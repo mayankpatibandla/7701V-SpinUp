@@ -1,8 +1,5 @@
 #include "driver.h"
-
-using namespace vex;
-
-void auton() {}
+#include "auton-manager.h"
 
 int main() {
   lbDriveMtr.setBrake(brake);
@@ -13,7 +10,7 @@ int main() {
   lFlyMtr.setBrake(coast);
   rFlyMtr.setBrake(coast);
 
-  Controller.ButtonX.pressed([]() { flyMtrs.toggleState(); });
+  driverInit();
 
   Competition.drivercontrol(driver);
   Competition.autonomous(auton);

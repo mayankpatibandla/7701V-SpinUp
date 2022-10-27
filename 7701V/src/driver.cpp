@@ -1,17 +1,19 @@
 #include "driver.h"
+#include "auton-manager.h"
 #include "debug.h"
-
 
 double curveJoystick(double input, const double t) {
   input /= 100;
   return input * std::exp(t * (std::abs(input) - 1));
 }
 
+void driverInit() {
+  Controller.ButtonX.pressed([]() { flyMtrs.toggleState(); });
+  Controller.ButtonA.pressed([]() { indexerSlnd.toggle(); });
+}
+
 void driver() {
-  // ButtonA: indexer manual
   // ButtonLeft: auto fire indexer
-  // ButtonRight && ButtonDown: auton test
-  // ButtonR1: hold for slow flywheel
   // ButtonL1, L2: intake
   while (true) {
     bool flywheelSlow = !Controller.ButtonR1.pressing();
@@ -28,7 +30,13 @@ void driver() {
       leftDriveMtrs.spin(fwd, leftVel * 12, volt);
       rightDriveMtrs.spin(fwd, rightVel * 12, volt);
     } else {
-      driveMtrs.stop();
+      driveMtrs.stop(brake);
+    }
+
+    if ((!Competition.isCompetitionSwitch() && !Competition.isFieldControl()) &&
+        (Controller.ButtonRight.pressing() &&
+         Controller.ButtonDown.pressing())) {
+      auton();
     }
 
     Brain.Screen.clearScreen();

@@ -1,8 +1,7 @@
 #pragma once
-#include "vmotor.h"
+#include "vdevices.h"
 
-using namespace vex;
-using namespace vmotor;
+using namespace vdevices;
 
 extern const double deadband;
 
@@ -37,4 +36,4 @@ extern rotation lRot;
 extern rotation rRot;
 extern rotation sRot;
 
-extern pneumatics indexerSlnd;
+extern togglepneumatics indexerSlnd;

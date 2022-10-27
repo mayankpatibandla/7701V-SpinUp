@@ -1,7 +1,5 @@
 #include "robot-config.h"
 
-using namespace vex;
-
 const double deadband = 1;
 
 const double forwardCurve = 3;
@@ -23,16 +21,18 @@ motor_group rightDriveMtrs(rbDriveMtr, rtDriveMtr);
 
 motor_group driveMtrs(lbDriveMtr, ltDriveMtr, rbDriveMtr, rtDriveMtr);
 
-vmotor::togglemotor lFlyMtr(PORT5, gearSetting::ratio6_1, false);
-vmotor::togglemotor rFlyMtr(PORT7, gearSetting::ratio6_1, true);
-vmotor::togglemotor_group flyMtrs(lFlyMtr, rFlyMtr);
+togglemotor lFlyMtr(PORT5, gearSetting::ratio6_1, false);
+togglemotor rFlyMtr(PORT7, gearSetting::ratio6_1, true);
+togglemotor_group flyMtrs(lFlyMtr, rFlyMtr);
 
+// TODO: update ports
 motor lIntakeMtr(11, gearSetting::ratio6_1, false);
 motor rIntakeMtr(12, gearSetting::ratio6_1, true);
 motor_group intakeMtrs(lIntakeMtr, rIntakeMtr);
 
+// TODO: check reversing
 rotation lRot(PORT3, false);
 rotation rRot(PORT8, false);
 rotation sRot(PORT4, false);
 
-pneumatics indexerSlnd(Brain.ThreeWirePort.A);
+togglepneumatics indexerSlnd(Brain.ThreeWirePort.A);

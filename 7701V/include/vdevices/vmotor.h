@@ -1,9 +1,7 @@
 #pragma once
 #include "vex.h"
 
-// using namespace vex;
-
-namespace vmotor {
+namespace vdevices {
 class togglemotor : public vex::motor {
 private:
   bool state;
@@ -25,6 +23,6 @@ public:
   using vex::motor_group::spin;
 
 public:
-  togglemotor_group(vmotor::togglemotor &m1, vmotor::togglemotor &...);
+  togglemotor_group(vdevices::togglemotor &m1, vdevices::togglemotor &...);
 };
 } // namespace vmotor
