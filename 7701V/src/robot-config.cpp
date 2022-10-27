@@ -37,9 +37,13 @@ rotation lRot(PORT3, false);
 rotation rRot(PORT8, false);
 rotation sRot(PORT4, false);
 
+inertial inert(13, turnType::left);
+
 togglepneumatics indexerSlnd(Brain.ThreeWirePort.A);
 
 void devicesInit(){
+  inert.calibrate();
+
   lbDriveMtr.setBrake(brake);
   ltDriveMtr.setBrake(brake);
   rbDriveMtr.setBrake(brake);
@@ -64,4 +68,14 @@ void devicesInit(){
 
   allMtrs.resetPosition();
   allMtrs.resetRotation();
+
+
+  lRot.resetPosition();
+  rRot.resetPosition();
+  sRot.resetPosition();
+
+  waitUntil(!inert.isCalibrating());
+
+  inert.resetHeading();
+  inert.resetRotation();
 }
