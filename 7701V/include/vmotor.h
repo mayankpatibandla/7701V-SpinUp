@@ -5,11 +5,11 @@
 
 namespace vmotor {
 class togglemotor : public vex::motor {
-protected:
-  togglemotor();
+private:
+  bool state;
 
 protected:
-  bool state;
+  togglemotor();
 
 public:
   togglemotor(int32_t index, vex::gearSetting gears, bool reverse);
