@@ -1,17 +1,14 @@
-#include "driver.h"
 #include "auton-manager.h"
+#include "driver.h"
 
 int main() {
-  lbDriveMtr.setBrake(brake);
-  ltDriveMtr.setBrake(brake);
-  rbDriveMtr.setBrake(brake);
-  rtDriveMtr.setBrake(brake);
-
-  lFlyMtr.setBrake(coast);
-  rFlyMtr.setBrake(coast);
-
+  devicesInit();
   driverInit();
 
   Competition.drivercontrol(driver);
   Competition.autonomous(auton);
+
+  while(true){
+    this_thread::sleep_for(0xFFFFFFFF);
+  }
 }

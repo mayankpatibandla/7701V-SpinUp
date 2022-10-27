@@ -37,3 +37,5 @@ extern rotation rRot;
 extern rotation sRot;
 
 extern togglepneumatics indexerSlnd;
+
+extern void devicesInit();

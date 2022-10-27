@@ -30,9 +30,38 @@ motor lIntakeMtr(11, gearSetting::ratio6_1, false);
 motor rIntakeMtr(12, gearSetting::ratio6_1, true);
 motor_group intakeMtrs(lIntakeMtr, rIntakeMtr);
 
+motor_group allMtrs(lbDriveMtr, ltDriveMtr, rbDriveMtr, rtDriveMtr, lFlyMtr, rFlyMtr, lIntakeMtr, rIntakeMtr);
+
 // TODO: check reversing
 rotation lRot(PORT3, false);
 rotation rRot(PORT8, false);
 rotation sRot(PORT4, false);
 
 togglepneumatics indexerSlnd(Brain.ThreeWirePort.A);
+
+void devicesInit(){
+  lbDriveMtr.setBrake(brake);
+  ltDriveMtr.setBrake(brake);
+  rbDriveMtr.setBrake(brake);
+  rtDriveMtr.setBrake(brake);
+
+  lFlyMtr.setBrake(coast);
+  rFlyMtr.setBrake(coast);
+
+  lIntakeMtr.setBrake(coast);
+  rIntakeMtr.setBrake(coast);
+
+  lbDriveMtr.setMaxTorque(100, pct);
+  ltDriveMtr.setMaxTorque(100, pct);
+  rbDriveMtr.setMaxTorque(100, pct);
+  rtDriveMtr.setMaxTorque(100, pct);
+
+  lFlyMtr.setMaxTorque(100, pct);
+  rFlyMtr.setMaxTorque(100, pct);
+
+  lIntakeMtr.setMaxTorque(100, pct);
+  rIntakeMtr.setMaxTorque(100, pct);
+
+  allMtrs.resetPosition();
+  allMtrs.resetRotation();
+}
