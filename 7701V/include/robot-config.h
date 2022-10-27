@@ -1,8 +1,6 @@
 #pragma once
 #include "vdevices.h"
 
-using namespace vdevices;
-
 extern const double deadband;
 
 extern const double forwardCurve;

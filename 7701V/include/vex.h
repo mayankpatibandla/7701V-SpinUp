@@ -5,6 +5,10 @@
 #include <string.h>
 
 #include <cmath>
+#include <sstream>
+#include <string>
+#include <fstream>
+#include <iostream>
 
 #include "v5.h"
 #include "v5_vcs.h"
