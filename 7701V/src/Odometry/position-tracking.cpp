@@ -1,5 +1,4 @@
-#include "robot-config.h"
-#include "vex.h"
+#include "odom.h"
 
 namespace positiontracking {
 bool usingInertial = false;
@@ -39,7 +38,7 @@ void positionTracking() {
 
     // Change in position for each tracking wheel
     // Equation is circumference of wheel times section of circle where the
-    // encoder's angle changed: delta = 2 * pi * radius * deltaEnc / 360
+    // encoder's angle changed: delta = circumference * deltaEnc / 360
     double delta_L = WHEEL_CIRCUMFERENCE * (encL - encL_0) / 360;
     double delta_R = WHEEL_CIRCUMFERENCE * (encR - encR_0) / 360;
     double delta_S = WHEEL_CIRCUMFERENCE * (encS - encS_0) / 360;
@@ -65,7 +64,7 @@ void positionTracking() {
 
     // change in local position
     double delta_d_l_x = 0, delta_d_l_y = 0;
-    // if delta theta is 0, set change in local position to delta s and delta r;
+    // if delta theta is 0, set change in local position to delta s and delta r
     // this avoids a divide by zero error
     if (delta_theta == 0) {
       delta_d_l_x = delta_S;
@@ -111,4 +110,29 @@ void positionTracking() {
     this_thread::sleep_until(timeStart + 10);
   }
 }
+
+// functions that can be used externally to get the positions
+double x() { return pos_y; }
+double y() { return pos_x; }
+double theta() { return pos_theta; }
+
+// returns angle with wrapping
+// range ? [-pi, pi) : [0, 2pi)
+double thetaWrapped(bool range) {
+  //-pi to pi
+  if (range) {
+    double temp_theta = fmod(theta() + M_PI, 2 * M_PI);
+    if (temp_theta < 0)
+      temp_theta += 2 * M_PI;
+    return temp_theta - M_PI;
+  }
+  // 0 to 2pi
+  double temp_theta = fmod(theta(), 2 * M_PI);
+  if (temp_theta < 0)
+    temp_theta += 2 * M_PI;
+  return temp_theta;
+}
+
+double plrR() { return std::hypot(x(), y()); }
+double plrTheta() { return std::atan2(y(), x()); }
 } // namespace positiontracking
