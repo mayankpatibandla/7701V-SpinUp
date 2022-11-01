@@ -1,10 +1,18 @@
 #pragma once
 #include "vdevices/vpneumatics.h"
 
-//todo:
 namespace vdevices{
 class indexer : public togglepneumatics{
 protected:
-  bool x;
+  bool isShooting;
+
+public:
+  void setShooting(bool value);
+  bool getShooting();
+
+  void startShooting();
+  void stopShooting();
+
+  void shootDisc();
 };
 }
