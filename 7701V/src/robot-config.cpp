@@ -3,7 +3,7 @@
 const double deadband = 1;
 
 const double forwardCurve = 3;
-const double turnCurve = 3;
+const double turnCurve = 4.25;
 
 brain Brain;
 controller Controller(primary);
