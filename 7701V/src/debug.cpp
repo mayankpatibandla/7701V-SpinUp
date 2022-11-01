@@ -1,5 +1,8 @@
 #include "debug.h"
 #include "driver.h"
+#include "robot-config.h"
+#include "vex.h"
+
 
 void debugFlywheel() {
   std::ostringstream strstream;

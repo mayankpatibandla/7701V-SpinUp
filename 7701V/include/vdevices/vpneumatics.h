@@ -4,6 +4,7 @@
 namespace vdevices {
 class togglepneumatics : public vex::pneumatics {
 public:
+  togglepneumatics(triport::port &port);
 
   void toggle();
 };

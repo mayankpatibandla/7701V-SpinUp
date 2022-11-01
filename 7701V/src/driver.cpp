@@ -23,8 +23,7 @@ void driver() {
 
     if (Controller.ButtonUp.pressing() && Controller.ButtonLeft.pressing()) {
       indexerSlnd.set(false);
-    }
-    else if(Controller.ButtonLeft.pressing()){
+    } else if (Controller.ButtonLeft.pressing()) {
       shootDisc();
     }
 
