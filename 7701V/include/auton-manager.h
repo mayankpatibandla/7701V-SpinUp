@@ -1,5 +1,4 @@
 #pragma once
-#include "robot-config.h"
-#include "vex.h"
+#include "control.h"
 
 extern void auton();

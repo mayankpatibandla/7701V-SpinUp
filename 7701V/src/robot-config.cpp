@@ -39,7 +39,7 @@ rotation sRot(PORT4, false);
 
 inertial inert(13, turnType::left);
 
-togglepneumatics indexerSlnd(Brain.ThreeWirePort.C);
+togglepneumatics indexerSlnd(Brain.ThreeWirePort.B);
 
 void devicesInit(){
   inert.calibrate();
