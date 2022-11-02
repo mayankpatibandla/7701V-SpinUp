@@ -1,18 +1,29 @@
 #include "vdevices/vindexer.h"
 
-vdevices::indexer::indexer(triport::port &port, uint32_t shotCooldown)
-    : togglepneumatics(port), shotCooldown(shotCooldown) {
+#include "robot-config.h" // for debug, remove later
+
+vdevices::indexer::indexer(triport::port &port, uint32_t shotCooldown, uint32_t autofireCooldown)
+    : togglepneumatics(port), shotCooldown(shotCooldown), autofireCooldown(autofireCooldown) {
   autofireThread = vex::thread(autofire, static_cast<void *>(this));
 }
 
+// function does not work
 void vdevices::indexer::autofire(void *arg) {
   if (arg == NULL) {
     return;
   }
   indexer *instance = static_cast<indexer *>(arg);
 
-  if (instance->isShooting) {
-    instance->shootDisc(instance->shotCooldown);
+  while (true) {
+    if (instance->getAutofiring()) {
+      instance->shootDisc();
+      this_thread::sleep_for(instance->getShotCooldown());
+    } else {
+      this_thread::sleep_for(50);
+    }
+    //TODO: fix this
+    
+    // Controller.Screen.print("in autofire");
   }
 }
 

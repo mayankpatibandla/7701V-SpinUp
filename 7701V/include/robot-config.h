@@ -34,9 +34,9 @@ extern rotation lRot;
 extern rotation rRot;
 extern rotation sRot;
 
-extern inertial inert;
+extern inertial Inertial;
 
 extern const uint32_t shotCooldown;
-extern indexer indexerSlnd;
+extern indexer Indexer;
 
 extern void devicesInit();

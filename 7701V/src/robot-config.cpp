@@ -30,7 +30,8 @@ motor lIntakeMtr(11, gearSetting::ratio6_1, false);
 motor rIntakeMtr(12, gearSetting::ratio6_1, true);
 motor_group intakeMtrs(lIntakeMtr, rIntakeMtr);
 
-motor_group allMtrs(lbDriveMtr, ltDriveMtr, rbDriveMtr, rtDriveMtr, lFlyMtr, rFlyMtr, lIntakeMtr, rIntakeMtr);
+motor_group allMtrs(lbDriveMtr, ltDriveMtr, rbDriveMtr, rtDriveMtr, lFlyMtr,
+                    rFlyMtr, lIntakeMtr, rIntakeMtr);
 
 // TODO: check reversing
 rotation lRot(PORT3, false);
@@ -40,9 +41,9 @@ rotation sRot(PORT4, false);
 inertial inert(13, turnType::left);
 
 const uint32_t shotCooldown = 50;
-indexer indexerSlnd(Brain.ThreeWirePort.B, shotCooldown);
+indexer Indexer(Brain.ThreeWirePort.B, shotCooldown);
 
-void devicesInit(){
+void devicesInit() {
   inert.calibrate();
 
   lbDriveMtr.setBrake(brake);
@@ -69,7 +70,6 @@ void devicesInit(){
 
   allMtrs.resetPosition();
   allMtrs.resetRotation();
-
 
   lRot.resetPosition();
   rRot.resetPosition();

@@ -3,7 +3,6 @@
 #include "robot-config.h"
 #include "vex.h"
 
-
 void debugFlywheel() {
   std::ostringstream strstream;
   strstream.clear();
@@ -44,4 +43,9 @@ void debugDrive(const double leftVel, const double rightVel) {
   Brain.Screen.printAt(0, 190, strstream.str().c_str());
   strstream.str("");
   strstream.clear();
+}
+
+void debugIndexer(){
+  Controller.Screen.clearLine(3);
+  Controller.Screen.print(Indexer.getShooting());
 }

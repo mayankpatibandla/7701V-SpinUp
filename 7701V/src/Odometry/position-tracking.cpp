@@ -52,7 +52,7 @@ void positionTracking() {
     // get robot heading from inertial sensor and convert it from degrees to
     // radians
     if (usingInertial) {
-      theta_1 = -inert.rotation(deg) * M_PI / 180;
+      theta_1 = -Inertial.rotation(deg) * M_PI / 180;
       delta_theta = theta_1 - theta_0;
     }
     // get robot heading from tracking wheels instead because it is more

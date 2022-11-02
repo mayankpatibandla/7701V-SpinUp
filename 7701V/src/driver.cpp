@@ -9,7 +9,7 @@ double curveJoystick(double input, const double t) {
 
 void driverInit() {
   Controller.ButtonX.pressed([]() { flyMtrs.toggleState(); });
-  Controller.ButtonA.pressed([]() { indexerSlnd.shootDisc(); });
+  Controller.ButtonA.pressed([]() { Indexer.shootDisc(); });
 }
 
 void driver() {
@@ -21,9 +21,10 @@ void driver() {
                  volt);
 
     if (Controller.ButtonUp.pressing() && Controller.ButtonLeft.pressing()) {
-      indexerSlnd.set(false);
-    } else if (Controller.ButtonLeft.pressing()) {
-      indexerSlnd.toggle();
+      Indexer.set(false);
+    } else {
+      debugIndexer();
+      Indexer.setAutofiring(Controller.ButtonLeft.pressing());
     }
 
     double leftVel = curveJoystick(Controller.Axis3.position(), forwardCurve) +
