@@ -39,7 +39,7 @@ rotation sRot(PORT4, false);
 
 inertial inert(13, turnType::left);
 
-const uint32_t shotCooldown = 75;
+const uint32_t shotCooldown = 50;
 indexer indexerSlnd(Brain.ThreeWirePort.B, shotCooldown);
 
 void devicesInit(){
