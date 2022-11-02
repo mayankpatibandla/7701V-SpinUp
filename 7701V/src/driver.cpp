@@ -17,7 +17,7 @@ void driver() {
   while (true) {
     bool flywheelSlow = Controller.ButtonR1.pressing();
 
-    flyMtrs.spin(fwd, (flyMtrs.getState() / (flywheelSlow / 1.5 + 1)) * 12,
+    flyMtrs.spin(fwd, (flyMtrs.getState() / (flywheelSlow / (1.5) + 1)) * 12,
                  volt);
 
     if (Controller.ButtonUp.pressing() && Controller.ButtonLeft.pressing()) {
