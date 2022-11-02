@@ -13,7 +13,6 @@ void driverInit() {
 }
 
 void driver() {
-  // ButtonLeft: auto fire indexer
   // ButtonL1, L2: intake
   while (true) {
     bool flywheelSlow = Controller.ButtonR1.pressing();
