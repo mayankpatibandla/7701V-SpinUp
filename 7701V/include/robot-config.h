@@ -1,12 +1,11 @@
 #pragma once
 #include "vdevices.h"
 
-extern const double deadband;
+extern brain Brain;
 
+extern const double deadband;
 extern const double forwardCurve;
 extern const double turnCurve;
-
-extern brain Brain;
 extern controller Controller;
 extern controller partnerController;
 
@@ -22,6 +21,7 @@ extern motor_group rightDriveMtrs;
 
 extern motor_group driveMtrs;
 
+extern const double flywheelSlowCoeff;
 extern togglemotor lFlyMtr;
 extern togglemotor rFlyMtr;
 extern togglemotor_group flyMtrs;

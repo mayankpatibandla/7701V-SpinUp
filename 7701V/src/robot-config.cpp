@@ -1,11 +1,10 @@
 #include "robot-config.h"
 
-const double deadband = 1;
+brain Brain;
 
+const double deadband = 1;
 const double forwardCurve = 3;
 const double turnCurve = 5;
-
-brain Brain;
 controller Controller(primary);
 controller partnerController(partner);
 
@@ -21,6 +20,7 @@ motor_group rightDriveMtrs(rbDriveMtr, rtDriveMtr);
 
 motor_group driveMtrs(lbDriveMtr, ltDriveMtr, rbDriveMtr, rtDriveMtr);
 
+const double flywheelSlowCoeff = 1.5;
 togglemotor lFlyMtr(PORT5, gearSetting::ratio6_1, false);
 togglemotor rFlyMtr(PORT7, gearSetting::ratio6_1, true);
 togglemotor_group flyMtrs(lFlyMtr, rFlyMtr);
