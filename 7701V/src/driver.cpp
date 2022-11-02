@@ -24,7 +24,7 @@ void driver() {
     if (Controller.ButtonUp.pressing() && Controller.ButtonLeft.pressing()) {
       indexerSlnd.set(false);
     } else if (Controller.ButtonLeft.pressing()) {
-      shootDisc();
+      indexerSlnd.toggle();
     }
 
     double leftVel = curveJoystick(Controller.Axis3.position(), forwardCurve) +
