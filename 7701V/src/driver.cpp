@@ -45,7 +45,8 @@ void driver() {
     }
 
     Brain.Screen.clearScreen();
-    debugFlywheel();
+    // debugFlywheel();
+    debugOdom();
     Brain.Screen.render();
   }
 }

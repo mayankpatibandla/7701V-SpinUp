@@ -35,17 +35,17 @@ motor_group allMtrs(lbDriveMtr, ltDriveMtr, rbDriveMtr, rtDriveMtr, lFlyMtr,
 
 // TODO: check reversing
 rotation lRot(PORT3, false);
-rotation rRot(PORT8, false);
+rotation rRot(PORT8, true);
 rotation sRot(PORT4, false);
 
-inertial inert(13, turnType::left);
+inertial Inertial(13, turnType::left);
 
 const uint32_t shotCooldown = 50;
 const uint32_t autofireCooldown = 500;
 indexer Indexer(Brain.ThreeWirePort.B, shotCooldown, autofireCooldown);
 
 void devicesInit() {
-  inert.calibrate();
+  Inertial.calibrate();
 
   lbDriveMtr.setBrake(brake);
   ltDriveMtr.setBrake(brake);
@@ -76,8 +76,8 @@ void devicesInit() {
   rRot.resetPosition();
   sRot.resetPosition();
 
-  waitUntil(!inert.isCalibrating());
+  waitUntil(!Inertial.isCalibrating());
 
-  inert.resetHeading();
-  inert.resetRotation();
+  Inertial.resetHeading();
+  Inertial.resetRotation();
 }

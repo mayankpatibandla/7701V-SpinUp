@@ -10,18 +10,18 @@ const double WHEEL_CIRCUMFERENCE = M_TWOPI * WHEEL_RADIUS;
 
 // left-right distance between left and right tracking wheels and tracking
 // center (in inches)
-const double s_L = 0;
-const double s_R = 0;
+const double s_L = 2.875;
+const double s_R = 2.875;
 // forward-backward distance between back tracking wheel and tracking center (in
 // inches)
-const double s_S = 0;
+const double s_S = 2.75;
 
 double pos_x;     // x position of robot (in inches)
 double pos_y;     // y position of robot (in inches)
 double pos_theta; // angle of robot's heading (in radians)
 
 // main position tracking function, will be used in its own thread
-void positionTracking() {
+void positiontracking() {
   // previous position of encoders: L = left, R = right, S = back
   double encL_0 = 0, encR_0 = 0, encS_0 = 0;
 
