@@ -9,7 +9,7 @@ double curveJoystick(double input, const double t) {
 
 void driverInit() {
   Controller.ButtonX.pressed([]() { flyMtrs.toggleState(); });
-  Controller.ButtonA.pressed([]() { shootDisc(); });
+  Controller.ButtonA.pressed([]() { indexerSlnd.shootDisc(); });
 }
 
 void driver() {

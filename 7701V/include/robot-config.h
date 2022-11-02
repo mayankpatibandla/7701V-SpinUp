@@ -36,6 +36,7 @@ extern rotation sRot;
 
 extern inertial inert;
 
-extern togglepneumatics indexerSlnd;
+extern const uint32_t shotCooldown;
+extern indexer indexerSlnd;
 
 extern void devicesInit();

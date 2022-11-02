@@ -39,7 +39,8 @@ rotation sRot(PORT4, false);
 
 inertial inert(13, turnType::left);
 
-togglepneumatics indexerSlnd(Brain.ThreeWirePort.B);
+const uint32_t shotCooldown = 75;
+indexer indexerSlnd(Brain.ThreeWirePort.B, shotCooldown);
 
 void devicesInit(){
   inert.calibrate();
