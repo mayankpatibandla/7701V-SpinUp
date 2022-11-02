@@ -46,7 +46,6 @@ void driver() {
 
     Brain.Screen.clearScreen();
     debugFlywheel();
-    debugDrive(leftVel, rightVel);
     Brain.Screen.render();
   }
 }
