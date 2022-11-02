@@ -17,15 +17,14 @@ void driver() {
   while (true) {
     bool flywheelSlow = Controller.ButtonR1.pressing();
 
-    flyMtrs.spin(fwd, (flyMtrs.getState() / (flywheelSlow / flywheelSlowCoeff + 1)) * 12,
-                 volt);
+    flyMtrs.spin(
+        fwd, (flyMtrs.getState() / (flywheelSlow / flywheelSlowCoeff + 1)) * 12,
+        volt);
 
     if (Controller.ButtonUp.pressing() && Controller.ButtonLeft.pressing()) {
       Indexer.set(false);
-    } else {
-      debugIndexer();
-      Indexer.setAutofiring(Controller.ButtonLeft.pressing());
     }
+    Indexer.setAutofiring(Controller.ButtonY.pressing());
 
     double leftVel = curveJoystick(Controller.Axis3.position(), forwardCurve) +
                      curveJoystick(Controller.Axis1.position(), turnCurve);

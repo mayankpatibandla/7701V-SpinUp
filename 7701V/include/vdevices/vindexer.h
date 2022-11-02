@@ -6,8 +6,8 @@ class indexer : public togglepneumatics {
 protected:
   uint32_t shotCooldown;
 
-  bool isAutofiring;
   uint32_t autofireCooldown;
+  bool isAutofiring;
 
   // threaded class members:
   // https://www.vexforum.com/t/creating-a-task-using-a-non-static-class-function/82721/2?u=xtigr
@@ -21,14 +21,14 @@ public:
   uint32_t getShotCooldown();
   void setShotCooldown(uint32_t value);
 
+  uint32_t getAutofireCooldown();
+  void setAutofireCooldown(uint32_t value);
+
   bool getAutofiring();
   void setAutofiring(bool value);
 
-  uint32_t getAutofireCooldown();
-  void setAutofiringCooldown(uint32_t value);
-
-  void startShooting();
-  void stopShooting();
+  void startAutofiring();
+  void stopAutofiring();
 
   void shootDisc();
   void shootDisc(uint32_t cooldown);

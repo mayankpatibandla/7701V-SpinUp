@@ -47,5 +47,5 @@ void debugDrive(const double leftVel, const double rightVel) {
 
 void debugIndexer(){
   Controller.Screen.clearLine(3);
-  Controller.Screen.print(Indexer.getShooting());
+  Controller.Screen.print(Indexer.getAutofiring());
 }

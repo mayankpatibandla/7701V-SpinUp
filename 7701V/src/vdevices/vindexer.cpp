@@ -2,8 +2,10 @@
 
 #include "robot-config.h" // for debug, remove later
 
-vdevices::indexer::indexer(triport::port &port, uint32_t shotCooldown, uint32_t autofireCooldown)
-    : togglepneumatics(port), shotCooldown(shotCooldown), autofireCooldown(autofireCooldown) {
+vdevices::indexer::indexer(triport::port &port, uint32_t shotCooldown,
+                           uint32_t autofireCooldown)
+    : togglepneumatics(port), shotCooldown(shotCooldown),
+      autofireCooldown(autofireCooldown) {
   autofireThread = vex::thread(autofire, static_cast<void *>(this));
 }
 
@@ -17,12 +19,10 @@ void vdevices::indexer::autofire(void *arg) {
   while (true) {
     if (instance->getAutofiring()) {
       instance->shootDisc();
-      this_thread::sleep_for(instance->getShotCooldown());
-    } else {
-      this_thread::sleep_for(50);
     }
-    //TODO: fix this
-    
+    this_thread::sleep_for(instance->getAutofireCooldown());
+    // TODO: fix this
+
     // Controller.Screen.print("in autofire");
   }
 }
@@ -32,11 +32,16 @@ void vdevices::indexer::setShotCooldown(uint32_t value) {
   shotCooldown = value;
 }
 
-bool vdevices::indexer::getShooting() { return isShooting; }
-void vdevices::indexer::setShooting(bool value) { isShooting = value; }
+uint32_t vdevices::indexer::getAutofireCooldown() { return autofireCooldown; }
+void vdevices::indexer::setAutofireCooldown(uint32_t value) {
+  autofireCooldown = value;
+}
 
-void vdevices::indexer::startShooting() { isShooting = true; }
-void vdevices::indexer::stopShooting() { isShooting = false; }
+bool vdevices::indexer::getAutofiring() { return isAutofiring; }
+void vdevices::indexer::setAutofiring(bool value) { isAutofiring = value; }
+
+void vdevices::indexer::startAutofiring() { setAutofiring(true); }
+void vdevices::indexer::stopAutofiring() { setAutofiring(false); }
 
 void vdevices::indexer::shootDisc() {
   set(true);

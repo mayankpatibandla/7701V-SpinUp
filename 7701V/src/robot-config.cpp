@@ -41,7 +41,8 @@ rotation sRot(PORT4, false);
 inertial inert(13, turnType::left);
 
 const uint32_t shotCooldown = 50;
-indexer Indexer(Brain.ThreeWirePort.B, shotCooldown);
+const uint32_t autofireCooldown = 500;
+indexer Indexer(Brain.ThreeWirePort.B, shotCooldown, autofireCooldown);
 
 void devicesInit() {
   inert.calibrate();
