@@ -13,7 +13,6 @@ void driverInit() {
 }
 
 void driver() {
-  // ButtonL1, L2: intake
   while (true) {
     bool flywheelSlow = Controller.ButtonR1.pressing();
 
@@ -25,6 +24,14 @@ void driver() {
       Indexer.set(false);
     }
     Indexer.setAutofiring(Controller.ButtonY.pressing());
+
+    if (Controller.ButtonL1.pressing()) {
+      intakeMtrs.spin(fwd, 12, volt);
+    } else if (Controller.ButtonL2.pressing()) {
+      intakeMtrs.spin(fwd, -12, volt);
+    } else {
+      intakeMtrs.stop();
+    }
 
     double leftVel = curveJoystick(Controller.Axis3.position(), forwardCurve) +
                      curveJoystick(Controller.Axis1.position(), turnCurve);
@@ -48,5 +55,7 @@ void driver() {
     // debugFlywheel();
     debugOdom();
     Brain.Screen.render();
+
+    this_thread::sleep_for(1);
   }
 }

@@ -26,8 +26,8 @@ togglemotor rFlyMtr(PORT7, gearSetting::ratio6_1, true);
 togglemotor_group flyMtrs(lFlyMtr, rFlyMtr);
 
 // TODO: update ports
-motor lIntakeMtr(11, gearSetting::ratio6_1, false);
-motor rIntakeMtr(12, gearSetting::ratio6_1, true);
+motor lIntakeMtr(PORT11, gearSetting::ratio6_1, false);
+motor rIntakeMtr(PORT12, gearSetting::ratio6_1, true);
 motor_group intakeMtrs(lIntakeMtr, rIntakeMtr);
 
 motor_group allMtrs(lbDriveMtr, ltDriveMtr, rbDriveMtr, rtDriveMtr, lFlyMtr,
@@ -38,7 +38,7 @@ rotation lRot(PORT3, false);
 rotation rRot(PORT8, true);
 rotation sRot(PORT4, false);
 
-inertial Inertial(13, turnType::left);
+inertial Inertial(PORT13, turnType::left);
 
 const uint32_t shotCooldown = 50;
 const uint32_t autofireCooldown = 500;
