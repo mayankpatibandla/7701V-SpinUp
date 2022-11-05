@@ -3,11 +3,12 @@
 
 int main() {
   devicesInit();
+  autonInit();
   driverInit();
   odomInit();
 
   Competition.drivercontrol(driver);
-  Competition.autonomous(auton);
+  Competition.autonomous([]() { auton(); });
 
   while (true) {
     this_thread::sleep_for(0xFFFFFFFF);

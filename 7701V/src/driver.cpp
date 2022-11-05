@@ -11,8 +11,8 @@ uint32_t autofireStartTime = 0;
 uint32_t autofireDeltaTime = 0;
 
 void driverInit() {
-  Controller.ButtonB.pressed([]() { flyMtrs.toggleState(); });
-  Controller.ButtonX.pressed([]() { intakeMtrs.toggleState(); });
+  Controller.ButtonX.pressed([]() { flyMtrs.toggleState(); });
+  Controller.ButtonB.pressed([]() { intakeMtrs.toggleState(); });
 
   Controller.ButtonA.pressed(
       []() { autofireStartTime = Brain.Timer.system(); });
