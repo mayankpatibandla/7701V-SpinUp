@@ -26,8 +26,8 @@ togglemotor rFlyMtr(PORT7, gearSetting::ratio6_1, true);
 togglemotor_group flyMtrs(lFlyMtr, rFlyMtr);
 
 // TODO: update ports
-togglemotor lIntakeMtr(PORT11, gearSetting::ratio6_1, false);
-togglemotor rIntakeMtr(PORT12, gearSetting::ratio6_1, true);
+togglemotor lIntakeMtr(PORT11, gearSetting::ratio18_1, false);
+togglemotor rIntakeMtr(PORT12, gearSetting::ratio18_1, true);
 togglemotor_group intakeMtrs(lIntakeMtr, rIntakeMtr);
 
 motor_group allMtrs(lbDriveMtr, ltDriveMtr, rbDriveMtr, rtDriveMtr, lFlyMtr,
