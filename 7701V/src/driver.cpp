@@ -56,10 +56,10 @@ void driver() {
 
     // Intake
     if (Controller.ButtonL1.pressing()) {
-      intakeMtrs.spin(fwd, 12, volt);
+      intakeMtrs.spin(fwd, -12, volt);
       intakeMtrs.setState(false);
     } else if (Controller.ButtonL2.pressing()) {
-      intakeMtrs.spin(fwd, -12, volt);
+      intakeMtrs.spin(fwd, 12, volt);
       intakeMtrs.setState(false);
     } else if (intakeMtrs.getState()) {
       intakeMtrs.spin(fwd, 12, volt);
