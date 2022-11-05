@@ -27,14 +27,6 @@ void driverInit() {
 }
 
 void driver() {
-  /*
-[done][tested]A (hold): autofire
-[done][tested]B: flywheel
-[done][tested]X: Intake in (toggle)
-[not needed]Y: Intake out (hold), disable toggle
-[done][tested]Left and down: flywheel reverse
-  */
-
   while (true) {
     // Flywheel
     double flywheelSlow =
