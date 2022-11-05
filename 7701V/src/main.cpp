@@ -3,6 +3,7 @@
 
 int main() {
   devicesInit();
+  autonInit();
   driverInit();
   odomInit();
 

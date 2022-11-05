@@ -1,5 +1,5 @@
 #include "auton-manager.h"
 
-void auton(){
+void autonInit() {}
 
-}
+void auton() {}
