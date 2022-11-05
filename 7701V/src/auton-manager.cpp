@@ -48,10 +48,10 @@ void autonInit() {
     next = true;
   } break;
   case SKILLS: {
-    setAuton(auton_skills, tc);
+    selectedAuton = {auton_skills};
   } break;
   case TEST: {
-    setAuton(auton_test, tc);
+    selectedAuton = {auton_test};
   } break;
   case NONE: {
     // no auton
@@ -68,7 +68,7 @@ void autonInit() {
       case ROLLER: { // roller
         switch (at) {
         case MAIN: { // main
-          setAuton(auton_leftRoller, tc);
+          selectedAuton = {auton_leftRoller};
         } break;
         case OTHER: { // other
           // undefined
@@ -78,7 +78,7 @@ void autonInit() {
       case HIGH_GOAL: { // high goal
         switch (at) {
         case MAIN: { // main
-          setAuton(auton_leftHighGoal, tc);
+          // undefined
         } break;
         case OTHER: { // other
           // undefined
@@ -92,7 +92,7 @@ void autonInit() {
       case ROLLER: { // roller
         switch (at) {
         case MAIN: { // main
-          setAuton(auton_rightRoller, tc);
+          selectedAuton = {auton_rightRoller};
         } break;
         case OTHER: { // other
           // undefined
@@ -102,7 +102,7 @@ void autonInit() {
       case HIGH_GOAL: { // neutral
         switch (at) {
         case MAIN: { // main
-          setAuton(auton_rightHighGoal, tc);
+          // undefined
         } break;
         case OTHER: { // other
           // undefined
@@ -115,37 +115,6 @@ void autonInit() {
   }
 }
 
-void setAuton(void (*callback)(void), teamColor allianceColor) {
-  selectedAuton = {callback, allianceColor};
-}
-
 void auton() {
-  flyMtrs.spin(fwd, 12, volt);
-
-  intakeMtrs.spin(fwd, -12, volt);
-  driveMtrs.spinFor(90, deg, 50, velocityUnits::pct);
-  this_thread::sleep_for(197);
-  intakeMtrs.stop(brake);
-
-  driveMtrs.spinFor(-100, deg, 50, velocityUnits::pct);
-
-  leftDriveMtrs.spin(fwd, -3, volt);
-  rightDriveMtrs.spin(fwd, 3, volt);
-
-  waitUntil(Inertial.heading() > 20);
-  driveMtrs.stop();
-  this_thread::sleep_for(3500);
-  Indexer.shootDisc();
-  this_thread::sleep_for(2000);
-  Indexer.shootDisc();
-  this_thread::sleep_for(2000);
+  selectedAuton.autonCallback();
 }
-
-void auton_skills() {}
-void auton_test() {}
-
-void auton_leftRoller() {}
-void auton_leftHighGoal() {}
-
-void auton_rightRoller() {}
-void auton_rightHighGoal() {}

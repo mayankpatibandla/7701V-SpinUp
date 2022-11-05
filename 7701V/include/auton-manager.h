@@ -7,18 +7,12 @@ enum teamSide { LEFT = 0, RIGHT = 1 };
 enum autonVersion { ROLLER = 0, HIGH_GOAL = 1 };
 enum autonType { MAIN = 0, OTHER = 1 };
 
-extern teamColor tc;
-extern teamSide ts;
-extern autonVersion av;
-extern autonType at;
-
-struct auton_t{
+struct auton_t {
   void (*autonCallback)(void);
   teamColor allianceColor;
 };
 
 extern void autonInit();
-extern void setAuton(void (*callback)(void), teamColor allianceColor);
 extern auton_t selectedAuton;
 extern void auton();
 
@@ -27,7 +21,5 @@ extern void auton_skills();
 extern void auton_test();
 
 extern void auton_leftRoller();
-extern void auton_leftHighGoal();
 
 extern void auton_rightRoller();
-extern void auton_rightHighGoal();

@@ -29,10 +29,11 @@ void driverInit() {
 void driver() {
   while (true) {
     // Flywheel
-    double flywheelSlow =
-        Controller.ButtonR1.pressing()
-            ? flywheelCoeffs[0]
-            : Controller.ButtonR2.pressing() ? flywheelCoeffs[1] : 1;
+    double flywheelSlow = Controller.ButtonR1.pressing()
+                              ? 1
+                              : Controller.ButtonR2.pressing()
+                                    ? flywheelCoeffs[1]
+                                    : flywheelCoeffs[0];
     double flywheelReverse =
         Controller.ButtonLeft.pressing() && Controller.ButtonDown.pressing()
             ? -1
