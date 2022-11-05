@@ -38,9 +38,9 @@ rotation lRot(PORT3, false);
 rotation rRot(PORT8, false);
 rotation sRot(PORT4, false);
 
-inertial Inertial(PORT13, turnType::left);
+inertial Inertial(PORT20, turnType::left);
 
-const uint32_t shotCooldown = 50;
+const uint32_t shotCooldown = 100;
 const uint32_t autofireCooldown = 500;
 const uint32_t autofireBtnHoldTime = 250;
 indexer Indexer(Brain.ThreeWirePort.B, shotCooldown, autofireCooldown);

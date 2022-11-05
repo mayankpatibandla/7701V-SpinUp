@@ -8,7 +8,7 @@ int main() {
   odomInit();
 
   Competition.drivercontrol(driver);
-  Competition.autonomous(auton);
+  Competition.autonomous([]() { auton(); });
 
   while (true) {
     this_thread::sleep_for(0xFFFFFFFF);

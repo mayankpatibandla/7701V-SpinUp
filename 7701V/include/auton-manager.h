@@ -12,8 +12,15 @@ extern teamSide ts;
 extern autonVersion av;
 extern autonType at;
 
+struct auton_t{
+  void (*autonCallback)(void);
+  teamColor allianceColor;
+};
+
 extern void autonInit();
-extern void auton(void (* callback)(void), void *arg = nullptr);
+extern void setAuton(void (*callback)(void), teamColor allianceColor);
+extern auton_t selectedAuton;
+extern void auton();
 
 // autons
 extern void auton_skills();

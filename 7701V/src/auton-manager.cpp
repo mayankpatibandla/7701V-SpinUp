@@ -1,5 +1,13 @@
 #include "auton-manager.h"
 
+// init auton configs with default values, will be overridden
+teamColor tc = RED;
+teamSide ts = LEFT;
+autonVersion av = ROLLER;
+autonType at = MAIN;
+
+auton_t selectedAuton;
+
 void autonInit() {
   if (!Brain.SDcard.isInserted()) {
     Brain.Screen.setFont(mono60);
@@ -8,7 +16,7 @@ void autonInit() {
     while (!Brain.SDcard.isInserted())
       Controller.rumble("-.");
   }
-  
+
   std::ifstream ifs;
   int int_tc, int_ts, int_av, int_at;
 
@@ -40,10 +48,10 @@ void autonInit() {
     next = true;
   } break;
   case SKILLS: {
-    auton(auton_skills);
+    setAuton(auton_skills, tc);
   } break;
   case TEST: {
-    auton(auton_test);
+    setAuton(auton_test, tc);
   } break;
   case NONE: {
     // no auton
@@ -60,7 +68,7 @@ void autonInit() {
       case ROLLER: { // roller
         switch (at) {
         case MAIN: { // main
-          auton(auton_leftRoller, (void *)tc);
+          setAuton(auton_leftRoller, tc);
         } break;
         case OTHER: { // other
           // undefined
@@ -70,7 +78,7 @@ void autonInit() {
       case HIGH_GOAL: { // high goal
         switch (at) {
         case MAIN: { // main
-          auton(auton_leftHighGoal, (void *)tc);
+          setAuton(auton_leftHighGoal, tc);
         } break;
         case OTHER: { // other
           // undefined
@@ -84,7 +92,7 @@ void autonInit() {
       case ROLLER: { // roller
         switch (at) {
         case MAIN: { // main
-          auton(auton_rightRoller, (void *)tc);
+          setAuton(auton_rightRoller, tc);
         } break;
         case OTHER: { // other
           // undefined
@@ -94,7 +102,7 @@ void autonInit() {
       case HIGH_GOAL: { // neutral
         switch (at) {
         case MAIN: { // main
-          auton(auton_rightHighGoal, (void *)tc);
+          setAuton(auton_rightHighGoal, tc);
         } break;
         case OTHER: { // other
           // undefined
@@ -107,4 +115,37 @@ void autonInit() {
   }
 }
 
-void auton(void (*callback)(void *), void *arg) {}
+void setAuton(void (*callback)(void), teamColor allianceColor) {
+  selectedAuton = {callback, allianceColor};
+}
+
+void auton() {
+  flyMtrs.spin(fwd, 12, volt);
+
+  intakeMtrs.spin(fwd, -12, volt);
+  driveMtrs.spinFor(90, deg, 50, velocityUnits::pct);
+  this_thread::sleep_for(197);
+  intakeMtrs.stop(brake);
+
+  driveMtrs.spinFor(-100, deg, 50, velocityUnits::pct);
+
+  leftDriveMtrs.spin(fwd, -3, volt);
+  rightDriveMtrs.spin(fwd, 3, volt);
+
+  this_thread::sleep_for(150);
+  driveMtrs.stop();
+  this_thread::sleep_for(3500);
+  Indexer.shootDisc();
+  this_thread::sleep_for(2000);
+  Indexer.shootDisc();
+  this_thread::sleep_for(2000);
+}
+
+void auton_skills() {}
+void auton_test() {}
+
+void auton_leftRoller() {}
+void auton_leftHighGoal() {}
+
+void auton_rightRoller() {}
+void auton_rightHighGoal() {}
