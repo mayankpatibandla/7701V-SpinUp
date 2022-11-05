@@ -7,32 +7,75 @@ double curveJoystick(double input, const double t) {
   return input * std::exp(t * (std::abs(input) - 1));
 }
 
+uint32_t autofireStartTime = 0;
+uint32_t autofireDeltaTime = 0;
+
 void driverInit() {
-  Controller.ButtonX.pressed([]() { flyMtrs.toggleState(); });
-  Controller.ButtonA.pressed([]() { Indexer.shootDisc(); });
+  Controller.ButtonB.pressed([]() { flyMtrs.toggleState(); });
+  Controller.ButtonX.pressed([]() { intakeMtrs.toggleState(); });
+
+  Controller.ButtonA.pressed(
+      []() { autofireStartTime = Brain.Timer.system(); });
+  Controller.ButtonA.released([]() {
+    Indexer.stopAutofiring();
+    autofireStartTime = 0;
+
+    if (autofireDeltaTime <= autofireBtnHoldTime) {
+      Indexer.shootDisc();
+    }
+  });
 }
 
 void driver() {
+  /*
+[done][tested]A (hold): autofire
+[done][tested]B: flywheel
+[done][tested]X: Intake in (toggle)
+[not needed]Y: Intake out (hold), disable toggle
+[done][tested]Left and down: flywheel reverse
+  */
+
   while (true) {
-    bool flywheelSlow = Controller.ButtonR1.pressing();
+    // Flywheel
+    double flywheelSlow =
+        Controller.ButtonR1.pressing()
+            ? flywheelCoeffs[0]
+            : Controller.ButtonR2.pressing() ? flywheelCoeffs[1] : 1;
+    double flywheelReverse =
+        Controller.ButtonLeft.pressing() && Controller.ButtonDown.pressing()
+            ? -1
+            : 1;
 
-    flyMtrs.spin(
-        fwd, (flyMtrs.getState() / (flywheelSlow / flywheelSlowCoeff + 1)) * 12,
-        volt);
+    flyMtrs.spin(fwd, flyMtrs.getState() * flywheelSlow * flywheelReverse * 12,
+                 volt);
 
+    // Indexer
+    autofireDeltaTime = Brain.Timer.system() - autofireStartTime;
+    if (Controller.ButtonA.pressing()) {
+      if (autofireDeltaTime > autofireBtnHoldTime) {
+        Indexer.startAutofiring();
+      }
+    }
+
+    // Indexer emergency retract
     if (Controller.ButtonUp.pressing() && Controller.ButtonLeft.pressing()) {
       Indexer.set(false);
     }
-    Indexer.setAutofiring(Controller.ButtonY.pressing());
 
+    // Intake
     if (Controller.ButtonL1.pressing()) {
       intakeMtrs.spin(fwd, 12, volt);
+      intakeMtrs.setState(false);
     } else if (Controller.ButtonL2.pressing()) {
       intakeMtrs.spin(fwd, -12, volt);
+      intakeMtrs.setState(false);
+    } else if (intakeMtrs.getState()) {
+      intakeMtrs.spin(fwd, 12, volt);
     } else {
       intakeMtrs.stop();
     }
 
+    // Drive
     double leftVel = curveJoystick(Controller.Axis3.position(), forwardCurve) +
                      curveJoystick(Controller.Axis1.position(), turnCurve);
     double rightVel = curveJoystick(Controller.Axis3.position(), forwardCurve) -
@@ -45,12 +88,13 @@ void driver() {
       driveMtrs.stop(brake);
     }
 
+    // Auton test
     if ((!Competition.isCompetitionSwitch() && !Competition.isFieldControl()) &&
-        (Controller.ButtonRight.pressing() &&
-         Controller.ButtonDown.pressing())) {
+        (Controller.ButtonRight.pressing() && Controller.ButtonUp.pressing())) {
       auton();
     }
 
+    // Debug
     Brain.Screen.clearScreen();
     // debugFlywheel();
     debugOdom();

@@ -20,28 +20,29 @@ motor_group rightDriveMtrs(rbDriveMtr, rtDriveMtr);
 
 motor_group driveMtrs(lbDriveMtr, ltDriveMtr, rbDriveMtr, rtDriveMtr);
 
-const double flywheelSlowCoeff = 1.5;
+const double flywheelCoeffs[] = {0.75, 0.67};
 togglemotor lFlyMtr(PORT5, gearSetting::ratio6_1, false);
 togglemotor rFlyMtr(PORT7, gearSetting::ratio6_1, true);
 togglemotor_group flyMtrs(lFlyMtr, rFlyMtr);
 
 // TODO: update ports
-motor lIntakeMtr(PORT11, gearSetting::ratio6_1, false);
-motor rIntakeMtr(PORT12, gearSetting::ratio6_1, true);
-motor_group intakeMtrs(lIntakeMtr, rIntakeMtr);
+togglemotor lIntakeMtr(PORT11, gearSetting::ratio6_1, false);
+togglemotor rIntakeMtr(PORT12, gearSetting::ratio6_1, true);
+togglemotor_group intakeMtrs(lIntakeMtr, rIntakeMtr);
 
 motor_group allMtrs(lbDriveMtr, ltDriveMtr, rbDriveMtr, rtDriveMtr, lFlyMtr,
                     rFlyMtr, lIntakeMtr, rIntakeMtr);
 
 // TODO: check reversing
 rotation lRot(PORT3, false);
-rotation rRot(PORT8, true);
+rotation rRot(PORT8, false);
 rotation sRot(PORT4, false);
 
 inertial Inertial(PORT13, turnType::left);
 
 const uint32_t shotCooldown = 50;
 const uint32_t autofireCooldown = 500;
+const uint32_t autofireBtnHoldTime = 250;
 indexer Indexer(Brain.ThreeWirePort.B, shotCooldown, autofireCooldown);
 
 void devicesInit() {
