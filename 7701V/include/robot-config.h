@@ -21,8 +21,7 @@ extern motor_group rightDriveMtrs;
 
 extern motor_group driveMtrs;
 
-extern const double flywheelCoeff1;
-extern const double flywheelCoeff2;
+extern const double flywheelCoeffs[];
 extern togglemotor lFlyMtr;
 extern togglemotor rFlyMtr;
 extern togglemotor_group flyMtrs;
@@ -39,6 +38,7 @@ extern inertial Inertial;
 
 extern const uint32_t shotCooldown;
 extern const uint32_t autofireCooldown;
+extern const uint32_t autofireBtnHoldTime;
 extern indexer Indexer;
 
 extern void devicesInit();
