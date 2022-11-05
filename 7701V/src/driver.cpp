@@ -8,17 +8,30 @@ double curveJoystick(double input, const double t) {
 }
 
 void driverInit() {
-  Controller.ButtonX.pressed([]() { flyMtrs.toggleState(); });
-  Controller.ButtonA.pressed([]() { Indexer.shootDisc(); });
+  Controller.ButtonB.pressed([]() { flyMtrs.toggleState(); });
+  Controller.ButtonX.pressed([]() { intakeMtrs.toggleState(); });
 }
 
 void driver() {
+  /*
+      A (hold): autofire
+[done]B: flywheel
+[done]X: Intake in (toggle)
+[not needed]Y: Intake out (hold), disable toggle
+[done?]Left and down: flywheel reverse
+  */
   while (true) {
-    bool flywheelSlow = Controller.ButtonR1.pressing();
+    double flywheelSlow =
+        Controller.ButtonR1.pressing()
+            ? flywheelCoeff1
+            : Controller.ButtonR2.pressing() ? flywheelCoeff2 : 1;
+    double flywheelReverse =
+        Controller.ButtonLeft.pressing() && Controller.ButtonDown.pressing()
+            ? -1
+            : 1;
 
     flyMtrs.spin(
-        fwd, (flyMtrs.getState() / (flywheelSlow / flywheelSlowCoeff + 1)) * 12,
-        volt);
+        fwd, flyMtrs.getState() * flywheelSlow * flywheelReverse * 12, volt);
 
     if (Controller.ButtonUp.pressing() && Controller.ButtonLeft.pressing()) {
       Indexer.set(false);
@@ -27,8 +40,10 @@ void driver() {
 
     if (Controller.ButtonL1.pressing()) {
       intakeMtrs.spin(fwd, 12, volt);
+      intakeMtrs.setState(false);
     } else if (Controller.ButtonL2.pressing()) {
       intakeMtrs.spin(fwd, -12, volt);
+      intakeMtrs.setState(false);
     } else {
       intakeMtrs.stop();
     }
@@ -46,8 +61,7 @@ void driver() {
     }
 
     if ((!Competition.isCompetitionSwitch() && !Competition.isFieldControl()) &&
-        (Controller.ButtonRight.pressing() &&
-         Controller.ButtonDown.pressing())) {
+        (Controller.ButtonRight.pressing() && Controller.ButtonUp.pressing())) {
       auton();
     }
 

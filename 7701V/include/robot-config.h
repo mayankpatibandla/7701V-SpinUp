@@ -21,14 +21,15 @@ extern motor_group rightDriveMtrs;
 
 extern motor_group driveMtrs;
 
-extern const double flywheelSlowCoeff;
+extern const double flywheelCoeff1;
+extern const double flywheelCoeff2;
 extern togglemotor lFlyMtr;
 extern togglemotor rFlyMtr;
 extern togglemotor_group flyMtrs;
 
-extern motor lIntakeMtrs;
-extern motor rIntakeMtrs;
-extern motor_group intakeMtrs;
+extern togglemotor lIntakeMtr;
+extern togglemotor rIntakeMtr;
+extern togglemotor_group intakeMtrs;
 
 extern rotation lRot;
 extern rotation rRot;

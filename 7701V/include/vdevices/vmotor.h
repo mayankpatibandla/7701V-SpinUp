@@ -21,5 +21,6 @@ class togglemotor_group : public togglemotor, public vex::motor_group {
 public:
   using vex::motor_group::motor_group;
   using vex::motor_group::spin;
+  using vex::motor_group::stop;
 };
 } // namespace vmotor
