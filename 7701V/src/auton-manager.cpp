@@ -132,7 +132,7 @@ void auton() {
   leftDriveMtrs.spin(fwd, -3, volt);
   rightDriveMtrs.spin(fwd, 3, volt);
 
-  this_thread::sleep_for(150);
+  waitUntil(Inertial.heading() > 20);
   driveMtrs.stop();
   this_thread::sleep_for(3500);
   Indexer.shootDisc();
