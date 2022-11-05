@@ -68,6 +68,7 @@ void autonInit() {
       case ROLLER: { // roller
         switch (at) {
         case MAIN: { // main
+          std::cout << "left roller" << std::endl;
           selectedAuton = {auton_leftRoller};
         } break;
         case OTHER: { // other
@@ -78,7 +79,7 @@ void autonInit() {
       case HIGH_GOAL: { // high goal
         switch (at) {
         case MAIN: { // main
-          // undefined
+          selectedAuton = {auton_leftHighGoal};
         } break;
         case OTHER: { // other
           // undefined

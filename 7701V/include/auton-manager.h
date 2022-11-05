@@ -21,5 +21,6 @@ extern void auton_skills();
 extern void auton_test();
 
 extern void auton_leftRoller();
+extern void auton_leftHighGoal();
 
 extern void auton_rightRoller();
