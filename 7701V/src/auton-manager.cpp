@@ -68,7 +68,6 @@ void autonInit() {
       case ROLLER: { // roller
         switch (at) {
         case MAIN: { // main
-          std::cout << "left roller" << std::endl;
           selectedAuton = {auton_leftRoller};
         } break;
         case OTHER: { // other
