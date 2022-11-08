@@ -14,15 +14,13 @@ void driverInit() {
   Controller.ButtonX.pressed([]() { flyMtrs.toggleState(); });
   Controller.ButtonB.pressed([]() { intakeMtrs.toggleState(); });
 
-  Controller.ButtonA.pressed(
-      []() { autofireStartTime = Brain.Timer.system(); });
+  Controller.ButtonA.pressed([]() {
+    Indexer.shootDisc();
+    autofireStartTime = Brain.Timer.system();
+  });
   Controller.ButtonA.released([]() {
     Indexer.stopAutofiring();
     autofireStartTime = 0;
-
-    if (autofireDeltaTime <= autofireBtnHoldTime) {
-      Indexer.shootDisc();
-    }
   });
 }
 
@@ -45,7 +43,8 @@ void driver() {
     // Indexer
     autofireDeltaTime = Brain.Timer.system() - autofireStartTime;
     if (Controller.ButtonA.pressing()) {
-      if (autofireDeltaTime > autofireBtnHoldTime) {
+      if (autofireDeltaTime > autofireBtnHoldTime &&
+          autofireDeltaTime > Indexer.getAutofireCooldown()) {
         Indexer.startAutofiring();
       }
     }
