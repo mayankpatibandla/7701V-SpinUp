@@ -48,10 +48,10 @@ void autonInit() {
     next = true;
   } break;
   case SKILLS: {
-    selectedAuton = {auton_skills};
+    selectedAuton = {autons::skills};
   } break;
   case TEST: {
-    selectedAuton = {auton_test};
+    selectedAuton = {autons::test};
   } break;
   case NONE: {
     // no auton
@@ -60,6 +60,7 @@ void autonInit() {
     // invalid input
   } break;
   }
+
   // side
   if (next) {
     switch (ts) {
@@ -68,7 +69,7 @@ void autonInit() {
       case ROLLER: { // roller
         switch (at) {
         case MAIN: { // main
-          selectedAuton = {auton_leftRoller};
+          selectedAuton = {autons::leftRoller};
         } break;
         case OTHER: { // other
           // undefined
@@ -78,7 +79,7 @@ void autonInit() {
       case HIGH_GOAL: { // high goal
         switch (at) {
         case MAIN: { // main
-          selectedAuton = {auton_leftHighGoal};
+          selectedAuton = {autons::leftHighGoal};
         } break;
         case OTHER: { // other
           // undefined
@@ -92,7 +93,7 @@ void autonInit() {
       case ROLLER: { // roller
         switch (at) {
         case MAIN: { // main
-          selectedAuton = {auton_rightRoller};
+          selectedAuton = {autons::rightRoller};
         } break;
         case OTHER: { // other
           // undefined
@@ -115,6 +116,4 @@ void autonInit() {
   }
 }
 
-void auton() {
-  selectedAuton.autonCallback();
-}
+void auton() { selectedAuton.autonCallback(); }

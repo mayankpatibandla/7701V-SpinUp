@@ -1,6 +1,6 @@
 #include "auton-manager.h"
 
-void auton_leftHighGoal() {
+void autons::leftHighGoal() {
   flyMtrs.spin(fwd, 12, volt);
 
   intakeMtrs.spin(fwd, -12, volt);
@@ -14,7 +14,7 @@ void auton_leftHighGoal() {
   rightDriveMtrs.spin(fwd, 3, volt);
   this_thread::sleep_for(250);
   driveMtrs.stop();
-  
+
   this_thread::sleep_for(3500);
   Indexer.shootDisc();
   this_thread::sleep_for(2000);

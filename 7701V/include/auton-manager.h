@@ -17,10 +17,12 @@ extern auton_t selectedAuton;
 extern void auton();
 
 // autons
-extern void auton_skills();
-extern void auton_test();
+namespace autons {
+extern void skills();
+extern void test();
 
-extern void auton_leftRoller();
-extern void auton_leftHighGoal();
+extern void leftRoller();
+extern void leftHighGoal();
 
-extern void auton_rightRoller();
+extern void rightRoller();
+} // namespace autons

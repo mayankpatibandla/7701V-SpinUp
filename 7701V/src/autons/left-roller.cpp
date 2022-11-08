@@ -1,6 +1,6 @@
 #include "auton-manager.h"
 
-void auton_leftRoller() {
+void autons::leftRoller() {
   intakeMtrs.spin(fwd, -12, volt);
   driveMtrs.spinFor(90, deg, 50, velocityUnits::pct);
   this_thread::sleep_for(197);
