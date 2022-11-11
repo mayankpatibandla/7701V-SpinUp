@@ -38,7 +38,6 @@ extern inertial Inertial;
 
 extern const uint32_t shotCooldown;
 extern const uint32_t autofireCooldown;
-extern const uint32_t autofireBtnHoldTime;
 extern indexer Indexer;
 
 extern void devicesInit();

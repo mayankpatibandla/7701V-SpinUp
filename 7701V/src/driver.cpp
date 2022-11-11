@@ -43,8 +43,7 @@ void driver() {
     // Indexer
     autofireDeltaTime = Brain.Timer.system() - autofireStartTime;
     if (Controller.ButtonA.pressing()) {
-      if (autofireDeltaTime > autofireBtnHoldTime &&
-          autofireDeltaTime > Indexer.getAutofireCooldown()) {
+      if (autofireDeltaTime > Indexer.getAutofireCooldown()) {
         Indexer.startAutofiring();
       }
     }
