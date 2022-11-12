@@ -1,7 +1,7 @@
 #include "odom.h"
 
 namespace positiontracking {
-bool usingInertial = false;
+bool usingInertial = true;
 
 // radius of tracking wheel (in inches)
 const double WHEEL_RADIUS = 1.4; // 2.75 in
