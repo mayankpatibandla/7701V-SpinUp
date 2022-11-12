@@ -1,8 +1,6 @@
 #include "debug.h"
 #include "control.h"
 #include "driver.h"
-#include "robot-config.h"
-#include "vex.h"
 
 void debugFlywheel() {
   std::ostringstream strstream;
@@ -69,4 +67,17 @@ void debugOdom() {
                        positiontracking::thetaWrapped(true) * 180 / M_PI);
   Brain.Screen.printAt(0, 230, "Theta [0, 360)  . | %8f (deg)",
                        positiontracking::thetaWrapped(false) * 180 / M_PI);
+}
+
+vex::thread debugThread;
+
+void debugInit() { debugThread = vex::thread(debug); }
+
+void debug() {
+  while (true) {
+    Brain.Screen.clearScreen();
+    debugOdom();
+    Brain.Screen.render();
+    this_thread::sleep_for(50);
+  }
 }

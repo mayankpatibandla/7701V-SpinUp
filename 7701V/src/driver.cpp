@@ -1,6 +1,5 @@
 #include "driver.h"
 #include "auton-manager.h"
-#include "debug.h"
 
 double curveJoystick(double input, const double t) {
   input /= 100;
@@ -84,12 +83,6 @@ void driver() {
         (Controller.ButtonRight.pressing() && Controller.ButtonUp.pressing())) {
       auton();
     }
-
-    // Debug
-    Brain.Screen.clearScreen();
-    // debugFlywheel();
-    debugOdom();
-    Brain.Screen.render();
 
     this_thread::sleep_for(1);
   }
