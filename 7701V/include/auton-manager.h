@@ -10,6 +10,9 @@ enum autonType { MAIN = 0, OTHER = 1 };
 struct auton_t {
   void (*autonCallback)(void);
   teamColor allianceColor;
+
+  auton_t(void (*autonCallback)(void) = nullptr, teamColor allianceColor = NONE)
+      : autonCallback(autonCallback), allianceColor(allianceColor) {}
 };
 
 extern void autonInit();

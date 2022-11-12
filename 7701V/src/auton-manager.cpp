@@ -69,7 +69,7 @@ void autonInit() {
       case ROLLER: { // roller
         switch (at) {
         case MAIN: { // main
-          selectedAuton = {autons::leftRoller};
+          selectedAuton = {autons::leftRoller, tc};
         } break;
         case OTHER: { // other
           // undefined
@@ -79,7 +79,7 @@ void autonInit() {
       case HIGH_GOAL: { // high goal
         switch (at) {
         case MAIN: { // main
-          selectedAuton = {autons::leftHighGoal};
+          selectedAuton = {autons::leftHighGoal, tc};
         } break;
         case OTHER: { // other
           // undefined
@@ -93,7 +93,7 @@ void autonInit() {
       case ROLLER: { // roller
         switch (at) {
         case MAIN: { // main
-          selectedAuton = {autons::rightRoller};
+          selectedAuton = {autons::rightRoller, tc};
         } break;
         case OTHER: { // other
           // undefined
@@ -103,7 +103,7 @@ void autonInit() {
       case HIGH_GOAL: { // high goal
         switch (at) {
         case MAIN: { // main
-          // undefined
+          selectedAuton = {autons::rightHighGoal, tc};
         } break;
         case OTHER: { // other
           // undefined
