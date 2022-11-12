@@ -71,8 +71,12 @@ void turnToAngle(double theta, int minTime, int maxTime, PID pid) {
   double pow = 1 / 0.;
 
   double error = 1 / 0.;
+  double integral = 0;
+  double derivative = 0;
 
-  const double errorAcc = 0.05, powAcc = 0.15;
+  double prevError = error;
+
+  const double errorAcc = 0.075, powAcc = 0.15;
 
   while (std::abs(error) > errorAcc || std::abs(pow) > powAcc ||
          (turnTimer.time(msec) < minTime && minTime != 0)) {
@@ -93,8 +97,20 @@ void turnToAngle(double theta, int minTime, int maxTime, PID pid) {
       error = absError - M_TWOPI;
     }
 
+    // add error to integral
+    integral += error;
+
+    // integral windup
+    if (error == 0 || std::abs(currentPos) > std::abs(theta) || error > pid.maxError) {
+      integral = 0;
+    }
+
+    // calculate derivative and update previous error
+    derivative = error - prevError;
+    prevError = error;
+
     // output powers
-    pow = error * pid.kP;
+    pow = error * pid.kP + integral * pid.kI + derivative + pid.kD;
     pow = clamp(pow, -1., 1.);
 
     leftDriveMtrs.spin(fwd, -pow * 12, volt);
