@@ -64,7 +64,7 @@ namespace pt = positiontracking;
 //   driveMtrs.stop();
 // }
 
-void turnToAngle(double theta, int timeout, PID pid) {
+void turnToAngle(double theta, int minTime, int maxTime, PID pid) {
   timer turnTimer;
   turnTimer.reset();
 
@@ -72,12 +72,13 @@ void turnToAngle(double theta, int timeout, PID pid) {
 
   double error = 1 / 0.;
 
-  const double errorAcc = 0.05, powAcc = 0.05;
+  const double errorAcc = 0.05, powAcc = 0.15;
 
-  while (std::abs(error) > errorAcc || std::abs(pow) > powAcc) {
+  while (std::abs(error) > errorAcc || std::abs(pow) > powAcc ||
+         (turnTimer.time(msec) < minTime && minTime != 0)) {
     uint32_t timeStart = Brain.Timer.system();
     // timeout
-    if (timeout != 0 && turnTimer.time(msec) > timeout)
+    if (maxTime != 0 && turnTimer.time(msec) > maxTime)
       break;
 
     // update current pos
@@ -107,5 +108,6 @@ void turnToAngle(double theta, int timeout, PID pid) {
     this_thread::sleep_until(timeStart + pid.dT);
   }
   driveMtrs.stop(brake);
-  std::cout << "done" << std::endl;
+  std::cout << "Done"
+            << " Time: " << turnTimer.time(msec) << std::endl;
 }
