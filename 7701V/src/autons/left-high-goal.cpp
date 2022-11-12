@@ -21,5 +21,7 @@ void autons::leftHighGoal() {
   Indexer.shootDisc();
   this_thread::sleep_for(1000);
   Indexer.shootDisc();
-  this_thread::sleep_for(2000);
+  this_thread::sleep_for(1000);
+
+  flyMtrs.stop(coast);
 }

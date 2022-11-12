@@ -25,4 +25,5 @@ extern void leftRoller();
 extern void leftHighGoal();
 
 extern void rightRoller();
+extern void rightHighGoal();
 } // namespace autons

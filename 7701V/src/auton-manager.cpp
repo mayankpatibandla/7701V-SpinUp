@@ -100,7 +100,7 @@ void autonInit() {
         } break;
         }
       } break;
-      case HIGH_GOAL: { // neutral
+      case HIGH_GOAL: { // high goal
         switch (at) {
         case MAIN: { // main
           // undefined
