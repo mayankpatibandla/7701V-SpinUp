@@ -221,16 +221,16 @@ void drawMenu(Menu &menu) {
     next = true;
   } break; // blue
   case 2: {
-    autonDescStream << "SKILLS AUTON";
+    autonDescStream << "Skills Auton";
   } break;
   case 3: {
-    autonDescStream << "TEST AUTON";
+    autonDescStream << "Test Auton";
   } break;
   case 4: {
-    autonDescStream << "NO AUTON";
+    autonDescStream << "No Auton";
   } break;
   default: {
-    autonDescStream << "INVALID INPUT";
+    autonDescStream << "Invalid Auton";
   } break;
   }
   // side
@@ -241,20 +241,20 @@ void drawMenu(Menu &menu) {
       case 0: { // roller
         switch (menu.multiButtons[3].state) {
         case 0: { // main
-          autonDescStream << "Left roller";
+          autonDescStream << "Left Roller";
         } break;
         case 1: { // other
-          autonDescStream << "[undefined]";
+          autonDescStream << "Undefined Auton";
         } break;
         }
       } break;
       case 1: { // high goal
         switch (menu.multiButtons[3].state) {
         case 0: { // main
-          autonDescStream << "Left high goal";
+          autonDescStream << "Left High Goal";
         } break;
         case 1: { // other
-          autonDescStream << "[undefined]";
+          autonDescStream << "Undefined Auton";
         } break;
         }
       } break;
@@ -265,20 +265,20 @@ void drawMenu(Menu &menu) {
       case 0: { // roller
         switch (menu.multiButtons[3].state) {
         case 0: { // main
-          autonDescStream << "Right roller";
+          autonDescStream << "Right Roller";
         } break;
         case 1: { // other
-          autonDescStream << "[undefined]";
+          autonDescStream << "Undefined Auton";
         } break;
         }
       } break;
       case 1: { // neutral
         switch (menu.multiButtons[3].state) {
         case 0: { // main
-          autonDescStream << "Right high goal";
+          autonDescStream << "Right High Goal";
         } break;
         case 1: { // other
-          autonDescStream << "[undefined]";
+          autonDescStream << "Undefined Auton";
         } break;
         }
       } break;
