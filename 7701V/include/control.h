@@ -11,6 +11,11 @@ struct PID {
       : kP(kP), kI(kI), kD(kD), maxError(maxError), dT(dT) {}
 };
 
-template <typename T> int sgn(T val) { return (T(0) < val) - (val < T(0)); }
+template <typename T> int sgn(const T &val) {
+  return (T(0) < val) - (val < T(0));
+}
+template <typename T> T clamp(const T &n, const T &lower, const T &upper) {
+  return std::max(lower, std::min(n, upper));
+}
 
 extern void turnToAngle(double theta, int timeout = 0, PID pid = PID());
