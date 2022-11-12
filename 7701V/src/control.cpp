@@ -3,7 +3,6 @@
 namespace pt = positiontracking;
 
 void turnToAngle(double theta, int timeout, PID pid) {
-  std::cout << pid.kP << " " << pid.kI << std::endl;
   timer turnTimer;
   turnTimer.reset();
 
@@ -15,7 +14,7 @@ void turnToAngle(double theta, int timeout, PID pid) {
 
   double prevError = error;
 
-  const double errorAcc = 0.05, powAcc = 0.05;
+  const double errorAcc = 0.025, powAcc = 0.05;
 
   while (std::abs(error) > errorAcc || std::abs(pow) > powAcc) {
     uint32_t timeStart = Brain.Timer.system();
@@ -55,6 +54,9 @@ void turnToAngle(double theta, int timeout, PID pid) {
 
     leftDriveMtrs.spin(fwd, -pow * 12, volt);
     rightDriveMtrs.spin(fwd, pow * 12, volt);
+
+    std::cout << "kP: " << pid.kP << " kI: " << pid.kI << std::endl;
+    std::cout << "Pow: " << pow << " Err: " << error << std::endl;
 
     // sleep for dT
     this_thread::sleep_until(timeStart + pid.dT);
