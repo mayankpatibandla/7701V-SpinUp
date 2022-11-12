@@ -73,7 +73,7 @@ void driveRelative(double distance, int minTime, int maxTime, PID pid) {
   driveTimer.reset();
 
   distance =
-      (distance / (M_TWOPI * pt::WHEEL_RADIUS)) * 360 * rRot.position(deg);
+      (distance / (M_TWOPI * pt::WHEEL_RADIUS)) * 360 + lRot.position(deg);
 
   double pow = 1 / 0.;
 
@@ -83,7 +83,7 @@ void driveRelative(double distance, int minTime, int maxTime, PID pid) {
 
   double prevError = error;
 
-  const double errorAcc = 5, powAcc = 0.15;
+  const double errorAcc = 10, powAcc = 0.15;
 
   while (std::abs(error) > errorAcc || std::abs(pow) > powAcc ||
          (driveTimer.time(msec) < minTime && minTime != 0)) {
@@ -94,7 +94,7 @@ void driveRelative(double distance, int minTime, int maxTime, PID pid) {
     }
 
     // update current pos
-    double currentPos = rRot.position(deg);
+    double currentPos = lRot.position(deg);
     // calculate error
     error = distance - currentPos;
 
