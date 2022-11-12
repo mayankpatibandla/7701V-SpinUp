@@ -32,12 +32,11 @@ togglemotor_group intakeMtrs(lIntakeMtr, rIntakeMtr);
 motor_group allMtrs(lbDriveMtr, ltDriveMtr, rbDriveMtr, rtDriveMtr, lFlyMtr,
                     rFlyMtr, lIntakeMtr, rIntakeMtr);
 
-// TODO: check reversing
 rotation lRot(PORT3, false);
-rotation rRot(PORT8, false);
-rotation sRot(PORT4, false);
+rotation rRot(PORT8, true);
+rotation sRot(PORT4, true);
 
-inertial Inertial(PORT20, turnType::left);
+inertial Inertial(PORT20, turnType::right);
 
 const uint32_t shotCooldown = 100;
 const uint32_t autofireCooldown = 500;

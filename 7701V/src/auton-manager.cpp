@@ -49,15 +49,19 @@ void autonInit() {
   } break;
   case SKILLS: {
     selectedAuton = {autons::skills};
+    Controller.Screen.print("Skills Auton");
   } break;
   case TEST: {
     selectedAuton = {autons::test};
+    Controller.Screen.print("Test Auton");
   } break;
   case NONE: {
     // no auton
+    Controller.Screen.print("No Auton");
   } break;
   default: {
     // invalid input
+    Controller.Screen.print("Invalid Auton");
   } break;
   }
 
@@ -69,20 +73,23 @@ void autonInit() {
       case ROLLER: { // roller
         switch (at) {
         case MAIN: { // main
-          selectedAuton = {autons::leftRoller};
+          selectedAuton = {autons::leftRoller, tc};
+          Controller.Screen.print("Left Roller");
         } break;
         case OTHER: { // other
           // undefined
+          Controller.Screen.print("Undefined Auton");
         } break;
         }
       } break;
       case HIGH_GOAL: { // high goal
         switch (at) {
         case MAIN: { // main
-          selectedAuton = {autons::leftHighGoal};
+          selectedAuton = {autons::leftHighGoal, tc};
+          Controller.Screen.print("Left High Goal");
         } break;
         case OTHER: { // other
-          // undefined
+          Controller.Screen.print("Undefined Auton");
         } break;
         }
       } break;
@@ -93,20 +100,22 @@ void autonInit() {
       case ROLLER: { // roller
         switch (at) {
         case MAIN: { // main
-          selectedAuton = {autons::rightRoller};
+          selectedAuton = {autons::rightRoller, tc};
+          Controller.Screen.print("Right Roller");
         } break;
         case OTHER: { // other
-          // undefined
+          Controller.Screen.print("Undefined Auton");
         } break;
         }
       } break;
-      case HIGH_GOAL: { // neutral
+      case HIGH_GOAL: { // high goal
         switch (at) {
         case MAIN: { // main
-          // undefined
+          selectedAuton = {autons::rightHighGoal, tc};
+          Controller.Screen.print("Right High Goal");
         } break;
         case OTHER: { // other
-          // undefined
+          Controller.Screen.print("Undefined Auton");
         } break;
         }
       } break;

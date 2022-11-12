@@ -9,22 +9,24 @@ int main() {
       Controller.rumble("-.");
   }
 
-  ifstream ifs;
-  ifs.open("config/color.txt");
-  ifs >> autonSelectMenu.multiButtons[0].state;
-  ifs.close();
-  ifs.open("config/side.txt");
-  ifs >> autonSelectMenu.multiButtons[1].state;
-  ifs.close();
-  ifs.open("config/version.txt");
-  ifs >> autonSelectMenu.multiButtons[2].state;
-  ifs.close();
-  ifs.open("config/type.txt");
-  ifs >> autonSelectMenu.multiButtons[3].state;
-  ifs.close();
-
   Menu &currentMenu = autonSelectMenu;
   currentMenu.setCurrentSelection(0);
+
+  ifstream ifs;
+  ifs.open("config/color.txt");
+  ifs >> currentMenu.multiButtons[0].state;
+  ifs.close();
+  ifs.open("config/side.txt");
+  ifs >> currentMenu.multiButtons[1].state;
+  ifs.close();
+  ifs.open("config/version.txt");
+  ifs >> currentMenu.multiButtons[2].state;
+  ifs.close();
+  ifs.open("config/type.txt");
+  ifs >> currentMenu.multiButtons[3].state;
+  ifs.close();
+
+  
   Brain.Screen.render();
   while (true) {
     int waitTime = 250;
