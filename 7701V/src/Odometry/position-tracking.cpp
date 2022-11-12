@@ -10,11 +10,11 @@ const double WHEEL_CIRCUMFERENCE = M_TWOPI * WHEEL_RADIUS;
 
 // left-right distance between left and right tracking wheels and tracking
 // center (in inches)
-const double s_L = 2.875;
-const double s_R = 2.875;
+const double s_L = 2.78125;
+const double s_R = 2.78125;
 // forward-backward distance between back tracking wheel and tracking center (in
 // inches)
-const double s_S = 2.75;
+const double s_S = 1.5;
 
 double pos_x;     // x position of robot (in inches)
 double pos_y;     // y position of robot (in inches)
@@ -58,7 +58,7 @@ void positiontracking() {
     // get robot heading from tracking wheels instead because it is more
     // accurate
     else {
-      delta_theta = (delta_L - delta_R) / (s_L + s_R);
+      delta_theta = (delta_R - delta_L) / (s_L + s_R);
       theta_1 = delta_theta + theta_0;
     }
 
@@ -67,13 +67,14 @@ void positiontracking() {
     // if delta theta is 0, set change in local position to delta s and delta r
     // this avoids a divide by zero error
     if (delta_theta == 0) {
+      // error here on 7701V doc, should be delta not offset
       delta_d_l_x = delta_S;
       delta_d_l_y = delta_R;
     } else { // otherwise set it to this:
       delta_d_l_x =
           2 * std::sin(delta_theta / 2) * (delta_S / delta_theta + s_S);
       delta_d_l_y =
-          2 * std::sin(delta_theta / 2) * (delta_L / delta_theta - s_L);
+          2 * std::sin(delta_theta / 2) * (delta_R / delta_theta + s_R);
     }
 
     // calculate average orientation
@@ -112,8 +113,8 @@ void positiontracking() {
 }
 
 // functions that can be used externally to get the positions
-double x() { return pos_y; }
-double y() { return pos_x; }
+double x() { return pos_x; }
+double y() { return pos_y; }
 double theta() { return pos_theta; }
 
 // returns angle with wrapping
