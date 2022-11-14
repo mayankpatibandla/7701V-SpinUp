@@ -31,13 +31,12 @@ void driver() {
                               : Controller.ButtonR2.pressing()
                                     ? flywheelCoeffs[1]
                                     : flywheelCoeffs[0];
-    double flywheelReverse =
-        Controller.ButtonLeft.pressing() && Controller.ButtonDown.pressing()
-            ? -1
-            : 1;
 
-    flyMtrs.spin(fwd, flyMtrs.getState() * flywheelSlow * flywheelReverse * 12,
-                 volt);
+    if (Controller.ButtonLeft.pressing() && Controller.ButtonDown.pressing()) {
+      flyMtrs.spin(fwd, flywheelSlow * -12, volt);
+    } else {
+      flyMtrs.spin(fwd, flyMtrs.getState() * flywheelSlow * 12, volt);
+    }
 
     // Indexer
     autofireDeltaTime = Brain.Timer.system() - autofireStartTime;
