@@ -24,6 +24,10 @@ void driverInit() {
 }
 
 void driver() {
+  if(Competition.isCompetitionSwitch() || Competition.isFieldControl()){
+    flyMtrs.setState(true);
+  }
+
   while (true) {
     // Flywheel
     double flywheelSlow = Controller.ButtonR1.pressing()
