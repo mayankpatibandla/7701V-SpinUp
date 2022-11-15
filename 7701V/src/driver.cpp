@@ -24,11 +24,17 @@ void driverInit() {
 }
 
 void driver() {
-  if(Competition.isCompetitionSwitch() || Competition.isFieldControl()){
+  if (Competition.isCompetitionSwitch() || Competition.isFieldControl()) {
     flyMtrs.setState(true);
   }
 
   while (true) {
+    // Auton test
+    if ((!Competition.isCompetitionSwitch() && !Competition.isFieldControl()) &&
+        (Controller.ButtonRight.pressing() && Controller.ButtonUp.pressing())) {
+      auton();
+    }
+
     // Flywheel
     double flywheelSlow = Controller.ButtonR1.pressing()
                               ? 1
@@ -81,11 +87,8 @@ void driver() {
       driveMtrs.stop(brake);
     }
 
-    // Auton test
-    if ((!Competition.isCompetitionSwitch() && !Competition.isFieldControl()) &&
-        (Controller.ButtonRight.pressing() && Controller.ButtonUp.pressing())) {
-      auton();
-    }
+    // Auto Aiming
+    autoAiming = Controller.ButtonDown.pressing();
 
     this_thread::sleep_for(1);
   }
