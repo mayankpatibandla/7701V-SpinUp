@@ -9,6 +9,9 @@ double curveJoystick(double input, const double t) {
 uint32_t autofireStartTime = 0;
 uint32_t autofireDeltaTime = 0;
 
+vex::thread autoAimThread;
+bool autoAiming;
+
 void driverInit() {
   Controller.ButtonX.pressed([]() { flyMtrs.toggleState(); });
   Controller.ButtonB.pressed([]() { intakeMtrs.toggleState(); });
@@ -20,6 +23,10 @@ void driverInit() {
   Controller.ButtonA.released([]() {
     Indexer.stopAutofiring();
     autofireStartTime = 0;
+  });
+
+  autoAimThread = vex::thread([]() {
+    aimHighGoal({2.15, 0, 0.025}, highGoal(selectedAuton.allianceColor), autoAiming);
   });
 }
 
@@ -83,7 +90,7 @@ void driver() {
         abs(Controller.Axis3.position()) > deadband) {
       leftDriveMtrs.spin(fwd, leftVel * 12, volt);
       rightDriveMtrs.spin(fwd, rightVel * 12, volt);
-    } else {
+    } else if(!autoAiming) {
       driveMtrs.stop(brake);
     }
 

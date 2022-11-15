@@ -27,5 +27,4 @@ extern void driveRelative(double distance, int minTime = 0, int maxTime = 0,
 enum highGoal { RED_HIGHGOAL = 0, BLUE_HIGHGOAL = 1 };
 std::vector<double> getHighGoalCoords(highGoal goal);
 
-static bool autoAiming = false;
-void aimHighGoal(int minTime, int maxTime, PID pid, highGoal goal);
+void aimHighGoal(PID pid, highGoal goal, bool &autoAiming);
