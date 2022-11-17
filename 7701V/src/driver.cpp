@@ -26,7 +26,8 @@ void driverInit() {
   });
 
   autoAimThread = vex::thread([]() {
-    aimHighGoal({2.15, 0, 0.025}, highGoal(selectedAuton.allianceColor), autoAiming);
+    aimHighGoal({2.15, 0, 0.025}, highGoal(selectedAuton.allianceColor),
+                autoAiming);
   });
 }
 
@@ -90,7 +91,7 @@ void driver() {
         abs(Controller.Axis3.position()) > deadband) {
       leftDriveMtrs.spin(fwd, leftVel * 12, volt);
       rightDriveMtrs.spin(fwd, rightVel * 12, volt);
-    } else if(!autoAiming) {
+    } else if (!autoAiming) {
       driveMtrs.stop(brake);
     }
 

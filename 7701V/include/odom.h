@@ -3,3 +3,5 @@
 
 extern vex::thread positiontracking_thread;
 extern void odomInit();
+
+namespace pt = positiontracking;

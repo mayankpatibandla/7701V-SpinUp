@@ -1,7 +1,5 @@
 #include "control.h"
 
-namespace pt = positiontracking;
-
 void turnToAngle(double theta, int minTime, int maxTime, PID pid) {
   timer turnTimer;
   turnTimer.reset();
