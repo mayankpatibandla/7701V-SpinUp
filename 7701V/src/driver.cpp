@@ -9,6 +9,9 @@ double curveJoystick(double input, const double t) {
 uint32_t autofireStartTime = 0;
 uint32_t autofireDeltaTime = 0;
 
+vex::thread autoAimThread;
+bool autoAiming;
+
 void driverInit() {
   Controller.ButtonX.pressed([]() { flyMtrs.toggleState(); });
   Controller.ButtonB.pressed([]() { intakeMtrs.toggleState(); });
@@ -21,21 +24,36 @@ void driverInit() {
     Indexer.stopAutofiring();
     autofireStartTime = 0;
   });
+
+  autoAimThread = vex::thread([]() {
+    aimHighGoal({2.15, 0, 0.025}, highGoal(selectedAuton.allianceColor),
+                autoAiming);
+  });
 }
 
 void driver() {
+  if (Competition.isCompetitionSwitch() || Competition.isFieldControl()) {
+    flyMtrs.setState(true);
+  }
+
   while (true) {
+    // Auton test
+    if ((!Competition.isCompetitionSwitch() && !Competition.isFieldControl()) &&
+        (Controller.ButtonRight.pressing() && Controller.ButtonUp.pressing())) {
+      auton();
+    }
+
     // Flywheel
-    double flywheelSlow = Controller.ButtonR1.pressing()
-                              ? 1
-                              : Controller.ButtonR2.pressing()
-                                    ? flywheelCoeffs[1]
-                                    : flywheelCoeffs[0];
+    double flywheelSpeed = Controller.ButtonR1.pressing()
+                               ? 1
+                               : Controller.ButtonR2.pressing()
+                                     ? flywheelCoeffs[1]
+                                     : flywheelCoeffs[0];
 
     if (Controller.ButtonLeft.pressing() && Controller.ButtonDown.pressing()) {
-      flyMtrs.spin(fwd, flywheelSlow * -12, volt);
+      flyMtrs.spin(fwd, flywheelSpeed * -12, volt);
     } else {
-      flyMtrs.spin(fwd, flyMtrs.getState() * flywheelSlow * 12, volt);
+      flyMtrs.spin(fwd, flyMtrs.getState() * flywheelSpeed * 12, volt);
     }
 
     // Indexer
@@ -69,19 +87,17 @@ void driver() {
                      curveJoystick(Controller.Axis1.position(), turnCurve);
     double rightVel = curveJoystick(Controller.Axis3.position(), forwardCurve) -
                       curveJoystick(Controller.Axis1.position(), turnCurve);
+
     if (abs(Controller.Axis1.position()) > deadband ||
         abs(Controller.Axis3.position()) > deadband) {
       leftDriveMtrs.spin(fwd, leftVel * 12, volt);
       rightDriveMtrs.spin(fwd, rightVel * 12, volt);
-    } else {
+    } else if (!autoAiming) {
       driveMtrs.stop(brake);
     }
 
-    // Auton test
-    if ((!Competition.isCompetitionSwitch() && !Competition.isFieldControl()) &&
-        (Controller.ButtonRight.pressing() && Controller.ButtonUp.pressing())) {
-      auton();
-    }
+    // Auto Aiming
+    autoAiming = Controller.ButtonDown.pressing();
 
     this_thread::sleep_for(1);
   }

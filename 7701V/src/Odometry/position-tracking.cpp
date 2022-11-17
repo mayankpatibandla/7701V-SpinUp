@@ -113,8 +113,8 @@ void positiontracking() {
 }
 
 // functions that can be used externally to get the positions
-double x() { return pos_x; }
-double y() { return pos_y; }
+double x() { return pos_y; }
+double y() { return pos_x; }
 double theta() { return pos_theta; }
 
 // returns angle with wrapping
