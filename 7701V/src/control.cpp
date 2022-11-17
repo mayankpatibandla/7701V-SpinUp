@@ -133,7 +133,8 @@ std::vector<double> getHighGoalCoords(highGoal goal) {
   if (selectedAuton.side == LEFT) {
     switch (goal) {
     case RED_HIGHGOAL: {
-      return std::vector<double>{-11, 118};
+      // return std::vector<double>{-11, 118};
+      return std::vector<double>{0, 0};
     } break;
     case BLUE_HIGHGOAL: {
       return std::vector<double>{0, 0};
@@ -161,13 +162,13 @@ void aimHighGoal(PID pid, highGoal goal, bool &autoAiming) {
 
     const double errorAcc = 0.075, powAcc = 0.15;
 
+    // update target pos
+    // ? should this be inside loop
+    double theta = atan2(pt::y() - highGoalPos[1], pt::x() - highGoalPos[0]) + M_PI;
+
     while (autoAiming &&
            (std::abs(error) > errorAcc || std::abs(pow) > powAcc)) {
       uint32_t timeStart = Brain.Timer.system();
-
-      // update target pos
-      // ? should this be inside loop
-      double theta = atan2(pt::y() - highGoalPos[1], pt::x() - highGoalPos[0]);
 
       // update current pos
       double currentPos = pt::thetaWrapped();
@@ -208,7 +209,6 @@ void aimHighGoal(PID pid, highGoal goal, bool &autoAiming) {
       // sleep for dT
       this_thread::sleep_until(timeStart + pid.dT);
     }
-    std::cout << autoAiming << std::endl;
 
     this_thread::sleep_for(5);
   }
