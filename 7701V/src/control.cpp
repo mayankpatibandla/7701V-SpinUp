@@ -139,6 +139,15 @@ std::vector<double> getHighGoalCoords(highGoal goal) {
       return std::vector<double>{0, 0};
     } break;
     }
+  } else if (selectedAuton.side == RIGHT) {
+    switch (goal) {
+    case RED_HIGHGOAL: {
+      return std::vector<double>{0, 0};
+    } break;
+    case BLUE_HIGHGOAL: {
+      return std::vector<double>{0, 0};
+    } break;
+    }
   }
 
   return std::vector<double>(0);
@@ -212,4 +221,8 @@ void aimHighGoal(PID pid, highGoal goal, bool &autoAiming) {
 
     this_thread::sleep_for(5);
   }
+}
+
+double calcFlywheelCoeff(highGoal goal) {
+  return 0;
 }

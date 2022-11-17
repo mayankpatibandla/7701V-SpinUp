@@ -44,16 +44,16 @@ void driver() {
     }
 
     // Flywheel
-    double flywheelSlow = Controller.ButtonR1.pressing()
-                              ? 1
-                              : Controller.ButtonR2.pressing()
-                                    ? flywheelCoeffs[1]
-                                    : flywheelCoeffs[0];
+    double flywheelSpeed = Controller.ButtonR1.pressing()
+                               ? 1
+                               : Controller.ButtonR2.pressing()
+                                     ? flywheelCoeffs[1]
+                                     : flywheelCoeffs[0];
 
     if (Controller.ButtonLeft.pressing() && Controller.ButtonDown.pressing()) {
-      flyMtrs.spin(fwd, flywheelSlow * -12, volt);
+      flyMtrs.spin(fwd, flywheelSpeed * -12, volt);
     } else {
-      flyMtrs.spin(fwd, flyMtrs.getState() * flywheelSlow * 12, volt);
+      flyMtrs.spin(fwd, flyMtrs.getState() * flywheelSpeed * 12, volt);
     }
 
     // Indexer
@@ -87,6 +87,7 @@ void driver() {
                      curveJoystick(Controller.Axis1.position(), turnCurve);
     double rightVel = curveJoystick(Controller.Axis3.position(), forwardCurve) -
                       curveJoystick(Controller.Axis1.position(), turnCurve);
+
     if (abs(Controller.Axis1.position()) > deadband ||
         abs(Controller.Axis3.position()) > deadband) {
       leftDriveMtrs.spin(fwd, leftVel * 12, volt);

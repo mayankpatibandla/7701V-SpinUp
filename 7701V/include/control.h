@@ -12,7 +12,7 @@ struct PID {
       : kP(kP), kI(kI), kD(kD), maxError(maxError), dT(dT) {}
 };
 
-template <typename T> int sgn(const T &val) {
+template <typename T> T sgn(const T &val) {
   return (T(0) < val) - (val < T(0));
 }
 template <typename T> T clamp(const T &n, const T &lower, const T &upper) {
