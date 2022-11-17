@@ -115,6 +115,7 @@ void driveRelative(double distance, int minTime, int maxTime, PID pid) {
 
     driveMtrs.spin(fwd, pow * 12, volt);
 
+    // debug
     std::cout << "kP: " << pid.kP << " kI: " << pid.kI << " kD: " << pid.kD
               << std::endl;
     std::cout << "Pow: " << pow << " Err: " << error << std::endl;
@@ -162,7 +163,7 @@ void aimHighGoal(PID pid, highGoal goal, bool &autoAiming) {
 
     // update target pos
     // ? should this be inside loop
-    double theta = atan2(pt::y() - highGoalPos[1], pt::x() - highGoalPos[0]) + M_PI;
+    double theta = atan2(pt::y() - highGoalPos[1], pt::x() - highGoalPos[0]);
 
     while (autoAiming &&
            (std::abs(error) > errorAcc || std::abs(pow) > powAcc)) {
@@ -200,6 +201,7 @@ void aimHighGoal(PID pid, highGoal goal, bool &autoAiming) {
       leftDriveMtrs.spin(fwd, -pow * 12, volt);
       rightDriveMtrs.spin(fwd, pow * 12, volt);
 
+      // debug
       std::cout << "kP: " << pid.kP << " kI: " << pid.kI << " kD: " << pid.kD
                 << std::endl;
       std::cout << "Pow: " << pow << " Err: " << error << std::endl;
