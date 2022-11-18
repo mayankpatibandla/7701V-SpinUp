@@ -1,6 +1,7 @@
 #include "auton-manager.h"
-#include "driver.h"
 #include "debug.h"
+#include "driver.h"
+#include "gui.h"
 
 int main() {
   devicesInit();
@@ -8,6 +9,7 @@ int main() {
   driverInit();
   odomInit();
   debugInit();
+  guiInit();
 
   Competition.drivercontrol(driver);
   Competition.autonomous(auton);
