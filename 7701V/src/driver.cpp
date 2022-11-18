@@ -12,6 +12,8 @@ uint32_t autofireDeltaTime = 0;
 vex::thread autoAimThread;
 bool autoAiming;
 
+bool expansionReady = true;
+
 void driverInit() {
   Controller.ButtonX.pressed([]() { flyMtrs.toggleState(); });
   Controller.ButtonB.pressed([]() { intakeMtrs.toggleState(); });
@@ -45,10 +47,10 @@ void driver() {
 
     // Flywheel
     double flywheelSpeed = Controller.ButtonR1.pressing()
-                               ? 1
+                               ? flywheelCoeffs[0]
                                : Controller.ButtonR2.pressing()
                                      ? flywheelCoeffs[1]
-                                     : flywheelCoeffs[0];
+                                     : 1;
 
     if (Controller.ButtonLeft.pressing() && Controller.ButtonDown.pressing()) {
       flyMtrs.spin(fwd, flywheelSpeed * -12, volt);
@@ -65,13 +67,13 @@ void driver() {
     }
 
     // Indexer emergency retract
-    if (Controller.ButtonUp.pressing() && Controller.ButtonLeft.pressing()) {
+    if (Controller.ButtonUp.pressing()) {
       Indexer.set(false);
     }
 
     // Intake
     if (Controller.ButtonL1.pressing()) {
-      intakeMtrs.spin(fwd, -12, volt);
+      intakeMtrs.spin(fwd, -6, volt);
       intakeMtrs.setState(false);
     } else if (Controller.ButtonL2.pressing()) {
       intakeMtrs.spin(fwd, 12, volt);
@@ -98,6 +100,20 @@ void driver() {
 
     // Auto Aiming
     autoAiming = Controller.ButtonDown.pressing();
+
+    // Expansion
+    if (Controller.ButtonUp.pressing() && Controller.ButtonLeft.pressing() &&
+        Controller.ButtonR1.pressing() && Controller.ButtonR2.pressing()) {
+      if (expansionReady) {
+        expand();
+        expansionReady = false;
+      }
+    } else if (!Controller.ButtonUp.pressing() &&
+               !Controller.ButtonLeft.pressing() &&
+               !Controller.ButtonR1.pressing() &&
+               !Controller.ButtonR2.pressing()) {
+      expansionReady = true;
+    }
 
     this_thread::sleep_for(1);
   }
