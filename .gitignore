@@ -1,3 +1,9 @@
+# VEXcode gitignore
+**/.vscode
+**/bin
+**/build
+**/compile_commands.json
+
 # Unnecessary files and directories 
 CompetitionFieldPerimeter-AssemblyInstructions.pdf
 TestingPrograms/
