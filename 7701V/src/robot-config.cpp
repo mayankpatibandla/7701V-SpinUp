@@ -1,13 +1,10 @@
 #include "robot-config.h"
 
-using namespace vex;
+brain Brain;
 
 const double deadband = 1;
-
 const double forwardCurve = 3;
-const double turnCurve = 3;
-
-brain Brain;
+const double turnCurve = 5;
 controller Controller(primary);
 controller partnerController(partner);
 
@@ -23,16 +20,65 @@ motor_group rightDriveMtrs(rbDriveMtr, rtDriveMtr);
 
 motor_group driveMtrs(lbDriveMtr, ltDriveMtr, rbDriveMtr, rtDriveMtr);
 
-vmotor::togglemotor lFlyMtr(PORT5, gearSetting::ratio6_1, false);
-vmotor::togglemotor rFlyMtr(PORT7, gearSetting::ratio6_1, true);
-vmotor::togglemotor_group flyMtrs(lFlyMtr, rFlyMtr);
+const double flywheelCoeffs[] = {0.725, 0.67};
+togglemotor lFlyMtr(PORT5, gearSetting::ratio6_1, false);
+togglemotor rFlyMtr(PORT7, gearSetting::ratio6_1, true);
+togglemotor_group flyMtrs(lFlyMtr, rFlyMtr);
 
-motor lIntakeMtr(11, gearSetting::ratio6_1, false);
-motor rIntakeMtr(12, gearSetting::ratio6_1, true);
-motor_group intakeMtrs(lIntakeMtr, rIntakeMtr);
+togglemotor lIntakeMtr(PORT11, gearSetting::ratio18_1, false);
+togglemotor rIntakeMtr(PORT12, gearSetting::ratio18_1, true);
+togglemotor_group intakeMtrs(lIntakeMtr, rIntakeMtr);
+
+motor_group allMtrs(lbDriveMtr, ltDriveMtr, rbDriveMtr, rtDriveMtr, lFlyMtr,
+                    rFlyMtr, lIntakeMtr, rIntakeMtr);
 
 rotation lRot(PORT3, false);
-rotation rRot(PORT8, false);
-rotation sRot(PORT4, false);
+rotation rRot(PORT8, true);
+rotation sRot(PORT4, true);
 
-pneumatics indexerSlnd(Brain.ThreeWirePort.A);
+inertial Inertial(PORT20, turnType::right);
+
+const uint32_t shotCooldown = 100;
+const uint32_t autofireCooldown = 500;
+indexer Indexer(Brain.ThreeWirePort.B, shotCooldown, autofireCooldown);
+
+togglepneumatics leftExpansion(Brain.ThreeWirePort.C);
+togglepneumatics rightExpansion(Brain.ThreeWirePort.A);
+
+void devicesInit() {
+  Inertial.calibrate();
+
+  lbDriveMtr.setBrake(brake);
+  ltDriveMtr.setBrake(brake);
+  rbDriveMtr.setBrake(brake);
+  rtDriveMtr.setBrake(brake);
+
+  lFlyMtr.setBrake(coast);
+  rFlyMtr.setBrake(coast);
+
+  lIntakeMtr.setBrake(coast);
+  rIntakeMtr.setBrake(coast);
+
+  lbDriveMtr.setMaxTorque(100, pct);
+  ltDriveMtr.setMaxTorque(100, pct);
+  rbDriveMtr.setMaxTorque(100, pct);
+  rtDriveMtr.setMaxTorque(100, pct);
+
+  lFlyMtr.setMaxTorque(100, pct);
+  rFlyMtr.setMaxTorque(100, pct);
+
+  lIntakeMtr.setMaxTorque(100, pct);
+  rIntakeMtr.setMaxTorque(100, pct);
+
+  allMtrs.resetPosition();
+  allMtrs.resetRotation();
+
+  lRot.resetPosition();
+  rRot.resetPosition();
+  sRot.resetPosition();
+
+  waitUntil(!Inertial.isCalibrating());
+
+  Inertial.resetHeading();
+  Inertial.resetRotation();
+}

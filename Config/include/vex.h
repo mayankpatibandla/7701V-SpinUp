@@ -1,15 +1,7 @@
-#pragma once
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-#include <cmath>
-#include <vector>
-#include <sstream>
-#include <string>
-#include <fstream>
-#include <iostream>
 
 #include "v5.h"
 #include "v5_vcs.h"
@@ -21,5 +13,3 @@
 
 #define repeat(iterations)                                                     \
   for (int iterator = 0; iterator < iterations; iterator++)
-
-using namespace vex;

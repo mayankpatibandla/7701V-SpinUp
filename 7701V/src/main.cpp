@@ -1,20 +1,20 @@
+#include "auton-manager.h"
+#include "debug.h"
 #include "driver.h"
-
-using namespace vex;
-
-void auton() {}
+#include "gui.h"
 
 int main() {
-  lbDriveMtr.setBrake(brake);
-  ltDriveMtr.setBrake(brake);
-  rbDriveMtr.setBrake(brake);
-  rtDriveMtr.setBrake(brake);
-
-  lFlyMtr.setBrake(coast);
-  rFlyMtr.setBrake(coast);
-
-  Controller.ButtonX.pressed([]() { flyMtrs.toggleState(); });
+  devicesInit();
+  autonInit();
+  driverInit();
+  odomInit();
+  debugInit();
+  guiInit();
 
   Competition.drivercontrol(driver);
   Competition.autonomous(auton);
+
+  while (true) {
+    this_thread::sleep_for(0xFFFFFFFF);
+  }
 }
