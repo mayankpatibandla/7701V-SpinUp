@@ -42,6 +42,9 @@ const uint32_t shotCooldown = 100;
 const uint32_t autofireCooldown = 500;
 indexer Indexer(Brain.ThreeWirePort.B, shotCooldown, autofireCooldown);
 
+togglepneumatics leftExpansion(Brain.ThreeWirePort.C);
+togglepneumatics rightExpansion(Brain.ThreeWirePort.A);
+
 void devicesInit() {
   Inertial.calibrate();
 

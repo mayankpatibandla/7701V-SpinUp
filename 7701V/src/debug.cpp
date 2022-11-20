@@ -74,10 +74,10 @@ vex::thread debugThread;
 void debugInit() { debugThread = vex::thread(debug); }
 
 void debug() {
-  while (true) {
-    Brain.Screen.clearScreen();
-    debugOdom();
-    Brain.Screen.render();
-    this_thread::sleep_for(50);
-  }
+  // while (true) {
+  //   Brain.Screen.clearScreen();
+  //   debugOdom();
+  //   Brain.Screen.render();
+  //   this_thread::sleep_for(50);
+  // }
 }

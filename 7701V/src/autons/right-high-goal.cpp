@@ -8,7 +8,7 @@ void autons::rightHighGoal() {
 
   driveRelative(5, 200, 600);
   intakeMtrs.spin(fwd, -12, volt);
-  this_thread::sleep_for(200);
+  this_thread::sleep_for(150);
   intakeMtrs.stop(brake);
 
   driveRelative(-5, 0, 700);

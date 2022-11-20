@@ -1,5 +1,10 @@
 #include "control.h"
 
+void expand(){
+  leftExpansion.toggle();
+  rightExpansion.toggle();
+}
+
 void turnToAngle(double theta, int minTime, int maxTime, PID pid) {
   timer turnTimer;
   turnTimer.reset();

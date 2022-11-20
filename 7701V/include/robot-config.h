@@ -40,4 +40,7 @@ extern const uint32_t shotCooldown;
 extern const uint32_t autofireCooldown;
 extern indexer Indexer;
 
+extern togglepneumatics leftExpansion;
+extern togglepneumatics rightExpansion;
+
 extern void devicesInit();

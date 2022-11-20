@@ -19,6 +19,8 @@ template <typename T> T clamp(const T &n, const T &lower, const T &upper) {
   return std::max(lower, std::min(n, upper));
 }
 
+extern void expand();
+
 extern void turnToAngle(double theta, int minTime = 0, int maxTime = 0,
                         PID pid = {3.5, 0, 0.4});
 extern void driveRelative(double distance, int minTime = 0, int maxTime = 0,
