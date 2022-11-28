@@ -116,6 +116,7 @@ void positiontracking() {
 double x() { return pos_y; }
 double y() { return pos_x; }
 double theta() { return pos_theta; }
+Pose pose() { return {x(), y(), thetaWrapped()}; }
 
 // returns angle with wrapping
 // range ? [-pi, pi) : [0, 2pi)
