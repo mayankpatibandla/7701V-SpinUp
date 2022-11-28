@@ -13,3 +13,7 @@ void printOdom() {
   Brain.Screen.printAt(240, 105, "Theta (deg): %5f",
                        pt::thetaWrapped() * 180 / M_PI);
 }
+
+void worldToScreen(double x, double y, double theta){
+  
+}

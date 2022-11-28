@@ -3,22 +3,22 @@
 namespace positiontracking {
 bool usingInertial = true;
 
-// radius of tracking wheel (in inches)
+// radius of tracking wheel (inches)
 const double WHEEL_RADIUS = 1.4; // 2.75 in
-// circumference of tracking wheel (in inches)
+// circumference of tracking wheel (inches)
 const double WHEEL_CIRCUMFERENCE = M_TWOPI * WHEEL_RADIUS;
 
 // left-right distance between left and right tracking wheels and tracking
-// center (in inches)
+// center (inches)
 const double s_L = 2.78125;
 const double s_R = 2.78125;
-// forward-backward distance between back tracking wheel and tracking center (in
-// inches)
+// forward-backward distance between back tracking wheel and tracking center
+// (inches)
 const double s_S = 1.5;
 
-double pos_x;     // x position of robot (in inches)
-double pos_y;     // y position of robot (in inches)
-double pos_theta; // angle of robot's heading (in radians)
+double pos_x;     // x position of robot (inches)
+double pos_y;     // y position of robot (inches)
+double pos_theta; // angle of robot's heading (radians)
 
 // main position tracking function, will be used in its own thread
 void positiontracking() {
