@@ -1,4 +1,5 @@
 #pragma once
+#include "odom.h"
 #include "robot-config.h"
 
 extern void guiInit();
@@ -7,3 +8,6 @@ extern void updateScreen();
 extern void drawField();
 
 extern void printOdom();
+
+extern Pose worldToScreen(Pose pose);
+extern void drawRobot();

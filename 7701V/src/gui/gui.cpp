@@ -13,6 +13,8 @@ void updateScreen() {
     drawField();
     printOdom();
 
+    drawRobot();
+
     Brain.Screen.render();
     this_thread::sleep_for(50);
   }
