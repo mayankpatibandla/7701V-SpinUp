@@ -19,10 +19,17 @@ Pose worldToScreen(Pose pose) {
 }
 
 Pose rotatePose(Pose pose, Pose c) {
-  double x =
-      (pose.x * std::cos(pose.theta) - pose.y * std::sin(pose.theta)) + c.x;
-  double y =
-      (pose.y * std::cos(pose.theta) + pose.x * std::sin(pose.theta)) + c.y;
+  // double x =
+  //     (pose.x * std::cos(pose.theta) - pose.y * std::sin(pose.theta)) + c.x;
+  // double y =
+  //     (pose.y * std::cos(pose.theta) + pose.x * std::sin(pose.theta)) + c.y;
+
+  double x = ((pose.x - c.x) * std::cos(pose.theta) +
+              (pose.y - c.y) * std::sin(pose.theta)) +
+             c.x;
+  double y = (-(pose.x - c.x) * std::sin(pose.theta) +
+              (pose.y - c.y) * std::cos(pose.theta)) +
+             c.y;
 
   return {x, y, pose.theta};
 }
@@ -39,6 +46,7 @@ void drawRobot() {
   Brain.Screen.drawCircle(pose.x, pose.y, 2);
   Brain.Screen.drawLine(pose.x - 5, pose.y + 5, pose.x, pose.y - 5);
   Brain.Screen.drawLine(pose.x + 5, pose.y + 5, pose.x, pose.y - 5);
+
   Brain.Screen.setPenColor(purple);
   Brain.Screen.setFillColor(purple);
   Pose rotPose = rotatePose({pose.x, pose.y - 5, pose.theta}, pose);
