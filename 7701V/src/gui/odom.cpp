@@ -39,30 +39,14 @@ void drawRobot() {
   // Brain.Screen.printAt(240, 150, "Pose Y: %5f", pose.y);
   // Brain.Screen.printAt(240, 170, "Pose Theta: %5f", pose.theta);
 
-  // Brain.Screen.setPenColor(green);
-  // Brain.Screen.setFillColor(green);
-  // Brain.Screen.drawCircle(pose.x, pose.y, 2);
-  // Brain.Screen.drawLine(pose.x - 5, pose.y + 5, pose.x, pose.y - 5);
-  // Brain.Screen.drawLine(pose.x + 5, pose.y + 5, pose.x, pose.y - 5);
-
   Pose pose = worldToScreen(pt::pose(), {20, 220, 0});
-  Pose rotPose = rotatePose({pose.x, pose.y - 5, pose.theta}, pose);
+  Pose rotPose0 = rotatePose({pose.x, pose.y - 5, pose.theta}, pose);
+  Pose rotPose1 = rotatePose({pose.x - 5, pose.y + 5, pose.theta}, pose);
+  Pose rotPose2 = rotatePose({pose.x + 5, pose.y + 5, pose.theta}, pose);
 
-  Brain.Screen.setPenColor(purple);
-  Brain.Screen.setFillColor(purple);
+  Brain.Screen.setPenColor(green);
+  Brain.Screen.setFillColor(green);
   Brain.Screen.drawCircle(pose.x, pose.y, 2);
-  Brain.Screen.drawLine(pose.x - 5, pose.y + 5, rotPose.x, rotPose.y);
-  Brain.Screen.drawLine(pose.x + 5, pose.y + 5, rotPose.x, rotPose.y);
-
-  // Pose rotPose = rotatePose(pose, {pose.x - 20, pose.y - 20, pose.theta});
-
-  // Brain.Screen.setPenColor(white);
-  // Brain.Screen.setFillColor(transparent);
-  // Brain.Screen.printAt(240, 200, "Pose X: %5f", rotPose.x);
-  // Brain.Screen.printAt(240, 220, "Pose Y: %5f", rotPose.y);
-  // Brain.Screen.printAt(240, 240, "Pose Theta: %5f", pose.theta);
-
-  // Brain.Screen.setPenColor(purple);
-  // Brain.Screen.setFillColor(purple);
-  // Brain.Screen.drawCircle(rotPose.x, rotPose.y, 3);
+  Brain.Screen.drawLine(rotPose1.x, rotPose1.y, rotPose0.x, rotPose0.y);
+  Brain.Screen.drawLine(rotPose2.x, rotPose2.y, rotPose0.x, rotPose0.y);
 }
