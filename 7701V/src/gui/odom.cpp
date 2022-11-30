@@ -15,7 +15,8 @@ void printOdom() {
 
 Pose worldToScreen(Pose pose, Pose offset) {
   const double k = 200.0 / 140.02;
-  return {pose.x * k + offset.x, pose.y * k + offset.y, pose.theta}; // theta?
+  return {pose.x * k + offset.x, pose.y * k + offset.y,
+          pose.theta + offset.theta}; // theta?
 }
 
 Pose rotatePose(Pose pose, Pose c) {
