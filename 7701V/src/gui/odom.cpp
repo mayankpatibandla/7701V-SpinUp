@@ -13,9 +13,9 @@ void printOdom() {
                        pt::thetaWrapped() * 180 / M_PI);
 }
 
-Pose worldToScreen(Pose pose) {
+Pose worldToScreen(Pose pose, Pose offset) {
   const double k = 200.0 / 140.02;
-  return {pose.x * k + 20, pose.y * k + 220, pose.theta}; // theta?
+  return {pose.x * k + offset.x, pose.y * k + offset.y, pose.theta}; // theta?
 }
 
 Pose rotatePose(Pose pose, Pose c) {
@@ -35,21 +35,22 @@ Pose rotatePose(Pose pose, Pose c) {
 }
 
 void drawRobot() {
-  Pose pose = worldToScreen(pt::pose());
+  // Brain.Screen.printAt(240, 130, "Pose X: %5f", pose.x);
+  // Brain.Screen.printAt(240, 150, "Pose Y: %5f", pose.y);
+  // Brain.Screen.printAt(240, 170, "Pose Theta: %5f", pose.theta);
 
-  Brain.Screen.printAt(240, 130, "Pose X: %5f", pose.x);
-  Brain.Screen.printAt(240, 150, "Pose Y: %5f", pose.y);
-  Brain.Screen.printAt(240, 170, "Pose Theta: %5f", pose.theta);
+  // Brain.Screen.setPenColor(green);
+  // Brain.Screen.setFillColor(green);
+  // Brain.Screen.drawCircle(pose.x, pose.y, 2);
+  // Brain.Screen.drawLine(pose.x - 5, pose.y + 5, pose.x, pose.y - 5);
+  // Brain.Screen.drawLine(pose.x + 5, pose.y + 5, pose.x, pose.y - 5);
 
-  Brain.Screen.setPenColor(green);
-  Brain.Screen.setFillColor(green);
-  Brain.Screen.drawCircle(pose.x, pose.y, 2);
-  Brain.Screen.drawLine(pose.x - 5, pose.y + 5, pose.x, pose.y - 5);
-  Brain.Screen.drawLine(pose.x + 5, pose.y + 5, pose.x, pose.y - 5);
+  Pose pose = worldToScreen(pt::pose(), {20, 220, 0});
+  Pose rotPose = rotatePose({pose.x, pose.y - 5, pose.theta}, pose);
 
   Brain.Screen.setPenColor(purple);
   Brain.Screen.setFillColor(purple);
-  Pose rotPose = rotatePose({pose.x, pose.y - 5, pose.theta}, pose);
+  Brain.Screen.drawCircle(pose.x, pose.y, 2);
   Brain.Screen.drawLine(pose.x - 5, pose.y + 5, rotPose.x, rotPose.y);
   Brain.Screen.drawLine(pose.x + 5, pose.y + 5, rotPose.x, rotPose.y);
 

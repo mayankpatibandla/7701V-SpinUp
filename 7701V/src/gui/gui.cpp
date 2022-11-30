@@ -12,7 +12,6 @@ void updateScreen() {
 
     drawField();
     printOdom();
-
     drawRobot();
 
     Brain.Screen.render();
