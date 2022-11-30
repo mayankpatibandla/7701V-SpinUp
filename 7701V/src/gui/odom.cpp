@@ -13,18 +13,7 @@ void printOdom() {
                        pt::thetaWrapped() * 180 / M_PI);
 }
 
-Pose worldToScreen(Pose pose, Pose offset) {
-  const double k = 200.0 / 140.02;
-  return {pose.x * k + offset.x, pose.y * k + offset.y,
-          pose.theta + offset.theta}; // theta?
-}
-
 Pose rotatePose(Pose pose, Pose c) {
-  // double x =
-  //     (pose.x * std::cos(pose.theta) - pose.y * std::sin(pose.theta)) + c.x;
-  // double y =
-  //     (pose.y * std::cos(pose.theta) + pose.x * std::sin(pose.theta)) + c.y;
-
   double x = ((pose.x - c.x) * std::cos(pose.theta) +
               (pose.y - c.y) * std::sin(pose.theta)) +
              c.x;
@@ -35,19 +24,32 @@ Pose rotatePose(Pose pose, Pose c) {
   return {x, y, pose.theta};
 }
 
-void drawRobot() {
-  // Brain.Screen.printAt(240, 130, "Pose X: %5f", pose.x);
-  // Brain.Screen.printAt(240, 150, "Pose Y: %5f", pose.y);
-  // Brain.Screen.printAt(240, 170, "Pose Theta: %5f", pose.theta);
+Pose worldToScreen(Pose pose, Pose offset) {
+  // field side length (pixels) / field side length (inches)
+  const double k = 200.0 / 140.02;
 
-  Pose pose = worldToScreen(pt::pose(), {20, 220, 0});
+  // rotate the pose to account for starting position
+  Pose rotPose =
+      rotatePose({pose.x * k + offset.x, pose.y * k + offset.y, offset.theta},
+                 {120, 120, 0}); // c = field center
+
+  // subtract pi/2 to account for odom x-axis being forward
+  return {rotPose.x, rotPose.y, pose.theta + offset.theta - M_PI_2};
+}
+
+void drawRobot() {
+  // reversed y because screen coord system y-axis is opposite field y-axis
+  Pose pose = worldToScreen({pt::x(), -pt::y(), pt::thetaWrapped()},
+                            {120, 120, M_PI_2});
   Pose rotPose0 = rotatePose({pose.x, pose.y - 5, pose.theta}, pose);
   Pose rotPose1 = rotatePose({pose.x - 5, pose.y + 5, pose.theta}, pose);
   Pose rotPose2 = rotatePose({pose.x + 5, pose.y + 5, pose.theta}, pose);
 
   Brain.Screen.setPenColor(green);
   Brain.Screen.setFillColor(green);
+  Brain.Screen.setPenWidth(1);
   Brain.Screen.drawCircle(pose.x, pose.y, 2);
+  Brain.Screen.setPenWidth(3);
   Brain.Screen.drawLine(rotPose1.x, rotPose1.y, rotPose0.x, rotPose0.y);
   Brain.Screen.drawLine(rotPose2.x, rotPose2.y, rotPose0.x, rotPose0.y);
 }
