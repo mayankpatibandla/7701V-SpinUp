@@ -10,4 +10,4 @@ extern void drawField();
 extern void printOdom();
 
 extern Pose worldToScreen(Pose pose, Pose offset);
-extern void drawRobot();
+extern void drawRobot(Pose offset);

@@ -12,7 +12,7 @@ void updateScreen() {
 
     drawField();
     printOdom();
-    drawRobot();
+    drawRobot({120, 120, 0});
 
     Brain.Screen.render();
     this_thread::sleep_for(50);
