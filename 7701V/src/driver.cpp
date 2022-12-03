@@ -9,9 +9,6 @@ double curveJoystick(double input, const double t) {
 uint32_t autofireStartTime = 0;
 uint32_t autofireDeltaTime = 0;
 
-vex::thread autoAimThread;
-bool autoAiming;
-
 bool expansionReady = true;
 
 void driverInit() {
@@ -25,11 +22,6 @@ void driverInit() {
   Controller.ButtonA.released([]() {
     Indexer.stopAutofiring();
     autofireStartTime = 0;
-  });
-
-  autoAimThread = vex::thread([]() {
-    aimHighGoal({2.15, 0, 0.025}, highGoal(selectedAuton.allianceColor),
-                autoAiming);
   });
 }
 
@@ -46,11 +38,10 @@ void driver() {
     }
 
     // Flywheel
-    double flywheelSpeed = Controller.ButtonR1.pressing()
-                               ? flywheelCoeffs[0]
-                               : Controller.ButtonR2.pressing()
-                                     ? flywheelCoeffs[1]
-                                     : 1;
+    double flywheelSpeed =
+        Controller.ButtonR1.pressing()
+            ? flywheelCoeffs[0]
+            : Controller.ButtonR2.pressing() ? flywheelCoeffs[1] : 1;
 
     if (Controller.ButtonLeft.pressing() && Controller.ButtonDown.pressing()) {
       flyMtrs.spin(fwd, flywheelSpeed * -12, volt);
@@ -94,12 +85,9 @@ void driver() {
         abs(Controller.Axis3.position()) > deadband) {
       leftDriveMtrs.spin(fwd, leftVel * 12, volt);
       rightDriveMtrs.spin(fwd, rightVel * 12, volt);
-    } else if (!autoAiming) {
+    } else {
       driveMtrs.stop(brake);
     }
-
-    // Auto Aiming
-    autoAiming = Controller.ButtonDown.pressing();
 
     // Expansion
     if (Controller.ButtonUp.pressing() && Controller.ButtonLeft.pressing() &&
