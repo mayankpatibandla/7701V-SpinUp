@@ -22,7 +22,7 @@ motor_group rightDriveMtrs(rbDriveMtr, rmDriveMtr, rtDriveMtr);
 
 motor_group driveMtrs(lbDriveMtr, lmDriveMtr, ltDriveMtr, rbDriveMtr, rmDriveMtr, rtDriveMtr);
 
-const double flywheelCoeffs[] = {0.725, 0.67};
+const double flywheelCoeffs[] = {0.8625, 0.65};
 togglemotor lFlyMtr(PORT1, gearSetting::ratio6_1, true);
 togglemotor rFlyMtr(PORT22, gearSetting::ratio6_1, false);
 togglemotor_group flyMtrs(lFlyMtr, rFlyMtr);
@@ -40,7 +40,7 @@ rotation sRot(PORT22, true);
 
 inertial Inertial(PORT22, turnType::right);
 
-const uint32_t shotCooldown = 100;
+const uint32_t shotCooldown = 150;
 const uint32_t autofireCooldown = 500;
 indexer Indexer(Brain.ThreeWirePort.B, shotCooldown, autofireCooldown);
 

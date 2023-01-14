@@ -38,13 +38,13 @@ void vdevices::indexer::startAutofiring() { setAutofiring(true); }
 void vdevices::indexer::stopAutofiring() { setAutofiring(false); }
 
 void vdevices::indexer::shootDisc() {
-  set(true);
-  this_thread::sleep_for(shotCooldown);
   set(false);
+  this_thread::sleep_for(shotCooldown);
+  set(true);
 }
 
 void vdevices::indexer::shootDisc(uint32_t cooldown) {
-  set(true);
-  this_thread::sleep_for(cooldown);
   set(false);
+  this_thread::sleep_for(cooldown);
+  set(true);
 }
