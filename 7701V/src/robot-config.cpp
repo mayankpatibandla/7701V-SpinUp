@@ -10,33 +10,35 @@ controller partnerController(partner);
 
 competition Competition;
 
-motor lbDriveMtr(PORT2, gearSetting::ratio6_1, false);
-motor ltDriveMtr(PORT1, gearSetting::ratio6_1, false);
-motor_group leftDriveMtrs(lbDriveMtr, ltDriveMtr);
+motor lbDriveMtr(PORT11, gearSetting::ratio6_1, true);
+motor lmDriveMtr(PORT12, gearSetting::ratio6_1, false);
+motor ltDriveMtr(PORT13, gearSetting::ratio6_1, true);
+motor_group leftDriveMtrs(lbDriveMtr, lmDriveMtr, ltDriveMtr);
 
-motor rbDriveMtr(PORT10, gearSetting::ratio6_1, true);
-motor rtDriveMtr(PORT9, gearSetting::ratio6_1, true);
-motor_group rightDriveMtrs(rbDriveMtr, rtDriveMtr);
+motor rbDriveMtr(PORT20, gearSetting::ratio6_1, false);
+motor rmDriveMtr(PORT19, gearSetting::ratio6_1, true);
+motor rtDriveMtr(PORT18, gearSetting::ratio6_1, false);
+motor_group rightDriveMtrs(rbDriveMtr, rmDriveMtr, rtDriveMtr);
 
-motor_group driveMtrs(lbDriveMtr, ltDriveMtr, rbDriveMtr, rtDriveMtr);
+motor_group driveMtrs(lbDriveMtr, lmDriveMtr, ltDriveMtr, rbDriveMtr, rmDriveMtr, rtDriveMtr);
 
 const double flywheelCoeffs[] = {0.725, 0.67};
-togglemotor lFlyMtr(PORT5, gearSetting::ratio6_1, false);
-togglemotor rFlyMtr(PORT7, gearSetting::ratio6_1, true);
+togglemotor lFlyMtr(PORT1, gearSetting::ratio6_1, true);
+togglemotor rFlyMtr(PORT22, gearSetting::ratio6_1, false);
 togglemotor_group flyMtrs(lFlyMtr, rFlyMtr);
 
-togglemotor lIntakeMtr(PORT11, gearSetting::ratio18_1, false);
-togglemotor rIntakeMtr(PORT12, gearSetting::ratio18_1, true);
+togglemotor lIntakeMtr(PORT2, gearSetting::ratio18_1, true);
+togglemotor rIntakeMtr(PORT22, gearSetting::ratio18_1, false);
 togglemotor_group intakeMtrs(lIntakeMtr, rIntakeMtr);
 
-motor_group allMtrs(lbDriveMtr, ltDriveMtr, rbDriveMtr, rtDriveMtr, lFlyMtr,
+motor_group allMtrs(lbDriveMtr, lmDriveMtr, ltDriveMtr, rbDriveMtr, rmDriveMtr, rtDriveMtr, lFlyMtr,
                     rFlyMtr, lIntakeMtr, rIntakeMtr);
 
-rotation lRot(PORT3, false);
-rotation rRot(PORT8, true);
-rotation sRot(PORT4, true);
+rotation lRot(PORT22, false);
+rotation rRot(PORT22, true);
+rotation sRot(PORT22, true);
 
-inertial Inertial(PORT20, turnType::right);
+inertial Inertial(PORT22, turnType::right);
 
 const uint32_t shotCooldown = 100;
 const uint32_t autofireCooldown = 500;

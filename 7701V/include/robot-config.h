@@ -12,10 +12,12 @@ extern controller partnerController;
 extern competition Competition;
 
 extern motor lbDriveMtr;
+extern motor lmDriveMtr;
 extern motor ltDriveMtr;
 extern motor_group leftDriveMtrs;
 
 extern motor rbDriveMtr;
+extern motor rmDriveMtr;
 extern motor rtDriveMtr;
 extern motor_group rightDriveMtrs;
 
