@@ -22,7 +22,7 @@ motor_group rightDriveMtrs(rbDriveMtr, rmDriveMtr, rtDriveMtr);
 
 motor_group driveMtrs(lbDriveMtr, lmDriveMtr, ltDriveMtr, rbDriveMtr, rmDriveMtr, rtDriveMtr);
 
-const double flywheelCoeffs[] = {0.875, 0.6667};
+const double flywheelCoeffs[] = {1, 0.875, 0.725};
 togglemotor lFlyMtr(PORT1, gearSetting::ratio6_1, true);
 togglemotor rFlyMtr(PORT22, gearSetting::ratio6_1, false);
 togglemotor_group flyMtrs(lFlyMtr, rFlyMtr);

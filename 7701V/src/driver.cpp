@@ -41,8 +41,8 @@ void driver() {
     // Flywheel
     double flywheelSpeed =
         Controller.ButtonR1.pressing()
-            ? 1
-            : Controller.ButtonR2.pressing() ?  flywheelCoeffs[1] : flywheelCoeffs[0];
+            ? flywheelCoeffs[0]
+            : Controller.ButtonR2.pressing() ?  flywheelCoeffs[1] : flywheelCoeffs[2];
 
     if (Controller.ButtonLeft.pressing() && Controller.ButtonDown.pressing()) {
       flyMtrs.spin(fwd, flywheelSpeed * -12, volt);
