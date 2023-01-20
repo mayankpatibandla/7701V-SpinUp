@@ -3,8 +3,8 @@
 brain Brain;
 
 const double deadband = 1;
-const double forwardCurve = 3;
-const double turnCurve = 5;
+const double forwardCurve = 1;
+const double turnCurve = 1;
 controller Controller(primary);
 controller partnerController(partner);
 
@@ -22,7 +22,7 @@ motor_group rightDriveMtrs(rbDriveMtr, rmDriveMtr, rtDriveMtr);
 
 motor_group driveMtrs(lbDriveMtr, lmDriveMtr, ltDriveMtr, rbDriveMtr, rmDriveMtr, rtDriveMtr);
 
-const double flywheelCoeffs[] = {0.8625, 0.65};
+const double flywheelCoeffs[] = {0.875, 0.6667};
 togglemotor lFlyMtr(PORT1, gearSetting::ratio6_1, true);
 togglemotor rFlyMtr(PORT22, gearSetting::ratio6_1, false);
 togglemotor_group flyMtrs(lFlyMtr, rFlyMtr);
@@ -46,6 +46,8 @@ indexer Indexer(Brain.ThreeWirePort.B, shotCooldown, autofireCooldown);
 
 togglepneumatics leftExpansion(Brain.ThreeWirePort.C);
 togglepneumatics rightExpansion(Brain.ThreeWirePort.A);
+
+togglepneumatics angler(Brain.ThreeWirePort.D);
 
 void devicesInit() {
   Inertial.calibrate();

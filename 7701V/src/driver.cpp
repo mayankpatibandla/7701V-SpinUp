@@ -40,8 +40,8 @@ void driver() {
     // Flywheel
     double flywheelSpeed =
         Controller.ButtonR1.pressing()
-            ? flywheelCoeffs[0]
-            : Controller.ButtonR2.pressing() ? flywheelCoeffs[1] : 1;
+            ? 1
+            : Controller.ButtonR2.pressing() ? flywheelCoeffs[0] : flywheelCoeffs[1];
 
     if (Controller.ButtonLeft.pressing() && Controller.ButtonDown.pressing()) {
       flyMtrs.spin(fwd, flywheelSpeed * -12, volt);
@@ -64,7 +64,7 @@ void driver() {
 
     // Intake
     if (Controller.ButtonL1.pressing()) {
-      intakeMtrs.spin(fwd, -9, volt);
+      intakeMtrs.spin(fwd, -12, volt);
       intakeMtrs.setState(false);
     } else if (Controller.ButtonL2.pressing()) {
       intakeMtrs.spin(fwd, 12, volt);

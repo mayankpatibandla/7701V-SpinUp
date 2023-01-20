@@ -2,7 +2,7 @@
 
 void autons::leftRoller() {
   intakeMtrs.spin(fwd, -12, volt);
-  driveMtrs.spinFor(90, deg, 50, velocityUnits::pct);
+  driveMtrs.spinFor(50, deg, 50, velocityUnits::pct);
   this_thread::sleep_for(60);
   intakeMtrs.stop(brake);
 
