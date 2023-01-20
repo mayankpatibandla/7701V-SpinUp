@@ -14,6 +14,7 @@ bool expansionReady = true;
 void driverInit() {
   Controller.ButtonX.pressed([]() { flyMtrs.toggleState(); });
   Controller.ButtonB.pressed([]() { intakeMtrs.toggleState(); });
+  Controller.ButtonY.pressed([]() { angler.toggle(); });
 
   Controller.ButtonA.pressed([]() {
     Indexer.shootDisc();
@@ -41,7 +42,7 @@ void driver() {
     double flywheelSpeed =
         Controller.ButtonR1.pressing()
             ? 1
-            : Controller.ButtonR2.pressing() ? flywheelCoeffs[0] : flywheelCoeffs[1];
+            : Controller.ButtonR2.pressing() ?  flywheelCoeffs[1] : flywheelCoeffs[0];
 
     if (Controller.ButtonLeft.pressing() && Controller.ButtonDown.pressing()) {
       flyMtrs.spin(fwd, flywheelSpeed * -12, volt);

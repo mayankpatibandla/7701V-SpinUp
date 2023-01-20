@@ -32,13 +32,13 @@ togglemotor rIntakeMtr(PORT22, gearSetting::ratio18_1, false);
 togglemotor_group intakeMtrs(lIntakeMtr, rIntakeMtr);
 
 motor_group allMtrs(lbDriveMtr, lmDriveMtr, ltDriveMtr, rbDriveMtr, rmDriveMtr, rtDriveMtr, lFlyMtr,
-                    rFlyMtr, lIntakeMtr, rIntakeMtr);
+                    rFlyMtr, lIntakeMtr, rIntakeMtr); 
 
-rotation lRot(PORT22, false);
-rotation rRot(PORT22, true);
-rotation sRot(PORT22, true);
+rotation lRot(PORT15, false);
+rotation rRot(PORT16, true);
+rotation sRot(PORT17, true);
 
-inertial Inertial(PORT22, turnType::right);
+inertial Inertial(PORT14, turnType::right);
 
 const uint32_t shotCooldown = 150;
 const uint32_t autofireCooldown = 500;
