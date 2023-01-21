@@ -29,6 +29,7 @@ void driverInit() {
 void driver() {
   if (Competition.isCompetitionSwitch() || Competition.isFieldControl()) {
     flyMtrs.setState(true);
+    angler.set(false);
   }
 
   while (true) {

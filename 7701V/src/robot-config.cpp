@@ -4,7 +4,7 @@ brain Brain;
 
 const double deadband = 1;
 const double forwardCurve = 1;
-const double turnCurve = 1;
+const double turnCurve = 0.1;
 controller Controller(primary);
 controller partnerController(partner);
 
@@ -34,9 +34,9 @@ togglemotor_group intakeMtrs(lIntakeMtr, rIntakeMtr);
 motor_group allMtrs(lbDriveMtr, lmDriveMtr, ltDriveMtr, rbDriveMtr, rmDriveMtr, rtDriveMtr, lFlyMtr,
                     rFlyMtr, lIntakeMtr, rIntakeMtr); 
 
-rotation lRot(PORT15, false);
-rotation rRot(PORT16, true);
-rotation sRot(PORT17, true);
+rotation lRot(PORT15, true);
+rotation rRot(PORT16, false);
+rotation sRot(PORT17, false);
 
 inertial Inertial(PORT14, turnType::right);
 
