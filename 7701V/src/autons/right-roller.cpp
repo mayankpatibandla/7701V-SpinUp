@@ -10,7 +10,7 @@ void autons::rightRoller() {
 
   driveRelative(4, 150, 500);
   intakeMtrs.spin(fwd, -12, volt);
-  this_thread::sleep_for(350);
+  this_thread::sleep_for(275);
   intakeMtrs.stop(brake);
 
   driveRelative(-3, 0, 500);
@@ -34,7 +34,8 @@ void autons::rightRoller() {
   driveRelative(50, 400, 1500, {.0005, 0.000001, 0.000005});
 
   //shoot discs
-  turnToAngle(-2.28, 300, 1000);
+  this_thread::sleep_for(100);
+  turnToAngle(-2.0, 300, 1000);
   Indexer.shootDisc();
   this_thread::sleep_for(1000);
   Indexer.shootDisc();
