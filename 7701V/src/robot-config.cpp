@@ -4,7 +4,7 @@ brain Brain;
 
 const double deadband = 1;
 const double forwardCurve = 1;
-const double turnCurve = 1;
+const double turnCurve = 0.1;
 controller Controller(primary);
 controller partnerController(partner);
 
@@ -22,7 +22,7 @@ motor_group rightDriveMtrs(rbDriveMtr, rmDriveMtr, rtDriveMtr);
 
 motor_group driveMtrs(lbDriveMtr, lmDriveMtr, ltDriveMtr, rbDriveMtr, rmDriveMtr, rtDriveMtr);
 
-const double flywheelCoeffs[] = {0.875, 0.6667};
+const double flywheelCoeffs[] = {1, 0.875, 0.725};
 togglemotor lFlyMtr(PORT1, gearSetting::ratio6_1, true);
 togglemotor rFlyMtr(PORT22, gearSetting::ratio6_1, false);
 togglemotor_group flyMtrs(lFlyMtr, rFlyMtr);
@@ -32,13 +32,13 @@ togglemotor rIntakeMtr(PORT22, gearSetting::ratio18_1, false);
 togglemotor_group intakeMtrs(lIntakeMtr, rIntakeMtr);
 
 motor_group allMtrs(lbDriveMtr, lmDriveMtr, ltDriveMtr, rbDriveMtr, rmDriveMtr, rtDriveMtr, lFlyMtr,
-                    rFlyMtr, lIntakeMtr, rIntakeMtr);
+                    rFlyMtr, lIntakeMtr, rIntakeMtr); 
 
-rotation lRot(PORT22, false);
-rotation rRot(PORT22, true);
-rotation sRot(PORT22, true);
+rotation lRot(PORT15, true);
+rotation rRot(PORT16, false);
+rotation sRot(PORT17, false);
 
-inertial Inertial(PORT22, turnType::right);
+inertial Inertial(PORT14, turnType::right);
 
 const uint32_t shotCooldown = 150;
 const uint32_t autofireCooldown = 500;

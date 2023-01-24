@@ -45,4 +45,6 @@ extern indexer Indexer;
 extern togglepneumatics leftExpansion;
 extern togglepneumatics rightExpansion;
 
+extern togglepneumatics angler;
+
 extern void devicesInit();

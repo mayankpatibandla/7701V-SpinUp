@@ -10,11 +10,11 @@ const double WHEEL_CIRCUMFERENCE = M_TWOPI * WHEEL_RADIUS;
 
 // left-right distance between left and right tracking wheels and tracking
 // center (inches)
-const double s_L = 2.78125;
-const double s_R = 2.78125;
+const double s_L = 2.25;
+const double s_R = 2.25;
 // forward-backward distance between back tracking wheel and tracking center
 // (inches)
-const double s_S = 1.5;
+const double s_S = 4.25;
 
 double pos_x;     // x position of robot (inches)
 double pos_y;     // y position of robot (inches)
