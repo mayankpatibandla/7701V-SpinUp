@@ -14,31 +14,4 @@ void autons::rightRoller() {
   intakeMtrs.stop(brake);
 
   driveRelative(-3, 0, 500);
-
-  // shoot preloads
-  turnToAngle(-1.78, 100, 700);
-  Indexer.shootDisc();
-  this_thread::sleep_for(2000);
-  Indexer.shootDisc();
-  this_thread::sleep_for(500);
-
-  // intake more discs
-  // 2.67, 2.46, -2.28
-  intakeMtrs.spin(fwd, 12, volt);
-  flyMtrs.spin(fwd, 0.775 * 12, volt);
-
-  turnToAngle(2.67, 250, 1000);
-  driveRelative(25, 300, 1000, {.0005, 0.000001, 0.000005});
-
-  turnToAngle(2.46, 250, 1000);
-  driveRelative(50, 400, 1500, {.0005, 0.000001, 0.000005});
-
-  //shoot discs
-  this_thread::sleep_for(100);
-  turnToAngle(-2.0, 300, 1000);
-  Indexer.shootDisc();
-  this_thread::sleep_for(1000);
-  Indexer.shootDisc();
-  this_thread::sleep_for(1000);
-  Indexer.shootDisc();
 }
