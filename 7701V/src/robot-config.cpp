@@ -20,19 +20,18 @@ motor rmDriveMtr(PORT19, gearSetting::ratio6_1, true);
 motor rtDriveMtr(PORT18, gearSetting::ratio6_1, false);
 motor_group rightDriveMtrs(rbDriveMtr, rmDriveMtr, rtDriveMtr);
 
-motor_group driveMtrs(lbDriveMtr, lmDriveMtr, ltDriveMtr, rbDriveMtr, rmDriveMtr, rtDriveMtr);
+motor_group driveMtrs(lbDriveMtr, lmDriveMtr, ltDriveMtr, rbDriveMtr,
+                      rmDriveMtr, rtDriveMtr);
 
 const double flywheelCoeffs[] = {1, 0.875, 0.725};
-togglemotor lFlyMtr(PORT1, gearSetting::ratio6_1, true);
-togglemotor rFlyMtr(PORT22, gearSetting::ratio6_1, false);
-togglemotor_group flyMtrs(lFlyMtr, rFlyMtr);
+togglemotor flyMtr(PORT1, gearSetting::ratio6_1, true);
+togglemotor_group flyMtrs(flyMtr);
 
-togglemotor lIntakeMtr(PORT2, gearSetting::ratio18_1, true);
-togglemotor rIntakeMtr(PORT22, gearSetting::ratio18_1, false);
-togglemotor_group intakeMtrs(lIntakeMtr, rIntakeMtr);
+togglemotor intakeMtr(PORT2, gearSetting::ratio18_1, true);
+togglemotor_group intakeMtrs(intakeMtr);
 
-motor_group allMtrs(lbDriveMtr, lmDriveMtr, ltDriveMtr, rbDriveMtr, rmDriveMtr, rtDriveMtr, lFlyMtr,
-                    rFlyMtr, lIntakeMtr, rIntakeMtr); 
+motor_group allMtrs(lbDriveMtr, lmDriveMtr, ltDriveMtr, rbDriveMtr, rmDriveMtr,
+                    rtDriveMtr, flyMtr, intakeMtr);
 
 rotation lRot(PORT15, true);
 rotation rRot(PORT16, false);
@@ -57,22 +56,18 @@ void devicesInit() {
   rbDriveMtr.setBrake(brake);
   rtDriveMtr.setBrake(brake);
 
-  lFlyMtr.setBrake(coast);
-  rFlyMtr.setBrake(coast);
+  flyMtr.setBrake(coast);
 
-  lIntakeMtr.setBrake(coast);
-  rIntakeMtr.setBrake(coast);
+  intakeMtr.setBrake(coast);
 
   lbDriveMtr.setMaxTorque(100, pct);
   ltDriveMtr.setMaxTorque(100, pct);
   rbDriveMtr.setMaxTorque(100, pct);
   rtDriveMtr.setMaxTorque(100, pct);
 
-  lFlyMtr.setMaxTorque(100, pct);
-  rFlyMtr.setMaxTorque(100, pct);
+  flyMtr.setMaxTorque(100, pct);
 
-  lIntakeMtr.setMaxTorque(100, pct);
-  rIntakeMtr.setMaxTorque(100, pct);
+  intakeMtr.setMaxTorque(100, pct);
 
   allMtrs.resetPosition();
   allMtrs.resetRotation();

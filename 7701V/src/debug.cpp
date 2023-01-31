@@ -6,23 +6,14 @@ void debugFlywheel() {
   std::ostringstream strstream;
   strstream.clear();
 
-  strstream << "Left Flywheel Motor Velocity: " << lFlyMtr.velocity(pct);
+  strstream << "Flywheel Motor Velocity: " << flyMtr.velocity(pct);
   Brain.Screen.printAt(0, 20, strstream.str().c_str());
   strstream.str("");
   strstream.clear();
-  strstream << "Right Flywheel Motor Velocity: " << rFlyMtr.velocity(pct);
-  Brain.Screen.printAt(0, 50, strstream.str().c_str());
-  strstream.str("");
-  strstream.clear();
 
-  strstream << "Left Flywheel Motor Temperature: "
-            << lFlyMtr.temperature(celsius);
+  strstream << "Flywheel Motor Temperature: "
+            << flyMtr.temperature(celsius);
   Brain.Screen.printAt(0, 90, strstream.str().c_str());
-  strstream.str("");
-  strstream.clear();
-  strstream << "Right Flywheel Motor Temperature: "
-            << rFlyMtr.temperature(celsius);
-  Brain.Screen.printAt(0, 120, strstream.str().c_str());
   strstream.str("");
   strstream.clear();
 }

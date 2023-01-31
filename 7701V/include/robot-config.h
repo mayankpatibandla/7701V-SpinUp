@@ -24,12 +24,10 @@ extern motor_group rightDriveMtrs;
 extern motor_group driveMtrs;
 
 extern const double flywheelCoeffs[];
-extern togglemotor lFlyMtr;
-extern togglemotor rFlyMtr;
+extern togglemotor flyMtr;
 extern togglemotor_group flyMtrs;
 
-extern togglemotor lIntakeMtr;
-extern togglemotor rIntakeMtr;
+extern togglemotor intakeMtr;
 extern togglemotor_group intakeMtrs;
 
 extern rotation lRot;
