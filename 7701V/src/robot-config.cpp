@@ -39,8 +39,8 @@ rotation sRot(PORT17, false);
 
 inertial Inertial(PORT14, turnType::right);
 
-const uint32_t shotCooldown = 150;
-const uint32_t autofireCooldown = 500;
+const uint32_t shotCooldown = 125;
+const uint32_t autofireCooldown = 175;
 indexer Indexer(Brain.ThreeWirePort.B, shotCooldown, autofireCooldown);
 
 togglepneumatics leftExpansion(Brain.ThreeWirePort.C);

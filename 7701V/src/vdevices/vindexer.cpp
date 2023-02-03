@@ -39,7 +39,7 @@ void vdevices::indexer::stopAutofiring() { setAutofiring(false); }
 
 void vdevices::indexer::shootDisc() {
   set(true);
-  this_thread::sleep_for(shotCooldown);
+  this_thread::sleep_for(getShotCooldown());
   set(false);
 }
 
