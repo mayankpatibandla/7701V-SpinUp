@@ -13,8 +13,4 @@ int main() {
 
   Competition.drivercontrol(driver);
   Competition.autonomous(auton);
-
-  while (true) {
-    this_thread::sleep_for(0xFFFFFFFF);
-  }
 }
