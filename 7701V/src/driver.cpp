@@ -6,9 +6,6 @@ double curveJoystick(double input, const double t) {
   return input * std::exp(t * (std::abs(input) - 1));
 }
 
-uint32_t autofireStartTime = 0;
-uint32_t autofireDeltaTime = 0;
-
 bool expansionReady = true;
 
 void driverInit() {
@@ -17,12 +14,10 @@ void driverInit() {
   Controller.ButtonY.pressed([]() { angler.toggle(); });
 
   Controller.ButtonA.pressed([]() {
-    Indexer.shootDisc();
-    autofireStartTime = Brain.Timer.system();
+    Indexer.startAutofiring();
   });
   Controller.ButtonA.released([]() {
     Indexer.stopAutofiring();
-    autofireStartTime = 0;
   });
 }
 
@@ -49,14 +44,6 @@ void driver() {
       flyMtrs.spin(fwd, flywheelSpeed * -12, volt);
     } else {
       flyMtrs.spin(fwd, flyMtrs.getState() * flywheelSpeed * 12, volt);
-    }
-
-    // Indexer
-    autofireDeltaTime = Brain.Timer.system() - autofireStartTime;
-    if (Controller.ButtonA.pressing()) {
-      if (autofireDeltaTime > Indexer.getAutofireCooldown()) {
-        Indexer.startAutofiring();
-      }
     }
 
     // Indexer emergency retract

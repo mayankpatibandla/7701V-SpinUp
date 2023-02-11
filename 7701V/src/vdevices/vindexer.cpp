@@ -17,7 +17,7 @@ void vdevices::indexer::autofire(void *arg) {
     if (instance->getAutofiring()) {
       instance->shootDisc();
     }
-    this_thread::sleep_for(instance->getAutofireCooldown());
+    this_thread::sleep_for(instance->getAutofiring() ? instance->getAutofireCooldown() : 0);
   }
 }
 
