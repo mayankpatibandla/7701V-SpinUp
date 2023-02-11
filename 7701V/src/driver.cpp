@@ -7,18 +7,15 @@ double curveJoystick(double input, const double t) {
 }
 
 bool expansionReady = true;
+bool indexerReady = true;
 
 void driverInit() {
   Controller.ButtonX.pressed([]() { flyMtrs.toggleState(); });
   Controller.ButtonB.pressed([]() { intakeMtrs.toggleState(); });
   Controller.ButtonY.pressed([]() { angler.toggle(); });
 
-  Controller.ButtonA.pressed([]() {
-    Indexer.startAutofiring();
-  });
-  Controller.ButtonA.released([]() {
-    Indexer.stopAutofiring();
-  });
+  Controller.ButtonA.pressed([]() { Indexer.startAutofiring(); });
+  Controller.ButtonA.released([]() { Indexer.stopAutofiring(); });
 }
 
 void driver() {
@@ -35,10 +32,11 @@ void driver() {
     }
 
     // Flywheel
-    double flywheelSpeed =
-        Controller.ButtonR1.pressing()
-            ? flywheelCoeffs[0]
-            : Controller.ButtonR2.pressing() ?  flywheelCoeffs[1] : flywheelCoeffs[2];
+    double flywheelSpeed = Controller.ButtonR1.pressing()
+                               ? flywheelCoeffs[0]
+                               : Controller.ButtonR2.pressing()
+                                     ? flywheelCoeffs[1]
+                                     : flywheelCoeffs[2];
 
     if (Controller.ButtonLeft.pressing() && Controller.ButtonDown.pressing()) {
       flyMtrs.spin(fwd, flywheelSpeed * -12, volt);
@@ -47,8 +45,13 @@ void driver() {
     }
 
     // Indexer toggle
-    if (Controller.ButtonUp.pressing()) {
+    if (Controller.ButtonUp.pressing() && indexerReady && !Controller.ButtonLeft.pressing() &&
+        !Controller.ButtonR1.pressing() && !Controller.ButtonR2.pressing() && !Controller.ButtonRight.pressing()) {
       Indexer.toggle();
+      indexerReady = false;
+    }
+    if(!Controller.ButtonUp.pressing()){
+      indexerReady = true;
     }
 
     // Intake
@@ -82,9 +85,9 @@ void driver() {
     if (Controller.ButtonUp.pressing() && Controller.ButtonLeft.pressing() &&
         Controller.ButtonR1.pressing() && Controller.ButtonR2.pressing()) {
       if (expansionReady) {
+        expansionReady = false;
         expand();
         flyMtrs.setState(false);
-        expansionReady = false;
       }
     } else if (!Controller.ButtonUp.pressing() &&
                !Controller.ButtonLeft.pressing() &&
