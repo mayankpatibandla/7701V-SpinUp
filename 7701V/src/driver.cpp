@@ -46,9 +46,9 @@ void driver() {
       flyMtrs.spin(fwd, flyMtrs.getState() * flywheelSpeed * 12, volt);
     }
 
-    // Indexer emergency retract
+    // Indexer toggle
     if (Controller.ButtonUp.pressing()) {
-      Indexer.set(false);
+      Indexer.toggle();
     }
 
     // Intake
