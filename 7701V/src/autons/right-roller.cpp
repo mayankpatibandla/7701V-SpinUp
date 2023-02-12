@@ -1,14 +1,17 @@
 #include "auton-manager.h"
 
 void autons::rightRoller() {
-  driveRelative(25.75, 1200, 2000);
-  turnToAngle(-M_PI_2, 1000, 1700, {2.15, 0, 0.025});
+  flyMtrs.spin(fwd, 0.875 * 12, volt);
+  angler.set(true);
 
-  driveRelative(5, 200, 600);
+  // roller
+  driveRelative(23, 300, 1700);
+  turnToAngle(-M_PI_2 + 0.1, 600, 1500);
+
+  driveRelative(4, 150, 500);
   intakeMtrs.spin(fwd, -12, volt);
-  this_thread::sleep_for(150);
+  this_thread::sleep_for(275);
   intakeMtrs.stop(brake);
 
-  driveRelative(-5, 0, 700);
-  turnToAngle(-1.78, 300, 700, {2.16, 0, 0.025});
+  driveRelative(-3, 0, 500);
 }

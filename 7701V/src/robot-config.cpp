@@ -3,47 +3,50 @@
 brain Brain;
 
 const double deadband = 1;
-const double forwardCurve = 3;
-const double turnCurve = 5;
+const double forwardCurve = 1;
+const double turnCurve = 0.1;
 controller Controller(primary);
 controller partnerController(partner);
 
 competition Competition;
 
-motor lbDriveMtr(PORT2, gearSetting::ratio6_1, false);
-motor ltDriveMtr(PORT1, gearSetting::ratio6_1, false);
-motor_group leftDriveMtrs(lbDriveMtr, ltDriveMtr);
+motor lbDriveMtr(PORT11, gearSetting::ratio6_1, true);
+motor lmDriveMtr(PORT12, gearSetting::ratio6_1, false);
+motor ltDriveMtr(PORT13, gearSetting::ratio6_1, true);
+motor_group leftDriveMtrs(lbDriveMtr, lmDriveMtr, ltDriveMtr);
 
-motor rbDriveMtr(PORT10, gearSetting::ratio6_1, true);
-motor rtDriveMtr(PORT9, gearSetting::ratio6_1, true);
-motor_group rightDriveMtrs(rbDriveMtr, rtDriveMtr);
+motor rbDriveMtr(PORT20, gearSetting::ratio6_1, false);
+motor rmDriveMtr(PORT19, gearSetting::ratio6_1, true);
+motor rtDriveMtr(PORT18, gearSetting::ratio6_1, false);
+motor_group rightDriveMtrs(rbDriveMtr, rmDriveMtr, rtDriveMtr);
 
-motor_group driveMtrs(lbDriveMtr, ltDriveMtr, rbDriveMtr, rtDriveMtr);
+motor_group driveMtrs(lbDriveMtr, lmDriveMtr, ltDriveMtr, rbDriveMtr,
+                      rmDriveMtr, rtDriveMtr);
 
-const double flywheelCoeffs[] = {0.725, 0.67};
-togglemotor lFlyMtr(PORT5, gearSetting::ratio6_1, false);
-togglemotor rFlyMtr(PORT7, gearSetting::ratio6_1, true);
-togglemotor_group flyMtrs(lFlyMtr, rFlyMtr);
+const double flywheelCoeffs[] = {1, 0.875, 0.725};
+togglemotor flyMtr(PORT1, gearSetting::ratio6_1, true);
+togglemotor_group flyMtrs(flyMtr);
 
-togglemotor lIntakeMtr(PORT11, gearSetting::ratio18_1, false);
-togglemotor rIntakeMtr(PORT12, gearSetting::ratio18_1, true);
-togglemotor_group intakeMtrs(lIntakeMtr, rIntakeMtr);
+togglemotor intakeMtr(PORT2, gearSetting::ratio18_1, true);
+togglemotor_group intakeMtrs(intakeMtr);
 
-motor_group allMtrs(lbDriveMtr, ltDriveMtr, rbDriveMtr, rtDriveMtr, lFlyMtr,
-                    rFlyMtr, lIntakeMtr, rIntakeMtr);
+motor_group allMtrs(lbDriveMtr, lmDriveMtr, ltDriveMtr, rbDriveMtr, rmDriveMtr,
+                    rtDriveMtr, flyMtr, intakeMtr);
 
-rotation lRot(PORT3, false);
-rotation rRot(PORT8, true);
-rotation sRot(PORT4, true);
+rotation lRot(PORT15, true);
+rotation rRot(PORT16, false);
+rotation sRot(PORT17, false);
 
-inertial Inertial(PORT20, turnType::right);
+inertial Inertial(PORT14, turnType::right);
 
-const uint32_t shotCooldown = 100;
-const uint32_t autofireCooldown = 500;
+const uint32_t shotCooldown = 125;
+const uint32_t autofireCooldown = 200;
 indexer Indexer(Brain.ThreeWirePort.B, shotCooldown, autofireCooldown);
 
 togglepneumatics leftExpansion(Brain.ThreeWirePort.C);
 togglepneumatics rightExpansion(Brain.ThreeWirePort.A);
+
+togglepneumatics angler(Brain.ThreeWirePort.D);
 
 void devicesInit() {
   Inertial.calibrate();
@@ -53,22 +56,18 @@ void devicesInit() {
   rbDriveMtr.setBrake(brake);
   rtDriveMtr.setBrake(brake);
 
-  lFlyMtr.setBrake(coast);
-  rFlyMtr.setBrake(coast);
+  flyMtr.setBrake(coast);
 
-  lIntakeMtr.setBrake(coast);
-  rIntakeMtr.setBrake(coast);
+  intakeMtr.setBrake(coast);
 
   lbDriveMtr.setMaxTorque(100, pct);
   ltDriveMtr.setMaxTorque(100, pct);
   rbDriveMtr.setMaxTorque(100, pct);
   rtDriveMtr.setMaxTorque(100, pct);
 
-  lFlyMtr.setMaxTorque(100, pct);
-  rFlyMtr.setMaxTorque(100, pct);
+  flyMtr.setMaxTorque(100, pct);
 
-  lIntakeMtr.setMaxTorque(100, pct);
-  rIntakeMtr.setMaxTorque(100, pct);
+  intakeMtr.setMaxTorque(100, pct);
 
   allMtrs.resetPosition();
   allMtrs.resetRotation();

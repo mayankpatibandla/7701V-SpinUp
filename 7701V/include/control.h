@@ -22,11 +22,6 @@ template <typename T> T clamp(const T &n, const T &lower, const T &upper) {
 extern void expand();
 
 extern void turnToAngle(double theta, int minTime = 0, int maxTime = 0,
-                        PID pid = {3.5, 0, 0.4});
+                        PID pid = {1.15, 0, 0.0125});
 extern void driveRelative(double distance, int minTime = 0, int maxTime = 0,
-                          PID pid = {.0025, 0.000001, 0.00015});
-
-enum highGoal { RED_HIGHGOAL = 0, BLUE_HIGHGOAL = 1 };
-std::vector<double> getHighGoalCoords(highGoal goal);
-
-void aimHighGoal(PID pid, highGoal goal, bool &autoAiming);
+                          PID pid = {0.00125, 0.000001, 0.000075});

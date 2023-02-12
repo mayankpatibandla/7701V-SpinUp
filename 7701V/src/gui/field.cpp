@@ -1,9 +1,4 @@
 #include "gui.h"
-#include "odom.h"
-
-vex::thread guiThread;
-
-void guiInit() { guiThread = vex::thread(updateScreen); }
 
 void drawField() {
   // border
@@ -198,31 +193,4 @@ void drawField() {
 
   Brain.Screen.drawRectangle(19, 217, 83, 4);
   Brain.Screen.drawRectangle(19, 137, 4, 83);
-}
-
-void printOdom() {
-  Brain.Screen.setPenWidth(2);
-  Brain.Screen.setPenColor(color(0xFF, 0xFF, 0xFF));
-  Brain.Screen.setFillColor(transparent);
-  Brain.Screen.setFont(mono20);
-
-  Brain.Screen.printAt(240, 30, "Pos X  (in): %5f", pt::x());
-  Brain.Screen.printAt(240, 55, "Pos Y  (in): %5f", pt::y());
-  Brain.Screen.printAt(240, 80, "Theta (rad): %5f", pt::thetaWrapped());
-  Brain.Screen.printAt(240, 105, "Theta (deg): %5f",
-                       pt::thetaWrapped() * 180 / M_PI);
-}
-
-void updateScreen() {
-  Brain.Screen.clearScreen();
-  Brain.Screen.render();
-  while (true) {
-    Brain.Screen.clearScreen();
-
-    drawField();
-    printOdom();
-
-    Brain.Screen.render();
-    this_thread::sleep_for(50);
-  }
 }

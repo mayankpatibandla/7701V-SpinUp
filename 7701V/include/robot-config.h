@@ -12,22 +12,22 @@ extern controller partnerController;
 extern competition Competition;
 
 extern motor lbDriveMtr;
+extern motor lmDriveMtr;
 extern motor ltDriveMtr;
 extern motor_group leftDriveMtrs;
 
 extern motor rbDriveMtr;
+extern motor rmDriveMtr;
 extern motor rtDriveMtr;
 extern motor_group rightDriveMtrs;
 
 extern motor_group driveMtrs;
 
 extern const double flywheelCoeffs[];
-extern togglemotor lFlyMtr;
-extern togglemotor rFlyMtr;
+extern togglemotor flyMtr;
 extern togglemotor_group flyMtrs;
 
-extern togglemotor lIntakeMtr;
-extern togglemotor rIntakeMtr;
+extern togglemotor intakeMtr;
 extern togglemotor_group intakeMtrs;
 
 extern rotation lRot;
@@ -42,5 +42,7 @@ extern indexer Indexer;
 
 extern togglepneumatics leftExpansion;
 extern togglepneumatics rightExpansion;
+
+extern togglepneumatics angler;
 
 extern void devicesInit();

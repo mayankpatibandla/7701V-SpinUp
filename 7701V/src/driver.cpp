@@ -6,36 +6,22 @@ double curveJoystick(double input, const double t) {
   return input * std::exp(t * (std::abs(input) - 1));
 }
 
-uint32_t autofireStartTime = 0;
-uint32_t autofireDeltaTime = 0;
-
-vex::thread autoAimThread;
-bool autoAiming;
-
 bool expansionReady = true;
+bool indexerReady = true;
 
 void driverInit() {
   Controller.ButtonX.pressed([]() { flyMtrs.toggleState(); });
   Controller.ButtonB.pressed([]() { intakeMtrs.toggleState(); });
+  Controller.ButtonY.pressed([]() { angler.toggle(); });
 
-  Controller.ButtonA.pressed([]() {
-    Indexer.shootDisc();
-    autofireStartTime = Brain.Timer.system();
-  });
-  Controller.ButtonA.released([]() {
-    Indexer.stopAutofiring();
-    autofireStartTime = 0;
-  });
-
-  autoAimThread = vex::thread([]() {
-    aimHighGoal({2.15, 0, 0.025}, highGoal(selectedAuton.allianceColor),
-                autoAiming);
-  });
+  Controller.ButtonA.pressed([]() { Indexer.startAutofiring(); });
+  Controller.ButtonA.released([]() { Indexer.stopAutofiring(); });
 }
 
 void driver() {
   if (Competition.isCompetitionSwitch() || Competition.isFieldControl()) {
     flyMtrs.setState(true);
+    angler.set(false);
   }
 
   while (true) {
@@ -50,7 +36,7 @@ void driver() {
                                ? flywheelCoeffs[0]
                                : Controller.ButtonR2.pressing()
                                      ? flywheelCoeffs[1]
-                                     : 1;
+                                     : flywheelCoeffs[2];
 
     if (Controller.ButtonLeft.pressing() && Controller.ButtonDown.pressing()) {
       flyMtrs.spin(fwd, flywheelSpeed * -12, volt);
@@ -58,22 +44,19 @@ void driver() {
       flyMtrs.spin(fwd, flyMtrs.getState() * flywheelSpeed * 12, volt);
     }
 
-    // Indexer
-    autofireDeltaTime = Brain.Timer.system() - autofireStartTime;
-    if (Controller.ButtonA.pressing()) {
-      if (autofireDeltaTime > Indexer.getAutofireCooldown()) {
-        Indexer.startAutofiring();
-      }
+    // Indexer toggle
+    if (Controller.ButtonUp.pressing() && indexerReady && !Controller.ButtonLeft.pressing() &&
+        !Controller.ButtonR1.pressing() && !Controller.ButtonR2.pressing() && !Controller.ButtonRight.pressing()) {
+      Indexer.toggle();
+      indexerReady = false;
     }
-
-    // Indexer emergency retract
-    if (Controller.ButtonUp.pressing()) {
-      Indexer.set(false);
+    if(!Controller.ButtonUp.pressing()){
+      indexerReady = true;
     }
 
     // Intake
     if (Controller.ButtonL1.pressing()) {
-      intakeMtrs.spin(fwd, -6, volt);
+      intakeMtrs.spin(fwd, -12, volt);
       intakeMtrs.setState(false);
     } else if (Controller.ButtonL2.pressing()) {
       intakeMtrs.spin(fwd, 12, volt);
@@ -94,19 +77,17 @@ void driver() {
         abs(Controller.Axis3.position()) > deadband) {
       leftDriveMtrs.spin(fwd, leftVel * 12, volt);
       rightDriveMtrs.spin(fwd, rightVel * 12, volt);
-    } else if (!autoAiming) {
+    } else {
       driveMtrs.stop(brake);
     }
-
-    // Auto Aiming
-    autoAiming = Controller.ButtonDown.pressing();
 
     // Expansion
     if (Controller.ButtonUp.pressing() && Controller.ButtonLeft.pressing() &&
         Controller.ButtonR1.pressing() && Controller.ButtonR2.pressing()) {
       if (expansionReady) {
-        expand();
         expansionReady = false;
+        expand();
+        flyMtrs.setState(false);
       }
     } else if (!Controller.ButtonUp.pressing() &&
                !Controller.ButtonLeft.pressing() &&
