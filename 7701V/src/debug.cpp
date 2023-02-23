@@ -41,7 +41,6 @@ void debugIndexer() {
 }
 
 void debugOdom() {
-  Brain.Screen.clearScreen();
   Brain.Screen.printAt(0, 20, "Position X  . . . | %8f (in) ",
                        positiontracking::x());
   Brain.Screen.printAt(0, 50, "Position Y  . . . | %8f (in) ",
@@ -60,15 +59,24 @@ void debugOdom() {
                        positiontracking::thetaWrapped(false) * 180 / M_PI);
 }
 
+void debugOptical(){
+  std::ostringstream strstream;
+  strstream.clear();
+
+  Brain.Screen.printAt(240, 120, "Optical Hue: %8f", rollerOptical.hue());
+  strstream << "Optical Color: " << (rollerOptical.color() == blue ? "BLUE" : rollerOptical.color() == red ? "RED" : "OTHER");
+  Brain.Screen.printAt(240, 140,  strstream.str().c_str());
+  strstream.str("");
+  strstream.clear();
+}
+
 vex::thread debugThread;
 
 void debugInit() { debugThread = vex::thread(debug); }
 
 void debug() {
-  // while (true) {
-  //   Brain.Screen.clearScreen();
-  //   debugOdom();
-  //   Brain.Screen.render();
-  //   this_thread::sleep_for(50);
-  // }
+  while (true) {
+    debugOptical();
+    this_thread::sleep_for(50);
+  }
 }
