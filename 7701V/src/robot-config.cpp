@@ -38,6 +38,7 @@ rotation rRot(PORT16, false);
 rotation sRot(PORT17, false);
 
 inertial Inertial(PORT14, turnType::right);
+optical rollerOptical(PORT3, false);
 
 const uint32_t shotCooldown = 125;
 const uint32_t autofireCooldown = 200;
@@ -75,6 +76,9 @@ void devicesInit() {
   lRot.resetPosition();
   rRot.resetPosition();
   sRot.resetPosition();
+
+  rollerOptical.setLight(ledState::on);
+  rollerOptical.setLightPower(100, pct);
 
   waitUntil(!Inertial.isCalibrating());
 
