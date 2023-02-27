@@ -59,7 +59,7 @@ void devicesInit() {
 
   flyMtr.setBrake(coast);
 
-  intakeMtr.setBrake(coast);
+  intakeMtr.setBrake(brake);
 
   lbDriveMtr.setMaxTorque(100, pct);
   ltDriveMtr.setMaxTorque(100, pct);
