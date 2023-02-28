@@ -1,11 +1,14 @@
 #pragma once
-#include "control.h"
+#include "vex.h"
+#include "robot-config.h"
 
 // config
 enum teamColor { RED = 0, BLUE = 1, SKILLS = 2, TEST = 3, NONE = 4 };
 enum teamSide { LEFT = 0, RIGHT = 1 };
 enum autonVersion { ROLLER = 0, HIGH_GOAL = 1 };
 enum autonType { MAIN = 0, OTHER = 1 };
+
+extern color rollerColor;
 
 struct auton_t {
   void (*autonCallback)(void);

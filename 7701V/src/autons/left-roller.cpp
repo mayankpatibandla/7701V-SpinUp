@@ -1,4 +1,5 @@
 #include "auton-manager.h"
+#include "control.h"
 
 void autons::leftRoller() {
   intakeMtrs.spin(fwd, -12, volt);

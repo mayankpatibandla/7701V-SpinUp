@@ -1,4 +1,5 @@
 #include "auton-manager.h"
+#include "control.h"
 
 void autons::rightRoller() {
   flyMtrs.spin(fwd, 0.875 * 12, volt);

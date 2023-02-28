@@ -1,4 +1,5 @@
 #include "auton-manager.h"
+#include "control.h"
 
 void autons::leftHighGoal() {
   flyMtrs.spin(fwd, 12, volt);

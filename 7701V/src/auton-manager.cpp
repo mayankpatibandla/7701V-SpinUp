@@ -6,6 +6,8 @@ teamSide ts = LEFT;
 autonVersion av = ROLLER;
 autonType at = MAIN;
 
+color rollerColor = transparent;
+
 auton_t selectedAuton;
 
 void autonInit() {

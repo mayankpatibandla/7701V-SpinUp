@@ -1,4 +1,5 @@
 #include "auton-manager.h"
+#include "control.h"
 
 void autons::skills() {
   timer autonTimer;

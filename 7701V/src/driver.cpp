@@ -1,5 +1,6 @@
 #include "driver.h"
 #include "auton-manager.h"
+#include "control.h"
 
 double curveJoystick(double input, const double t) {
   input /= 100;

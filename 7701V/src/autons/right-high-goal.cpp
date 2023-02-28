@@ -1,4 +1,5 @@
 #include "auton-manager.h"
+#include "control.h"
 
 void autons::rightHighGoal() {
   timer autonTimer;
