@@ -21,6 +21,9 @@ template <typename T> T clamp(const T &n, const T &lower, const T &upper) {
 
 extern void expand();
 
+extern void spinRoller(double velocity = -1, color col = rollerColor,
+                       int minTime = 0, int maxTime = 0);
+
 extern void turnToAngle(double theta, int minTime = 0, int maxTime = 0,
                         PID pid = {1.15, 0, 0.0125});
 extern void driveRelative(double distance, int minTime = 0, int maxTime = 0,

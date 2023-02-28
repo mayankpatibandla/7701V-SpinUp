@@ -5,6 +5,24 @@ void expand() {
   rightExpansion.toggle();
 }
 
+void spinRoller(double velocity, color col, int minTime, int maxTime) {
+  timer rollerTimer;
+  rollerTimer.reset();
+
+  double voltage = velocity * 12;
+
+  intakeMtrs.spin(fwd, voltage, volt);
+
+  waitUntil(rollerTimer.time(msec) > minTime || minTime == 0);
+  while (true) {
+    if ((rollerTimer.time(msec) > maxTime && maxTime != 0) || rollerOptical.color() == col) {
+      break;
+    }
+  }
+
+  intakeMtrs.stop();
+}
+
 void turnToAngle(double theta, int minTime, int maxTime, PID pid) {
   timer turnTimer;
   turnTimer.reset();
