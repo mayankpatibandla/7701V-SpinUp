@@ -1,6 +1,6 @@
 #pragma once
-#include "vex.h"
 #include "robot-config.h"
+#include "vex.h"
 
 // config
 enum teamColor { RED = 0, BLUE = 1, SKILLS = 2, TEST = 3, NONE = 4 };

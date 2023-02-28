@@ -3,7 +3,6 @@
 #include "odom.h"
 #include "robot-config.h"
 
-
 extern void guiInit();
 extern void updateScreen();
 

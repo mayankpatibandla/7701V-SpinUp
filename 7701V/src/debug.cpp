@@ -11,8 +11,7 @@ void debugFlywheel() {
   strstream.str("");
   strstream.clear();
 
-  strstream << "Flywheel Motor Temperature: "
-            << flyMtr.temperature(celsius);
+  strstream << "Flywheel Motor Temperature: " << flyMtr.temperature(celsius);
   Brain.Screen.printAt(0, 90, strstream.str().c_str());
   strstream.str("");
   strstream.clear();
@@ -59,13 +58,16 @@ void debugOdom() {
                        positiontracking::thetaWrapped(false) * 180 / M_PI);
 }
 
-void debugOptical(){
+void debugOptical() {
   std::ostringstream strstream;
   strstream.clear();
 
   Brain.Screen.printAt(240, 120, "Optical Hue: %8f", rollerOptical.hue());
-  strstream << "Optical Color: " << (rollerOptical.color() == blue ? "BLUE" : rollerOptical.color() == red ? "RED" : "OTHER");
-  Brain.Screen.printAt(240, 140,  strstream.str().c_str());
+  strstream << "Optical Color: "
+            << (rollerOptical.color() == blue
+                    ? "BLUE"
+                    : rollerOptical.color() == red ? "RED" : "OTHER");
+  Brain.Screen.printAt(240, 140, strstream.str().c_str());
   strstream.str("");
   strstream.clear();
 }
