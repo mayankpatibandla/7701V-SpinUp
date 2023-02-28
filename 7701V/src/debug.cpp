@@ -75,8 +75,8 @@ vex::thread debugThread;
 void debugInit() { debugThread = vex::thread(debug); }
 
 void debug() {
-  while (true) {
-    debugOptical();
-    this_thread::sleep_for(50);
-  }
+  // while (true) {
+  //   debugOptical();
+  //   this_thread::sleep_for(50);
+  // }
 }
