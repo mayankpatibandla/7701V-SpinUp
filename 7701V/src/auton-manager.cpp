@@ -50,11 +50,11 @@ void autonInit() {
     next = true;
   } break;
   case SKILLS: {
-    selectedAuton = {autons::skills};
+    selectedAuton = {autons::skills, tc};
     Controller.Screen.print("Skills Auton");
   } break;
   case TEST: {
-    selectedAuton = {autons::test};
+    selectedAuton = {autons::test, tc};
     Controller.Screen.print("Test Auton");
   } break;
   case NONE: {
