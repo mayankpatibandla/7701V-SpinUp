@@ -125,6 +125,14 @@ void autonInit() {
     } break;
     }
   }
+
+  rollerColor =
+      selectedAuton.allianceColor == RED ||
+              selectedAuton.allianceColor == SKILLS
+          ? red
+          : selectedAuton.allianceColor == BLUE
+                ? blue
+                : selectedAuton.allianceColor == TEST ? red : transparent;
 }
 
 void auton() { selectedAuton.autonCallback(); }
