@@ -38,6 +38,9 @@ rotation rRot(PORT16, false);
 rotation sRot(PORT17, false);
 
 inertial Inertial(PORT14, turnType::right);
+
+int redMin = 350, redMax = 50;
+int blueMin = 200, blueMax = 300;
 optical rollerOptical(PORT3, false);
 
 const uint32_t shotCooldown = 125;

@@ -15,8 +15,17 @@ void spinRoller(double velocity, color col, int minTime, int maxTime) {
 
   waitUntil(rollerTimer.time(msec) > minTime || minTime == 0);
   while (true) {
-    if ((rollerTimer.time(msec) > maxTime && maxTime != 0) ||
-        rollerOptical.color() == col) {
+    int hue = rollerOptical.hue();
+
+    if (rollerTimer.time(msec) > maxTime && maxTime != 0) {
+      break;
+    }
+
+    if(col == red && redMax > hue && hue > redMin){
+      break;
+    }
+
+    if(col == blue && blueMax > hue && hue > blueMin){
       break;
     }
   }

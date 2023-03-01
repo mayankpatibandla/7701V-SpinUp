@@ -35,6 +35,9 @@ extern rotation rRot;
 extern rotation sRot;
 
 extern inertial Inertial;
+
+extern int redMin, redMax;
+extern int blueMin, blueMax;
 extern optical rollerOptical;
 
 extern const uint32_t shotCooldown;
