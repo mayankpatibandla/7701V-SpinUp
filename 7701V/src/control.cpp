@@ -24,7 +24,8 @@ void spinRoller(double velocity, color col, int minTime, int maxTime) {
   intakeMtrs.stop();
 }
 
-void turnToAngle(double theta, int minTime, int maxTime, PID pid) {
+void turnToAngle(double theta, int minTime, int maxTime, double maxVelocity,
+                 PID pid) {
   timer turnTimer;
   turnTimer.reset();
 
@@ -73,7 +74,7 @@ void turnToAngle(double theta, int minTime, int maxTime, PID pid) {
 
     // output powers
     pow = error * pid.kP + integral * pid.kI + derivative + pid.kD;
-    pow = clamp(pow, -1., 1.);
+    pow = clamp(pow, -maxVelocity, maxVelocity);
 
     leftDriveMtrs.spin(fwd, -pow * 12, volt);
     rightDriveMtrs.spin(fwd, pow * 12, volt);
@@ -90,7 +91,8 @@ void turnToAngle(double theta, int minTime, int maxTime, PID pid) {
             << " Time: " << turnTimer.time(msec) << std::endl;
 }
 
-void driveRelative(double distance, int minTime, int maxTime, PID pid) {
+void driveRelative(double distance, int minTime, int maxTime,
+                   double maxVelocity, PID pid) {
   timer driveTimer;
   driveTimer.reset();
 
@@ -135,7 +137,7 @@ void driveRelative(double distance, int minTime, int maxTime, PID pid) {
 
     // output powers
     pow = error * pid.kP + integral * pid.kI + derivative * pid.kD;
-    pow = clamp(pow, -1., 1.);
+    pow = clamp(pow, -maxVelocity, maxVelocity);
 
     driveMtrs.spin(fwd, pow * 12, volt);
 
