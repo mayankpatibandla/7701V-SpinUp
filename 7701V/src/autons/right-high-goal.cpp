@@ -2,7 +2,6 @@
 #include "control.h"
 
 void autons::rightHighGoal() {
-  timer autonTimer;
   flyMtrs.spin(fwd, 0.9125 * 12, volt);
 
   // roller
@@ -47,7 +46,5 @@ void autons::rightHighGoal() {
   Indexer.shootDisc();
   this_thread::sleep_for(1000);
   Indexer.shootDisc();
-  Controller.Screen.clearLine(3);
-  Controller.Screen.print(autonTimer.time(sec));
   this_thread::sleep_for(1000); 
 }

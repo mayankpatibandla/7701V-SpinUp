@@ -135,4 +135,14 @@ void autonInit() {
                 : selectedAuton.allianceColor == TEST ? red : transparent;
 }
 
-void auton() { selectedAuton.autonCallback(); }
+void auton() {
+  timer autonTimer;
+  autonTimer.reset();
+
+  selectedAuton.autonCallback();
+
+  Controller.Screen.clearLine(3);
+  Controller.Screen.print("Auton Time: ");
+  Controller.Screen.print(autonTimer.time(sec));
+  Controller.Screen.print(" sec");
+}
