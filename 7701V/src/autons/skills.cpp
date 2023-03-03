@@ -38,7 +38,7 @@ void autons::skills() {
   driveMtrs.stop();
 
   // shoot discs
-  turnToAngle(-2.325, 300, 1500, {0.8, 0, 0.0075}); //-2.325
+  turnToAngle(-2.325, 300, 1500, 1, {0.8, 0, 0.0075}); //-2.325
   this_thread::sleep_for(100);
   // 111.25, 34 + 13/16
   // turnToAngle(M_PI + std::atan2((54+13/16) - pt::y(), 111.25 - pt::x()), 300,

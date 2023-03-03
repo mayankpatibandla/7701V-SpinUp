@@ -5,5 +5,5 @@ void autons::test() {
   // intakeMtrs.spin(fwd, -12, volt);
   // waitUntil(rollerOptical.color() == red);
   // intakeMtrs.stop();
-  spinRoller();
+  spinRoller(-1, rollerColor, 165);
 }

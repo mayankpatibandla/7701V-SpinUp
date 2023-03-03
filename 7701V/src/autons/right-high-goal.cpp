@@ -16,7 +16,7 @@ void autons::rightHighGoal() {
   driveRelative(-2.4166, 0, 1000);
 
   // shoot preloads
-  turnToAngle(-1.8, 200, 700);
+  turnToAngle(-1.9375, 200, 700);
   this_thread::sleep_for(750);
   Indexer.shootDisc();
   this_thread::sleep_for(250);
@@ -37,7 +37,7 @@ void autons::rightHighGoal() {
   driveMtrs.stop();
 
   //shoot discs
-  turnToAngle(-1.9125, 300, 1500, {0.8, 0, 0.0075});//-2.325
+  turnToAngle(-1.9125, 300, 1500, 1, {0.8, 0, 0.0075});//-2.325
   this_thread::sleep_for(100);
   // 111.25, 34 + 13/16
   // turnToAngle(M_PI + std::atan2((54+13/16) - pt::y(), 111.25 - pt::x()), 300, 1500);
