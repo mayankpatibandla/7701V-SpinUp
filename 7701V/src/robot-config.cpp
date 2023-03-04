@@ -39,8 +39,8 @@ rotation sRot(PORT17, false);
 
 inertial Inertial(PORT14, turnType::right);
 
-int redMin = 350, redMax = 50;
-int blueMin = 200, blueMax = 300;
+int redMin = 340, redMax = 20;
+int blueMin = 225, blueMax = 265;
 optical rollerOptical(PORT3, false);
 
 int storageDistMin = 3, storageDistMax = 175;
