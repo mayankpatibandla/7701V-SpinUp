@@ -9,9 +9,7 @@ void autons::rightHighGoal() {
   turnToAngle(-M_PI_2 + 0.1, 600, 1200);
 
   driveRelative(12, 150, 600);
-  intakeMtrs.spin(fwd, -12, volt);
-  this_thread::sleep_for(300);
-  intakeMtrs.stop(brake);
+  spinRoller(-1, rollerColor, 165);
 
   driveRelative(-2.4166, 0, 1000);
 
