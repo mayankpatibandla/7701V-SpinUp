@@ -13,11 +13,8 @@ void updateScreen() {
     drawField();
     printOdom();
     printOptical();
+    printDistance();
     drawRobot({120, 120, 0});
-
-    Brain.Screen.setFillColor(transparent);
-    Brain.Screen.setPenColor(white);
-    Brain.Screen.printAt(240, 190, "Distance: %3f mm", storageDistance.objectDistance(mm));
 
     Brain.Screen.render();
     this_thread::sleep_for(50);

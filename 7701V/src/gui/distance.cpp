@@ -1,0 +1,14 @@
+#include "gui.h"
+
+void printDistance() {
+  double dist = storageDistance.objectDistance(mm);
+
+  Brain.Screen.setFillColor(transparent);
+  if (storageDistMin < storageDistance.objectDistance(mm) &&
+      storageDistance.objectDistance(mm) < storageDistMax) {
+    Brain.Screen.setPenColor(yellow);
+  } else {
+    Brain.Screen.setPenColor(white);
+  }
+  Brain.Screen.printAt(240, 190, "Distance: %3f mm", dist);
+}

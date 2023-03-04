@@ -12,5 +12,7 @@ extern void printOdom();
 
 extern void printOptical();
 
+extern void printDistance();
+
 extern Pose worldToScreen(Pose pose, Pose offset);
 extern void drawRobot(Pose offset);
