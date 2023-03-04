@@ -1,5 +1,23 @@
 #include "control.h"
 
+bool matchLoadEnabled = false;
+
+void matchLoad() {
+  while (true) {
+    if (matchLoadEnabled) {
+      if (storageDistMin < storageDistance.objectDistance(mm) &&
+          storageDistance.objectDistance(mm) < storageDistMax) {
+        this_thread::sleep_for(300);
+        Indexer.shootDisc();
+        this_thread::sleep_for(350);
+      }
+    }
+    this_thread::sleep_for(1);
+  }
+}
+
+vex::thread matchLoadThread(matchLoad);
+
 void expand() {
   leftExpansion.toggle();
   rightExpansion.toggle();
@@ -21,11 +39,11 @@ void spinRoller(double velocity, color col, int minTime, int maxTime) {
       break;
     }
 
-    if(col == red && redMax > hue && hue > redMin){
+    if (col == red && redMax > hue && hue > redMin) {
       break;
     }
 
-    if(col == blue && blueMax > hue && hue > blueMin){
+    if (col == blue && blueMax > hue && hue > blueMin) {
       break;
     }
   }

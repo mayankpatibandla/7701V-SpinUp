@@ -40,6 +40,9 @@ extern int redMin, redMax;
 extern int blueMin, blueMax;
 extern optical rollerOptical;
 
+extern int storageDistMin, storageDistMax;
+extern distance storageDistance;
+
 extern const uint32_t shotCooldown;
 extern const uint32_t autofireCooldown;
 extern indexer Indexer;

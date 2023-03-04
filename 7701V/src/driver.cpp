@@ -12,7 +12,6 @@ bool indexerReady = true;
 
 void driverInit() {
   Controller.ButtonX.pressed([]() { flyMtrs.toggleState(); });
-  Controller.ButtonB.pressed([]() { intakeMtrs.toggleState(); });
   Controller.ButtonY.pressed([]() { angler.toggle(); });
 
   Controller.ButtonA.pressed([]() { Indexer.startAutofiring(); });
@@ -48,13 +47,17 @@ void driver() {
     // Indexer toggle
     if (Controller.ButtonDown.pressing() && indexerReady &&
         !Controller.ButtonLeft.pressing() && !Controller.ButtonR1.pressing() &&
-        !Controller.ButtonR2.pressing() && !Controller.ButtonRight.pressing() && !Controller.ButtonUp.pressing()) {
+        !Controller.ButtonR2.pressing() && !Controller.ButtonRight.pressing() &&
+        !Controller.ButtonUp.pressing()) {
       Indexer.toggle();
       indexerReady = false;
     }
     if (!Controller.ButtonDown.pressing()) {
       indexerReady = true;
     }
+
+    // Match loads
+    matchLoadEnabled = Controller.ButtonB.pressing();
 
     // Intake
     if (Controller.ButtonL1.pressing()) {

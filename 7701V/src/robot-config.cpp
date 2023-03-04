@@ -43,6 +43,9 @@ int redMin = 350, redMax = 50;
 int blueMin = 200, blueMax = 300;
 optical rollerOptical(PORT3, false);
 
+int storageDistMin = 3, storageDistMax = 175;
+distance storageDistance(PORT4);
+
 const uint32_t shotCooldown = 125;
 const uint32_t autofireCooldown = 200;
 indexer Indexer(Brain.ThreeWirePort.B, shotCooldown, autofireCooldown);

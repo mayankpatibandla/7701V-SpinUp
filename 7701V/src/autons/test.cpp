@@ -2,8 +2,9 @@
 #include "control.h"
 
 void autons::test() {
-  // intakeMtrs.spin(fwd, -12, volt);
-  // waitUntil(rollerOptical.color() == red);
-  // intakeMtrs.stop();
-  spinRoller(-1, rollerColor, 165);
+  // spinRoller(-1, rollerColor, 165);
+
+  flyMtrs.spin(fwd, 0.825 * 12, volt);
+  matchLoadEnabled = true;
+  waitUntil(Controller.ButtonB.pressing());
 }
