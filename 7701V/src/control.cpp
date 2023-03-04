@@ -39,7 +39,7 @@ void spinRoller(double velocity, color col, int minTime, int maxTime) {
       break;
     }
 
-    if (col == red && redMax > hue && hue > redMin) {
+    if (col == red && (redMax > hue || hue > redMin)) {
       break;
     }
 

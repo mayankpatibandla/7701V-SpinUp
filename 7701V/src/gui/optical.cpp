@@ -11,7 +11,7 @@ void printOptical() {
   strstream << "Optical Color: "
             << (blueMax > rollerOptical.hue() && rollerOptical.hue() > blueMin
                     ? "BLUE"
-                    : redMax > rollerOptical.hue() && rollerOptical.hue() > redMin
+                    : redMax > rollerOptical.hue() || rollerOptical.hue() > redMin
                           ? "RED"
                           : rollerOptical.color() == transparent ? "TRANSPARENT"
                                                                  : "OTHER");
