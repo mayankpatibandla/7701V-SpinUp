@@ -9,9 +9,9 @@ void printOptical() {
 
   Brain.Screen.printAt(240, 120, "Optical Hue: %8f", rollerOptical.hue());
   strstream << "Optical Color: "
-            << (rollerOptical.color() == blue
+            << (blueMax > rollerOptical.hue() && rollerOptical.hue() > blueMin
                     ? "BLUE"
-                    : rollerOptical.color() == red
+                    : redMax > rollerOptical.hue() && rollerOptical.hue() > redMin
                           ? "RED"
                           : rollerOptical.color() == transparent ? "TRANSPARENT"
                                                                  : "OTHER");
