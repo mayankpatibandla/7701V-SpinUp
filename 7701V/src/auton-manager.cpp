@@ -135,6 +135,8 @@ void autonInit() {
                 : selectedAuton.allianceColor == TEST ? red : transparent;
 }
 
+void autons::emptyAuton() {}
+
 void auton() {
   timer autonTimer;
   autonTimer.reset();
