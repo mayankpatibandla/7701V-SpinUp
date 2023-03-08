@@ -2,7 +2,7 @@
 #include "control.h"
 
 void autons::rightHighGoal() {
-  flyMtrs.spin(fwd, 0.9 * 12, volt);
+  flyMtrs.spin(fwd, 0.9375 * 12, volt);
   angler.set(true);
 
   // roller
@@ -27,7 +27,7 @@ void autons::rightHighGoal() {
   // 2.67, 2.46, -2.28
   intakeMtrs.spin(fwd, 12, volt);
   flyMtrs.spin(fwd, 0.82 * 12, volt);
-  turnToAngle(2.8, 250, 1750);
+  turnToAngle(2.9, 250, 1750);
   // driveRelative(80, 400, 2500, {0.0005, 0.000001, 0.000025});
   driveMtrs.spin(fwd, 6, volt);
   this_thread::sleep_for(2150);
