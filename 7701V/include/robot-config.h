@@ -40,6 +40,7 @@ extern int redMin, redMax;
 extern int blueMin, blueMax;
 extern optical rollerOptical;
 
+extern int matchLoadStartDelay, matchLoadEndDelay;
 extern int storageDistMin, storageDistMax;
 extern distance storageDistance;
 

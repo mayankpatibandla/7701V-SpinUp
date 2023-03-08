@@ -7,9 +7,9 @@ void matchLoad() {
     if (matchLoadEnabled) {
       if (storageDistMin < storageDistance.objectDistance(mm) &&
           storageDistance.objectDistance(mm) < storageDistMax) {
-        this_thread::sleep_for(300);
+        this_thread::sleep_for(matchLoadStartDelay);
         Indexer.shootDisc();
-        this_thread::sleep_for(350);
+        this_thread::sleep_for(matchLoadEndDelay);
       }
     }
     this_thread::sleep_for(1);

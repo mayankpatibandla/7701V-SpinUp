@@ -43,6 +43,7 @@ int redMin = 340, redMax = 20;
 int blueMin = 225, blueMax = 265;
 optical rollerOptical(PORT3, false);
 
+int matchLoadStartDelay = 300, matchLoadEndDelay = 400;
 int storageDistMin = 3, storageDistMax = 175;
 distance storageDistance(PORT4);
 
