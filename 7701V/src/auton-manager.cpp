@@ -143,6 +143,10 @@ void auton() {
 
   selectedAuton.autonCallback();
 
+  if (!Competition.isCompetitionSwitch() && !Competition.isFieldControl()) {
+    Controller.rumble(rumbleShort);
+  }
+
   Controller.Screen.clearLine(3);
   Controller.Screen.print("Auton Time: ");
   Controller.Screen.print(autonTimer.time(sec));
