@@ -16,6 +16,8 @@ void updateScreen() {
     printDistance();
     drawRobot({120, 120, 0});
 
+    checkDevices();
+
     Brain.Screen.render();
     this_thread::sleep_for(50);
   }
