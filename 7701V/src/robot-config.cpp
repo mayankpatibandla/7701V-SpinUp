@@ -56,6 +56,32 @@ togglepneumatics rightExpansion(Brain.ThreeWirePort.A);
 
 togglepneumatics angler(Brain.ThreeWirePort.D);
 
+std::vector<vex::device*> devicesList;
+
+void devicesListInit(){
+  devicesList.push_back(&lbDriveMtr);
+  devicesList.push_back(&lmDriveMtr);
+  devicesList.push_back(&ltDriveMtr);
+
+  devicesList.push_back(&rbDriveMtr);
+  devicesList.push_back(&rmDriveMtr);
+  devicesList.push_back(&rtDriveMtr);
+
+  devicesList.push_back(&flyMtr);
+
+  devicesList.push_back(&intakeMtr);
+
+  devicesList.push_back(&lRot);
+  devicesList.push_back(&rRot);
+  devicesList.push_back(&sRot);
+
+  devicesList.push_back(&Inertial);
+
+  devicesList.push_back(&rollerOptical);
+
+  devicesList.push_back(&storageDistance);
+}
+
 void devicesInit() {
   Inertial.calibrate();
 

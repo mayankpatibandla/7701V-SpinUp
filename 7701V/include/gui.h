@@ -1,4 +1,5 @@
 #pragma once
+#include "alarm.h"
 #include "auton-manager.h"
 #include "odom.h"
 #include "robot-config.h"

@@ -53,4 +53,7 @@ extern togglepneumatics rightExpansion;
 
 extern togglepneumatics angler;
 
+extern std::vector<vex::device*> devicesList;
+extern void devicesListInit();
+
 extern void devicesInit();
