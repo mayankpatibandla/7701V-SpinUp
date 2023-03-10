@@ -46,6 +46,8 @@ void spinRoller(double velocity, color col, int minTime, int maxTime) {
     if (col == blue && blueMax > hue && hue > blueMin) {
       break;
     }
+
+    this_thread::sleep_for(1);
   }
 
   intakeMtrs.stop();
