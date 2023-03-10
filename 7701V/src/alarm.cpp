@@ -4,9 +4,6 @@ void error(vex::device *Device) {
   std::ostringstream strstream;
   strstream.clear();
 
-  strstream << "PORT: " << Device->index() + 1
-            << " TYPE: " << deviceTypeToString(Device->type());
-
   Brain.Screen.setFont(mono30);
   Brain.Screen.setFillColor(transparent);
   Brain.Screen.setPenColor(white);
