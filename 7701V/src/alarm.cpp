@@ -40,8 +40,8 @@ void error(vex::device *Device) {
 
 void checkDevices() {
   for (auto &i : devicesList) {
-    if (!i->installed()) {
-      error(i);
+    if (!i.device->installed()) {
+      error(i.device);
     }
   }
 }
