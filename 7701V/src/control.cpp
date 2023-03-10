@@ -1,11 +1,58 @@
 #include "control.h"
 
+bool matchLoadEnabled = false;
+
+void matchLoad() {
+  while (true) {
+    if (matchLoadEnabled) {
+      if (storageDistMin < storageDistance.objectDistance(mm) &&
+          storageDistance.objectDistance(mm) < storageDistMax) {
+        this_thread::sleep_for(matchLoadStartDelay);
+        Indexer.shootDisc();
+        this_thread::sleep_for(matchLoadEndDelay);
+      }
+    }
+    this_thread::sleep_for(1);
+  }
+}
+
+vex::thread matchLoadThread(matchLoad);
+
 void expand() {
   leftExpansion.toggle();
   rightExpansion.toggle();
 }
 
-void turnToAngle(double theta, int minTime, int maxTime, PID pid) {
+void spinRoller(double velocity, color col, int minTime, int maxTime) {
+  timer rollerTimer;
+  rollerTimer.reset();
+
+  double voltage = velocity * 12;
+
+  intakeMtrs.spin(fwd, voltage, volt);
+
+  waitUntil(rollerTimer.time(msec) > minTime || minTime == 0);
+  while (true) {
+    int hue = rollerOptical.hue();
+
+    if (rollerTimer.time(msec) > maxTime && maxTime != 0) {
+      break;
+    }
+
+    if (col == red && (redMax > hue || hue > redMin)) {
+      break;
+    }
+
+    if (col == blue && blueMax > hue && hue > blueMin) {
+      break;
+    }
+  }
+
+  intakeMtrs.stop();
+}
+
+void turnToAngle(double theta, int minTime, int maxTime, double maxVelocity,
+                 PID pid) {
   timer turnTimer;
   turnTimer.reset();
 
@@ -54,24 +101,19 @@ void turnToAngle(double theta, int minTime, int maxTime, PID pid) {
 
     // output powers
     pow = error * pid.kP + integral * pid.kI + derivative + pid.kD;
-    pow = clamp(pow, -1., 1.);
+    pow = clamp(pow, -maxVelocity, maxVelocity);
 
     leftDriveMtrs.spin(fwd, -pow * 12, volt);
     rightDriveMtrs.spin(fwd, pow * 12, volt);
-
-    std::cout << "kP: " << pid.kP << " kI: " << pid.kI << " kD: " << pid.kD
-              << std::endl;
-    std::cout << "Pow: " << pow << " Err: " << error << std::endl;
 
     // sleep for dT
     this_thread::sleep_until(timeStart + pid.dT);
   }
   driveMtrs.stop(brake);
-  std::cout << "Done"
-            << " Time: " << turnTimer.time(msec) << std::endl;
 }
 
-void driveRelative(double distance, int minTime, int maxTime, PID pid) {
+void driveRelative(double distance, int minTime, int maxTime,
+                   double maxVelocity, PID pid) {
   timer driveTimer;
   driveTimer.reset();
 
@@ -116,19 +158,12 @@ void driveRelative(double distance, int minTime, int maxTime, PID pid) {
 
     // output powers
     pow = error * pid.kP + integral * pid.kI + derivative * pid.kD;
-    pow = clamp(pow, -1., 1.);
+    pow = clamp(pow, -maxVelocity, maxVelocity);
 
     driveMtrs.spin(fwd, pow * 12, volt);
-
-    // debug
-    std::cout << "kP: " << pid.kP << " kI: " << pid.kI << " kD: " << pid.kD
-              << std::endl;
-    std::cout << "Pow: " << pow << " Err: " << error << std::endl;
 
     // sleep for dT
     this_thread::sleep_until(timeStart + pid.dT);
   }
   driveMtrs.stop(brake);
-  std::cout << "Done"
-            << " Time: " << driveTimer.time(msec) << std::endl;
 }

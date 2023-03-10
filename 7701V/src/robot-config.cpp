@@ -23,7 +23,7 @@ motor_group rightDriveMtrs(rbDriveMtr, rmDriveMtr, rtDriveMtr);
 motor_group driveMtrs(lbDriveMtr, lmDriveMtr, ltDriveMtr, rbDriveMtr,
                       rmDriveMtr, rtDriveMtr);
 
-const double flywheelCoeffs[] = {1, 0.875, 0.725};
+const double flywheelCoeffs[] = {1, 0.7, 0.79};
 togglemotor flyMtr(PORT1, gearSetting::ratio6_1, true);
 togglemotor_group flyMtrs(flyMtr);
 
@@ -39,6 +39,14 @@ rotation sRot(PORT17, false);
 
 inertial Inertial(PORT14, turnType::right);
 
+int redMin = 340, redMax = 20;
+int blueMin = 225, blueMax = 265;
+optical rollerOptical(PORT3, false);
+
+int matchLoadStartDelay = 300, matchLoadEndDelay = 400;
+int storageDistMin = 3, storageDistMax = 175;
+distance storageDistance(PORT4);
+
 const uint32_t shotCooldown = 125;
 const uint32_t autofireCooldown = 200;
 indexer Indexer(Brain.ThreeWirePort.B, shotCooldown, autofireCooldown);
@@ -47,6 +55,32 @@ togglepneumatics leftExpansion(Brain.ThreeWirePort.C);
 togglepneumatics rightExpansion(Brain.ThreeWirePort.A);
 
 togglepneumatics angler(Brain.ThreeWirePort.D);
+
+std::vector<vex::device*> devicesList;
+
+void devicesListInit(){
+  devicesList.push_back(&lbDriveMtr);
+  devicesList.push_back(&lmDriveMtr);
+  devicesList.push_back(&ltDriveMtr);
+
+  devicesList.push_back(&rbDriveMtr);
+  devicesList.push_back(&rmDriveMtr);
+  devicesList.push_back(&rtDriveMtr);
+
+  devicesList.push_back(&flyMtr);
+
+  devicesList.push_back(&intakeMtr);
+
+  devicesList.push_back(&lRot);
+  devicesList.push_back(&rRot);
+  devicesList.push_back(&sRot);
+
+  devicesList.push_back(&Inertial);
+
+  devicesList.push_back(&rollerOptical);
+
+  devicesList.push_back(&storageDistance);
+}
 
 void devicesInit() {
   Inertial.calibrate();
@@ -58,7 +92,7 @@ void devicesInit() {
 
   flyMtr.setBrake(coast);
 
-  intakeMtr.setBrake(coast);
+  intakeMtr.setBrake(brake);
 
   lbDriveMtr.setMaxTorque(100, pct);
   ltDriveMtr.setMaxTorque(100, pct);
@@ -75,6 +109,9 @@ void devicesInit() {
   lRot.resetPosition();
   rRot.resetPosition();
   sRot.resetPosition();
+
+  rollerOptical.setLight(ledState::on);
+  rollerOptical.setLightPower(100, pct);
 
   waitUntil(!Inertial.isCalibrating());
 

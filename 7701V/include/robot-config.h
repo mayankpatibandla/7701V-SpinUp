@@ -36,6 +36,14 @@ extern rotation sRot;
 
 extern inertial Inertial;
 
+extern int redMin, redMax;
+extern int blueMin, blueMax;
+extern optical rollerOptical;
+
+extern int matchLoadStartDelay, matchLoadEndDelay;
+extern int storageDistMin, storageDistMax;
+extern distance storageDistance;
+
 extern const uint32_t shotCooldown;
 extern const uint32_t autofireCooldown;
 extern indexer Indexer;
@@ -44,5 +52,8 @@ extern togglepneumatics leftExpansion;
 extern togglepneumatics rightExpansion;
 
 extern togglepneumatics angler;
+
+extern std::vector<vex::device*> devicesList;
+extern void devicesListInit();
 
 extern void devicesInit();

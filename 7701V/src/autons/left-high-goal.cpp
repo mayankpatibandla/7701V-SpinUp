@@ -1,27 +1,21 @@
 #include "auton-manager.h"
+#include "control.h"
 
 void autons::leftHighGoal() {
-  flyMtrs.spin(fwd, 12, volt);
+  flyMtrs.spin(fwd, .85 * 12, volt);
+  angler.set(true);
 
-  intakeMtrs.spin(fwd, -12, volt);
-  driveMtrs.spinFor(90, deg, 50, velocityUnits::pct);
-  this_thread::sleep_for(60);
-  intakeMtrs.stop(brake);
+  driveMtrs.spinFor(fwd, 100, msec, 50, velocityUnits::pct);
+  spinRoller(-1, rollerColor, 165);
 
-  driveMtrs.spinFor(-100, deg, 50, velocityUnits::pct);
-
-  leftDriveMtrs.spin(fwd, -3, volt);
-  rightDriveMtrs.spin(fwd, 3, volt);
-  this_thread::sleep_for(250);
-  driveMtrs.stop();
+  turnToAngle(0.35, 100, 700, 0.5);
 
   this_thread::sleep_for(3500);
-  Indexer.shootDisc();
-  this_thread::sleep_for(2000);
-  Indexer.shootDisc();
-  this_thread::sleep_for(1000);
-  Indexer.shootDisc();
-  this_thread::sleep_for(1000);
 
-  flyMtrs.stop(coast);
+  Indexer.shootDisc();
+  this_thread::sleep_for(1500);
+  Indexer.shootDisc();
+
+  this_thread::sleep_for(500);
+  angler.set(false);
 }

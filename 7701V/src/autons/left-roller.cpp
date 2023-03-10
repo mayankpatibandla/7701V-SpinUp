@@ -1,15 +1,9 @@
 #include "auton-manager.h"
+#include "control.h"
 
 void autons::leftRoller() {
-  intakeMtrs.spin(fwd, -12, volt);
-  driveMtrs.spinFor(50, deg, 50, velocityUnits::pct);
-  this_thread::sleep_for(30);
-  intakeMtrs.stop(brake);
+  driveMtrs.spinFor(fwd, 100, msec, 50, velocityUnits::pct);
+  spinRoller(-1, rollerColor, 165);
 
-  driveMtrs.spinFor(-100, deg, 50, velocityUnits::pct);
-
-  leftDriveMtrs.spin(fwd, -3, volt);
-  rightDriveMtrs.spin(fwd, 3, volt);
-  this_thread::sleep_for(250);
-  driveMtrs.stop();
+  turnToAngle(0.1, 100, 500, 0.25);
 }

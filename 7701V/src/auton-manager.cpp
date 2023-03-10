@@ -6,6 +6,8 @@ teamSide ts = LEFT;
 autonVersion av = ROLLER;
 autonType at = MAIN;
 
+color rollerColor = transparent;
+
 auton_t selectedAuton;
 
 void autonInit() {
@@ -48,11 +50,11 @@ void autonInit() {
     next = true;
   } break;
   case SKILLS: {
-    selectedAuton = {autons::skills};
+    selectedAuton = {autons::skills, tc};
     Controller.Screen.print("Skills Auton");
   } break;
   case TEST: {
-    selectedAuton = {autons::test};
+    selectedAuton = {autons::test, tc};
     Controller.Screen.print("Test Auton");
   } break;
   case NONE: {
@@ -123,6 +125,30 @@ void autonInit() {
     } break;
     }
   }
+
+  rollerColor =
+      selectedAuton.allianceColor == RED ||
+              selectedAuton.allianceColor == SKILLS
+          ? red
+          : selectedAuton.allianceColor == BLUE
+                ? blue
+                : selectedAuton.allianceColor == TEST ? red : transparent;
 }
 
-void auton() { selectedAuton.autonCallback(); }
+void autons::emptyAuton() {}
+
+void auton() {
+  timer autonTimer;
+  autonTimer.reset();
+
+  selectedAuton.autonCallback();
+
+  if (!Competition.isCompetitionSwitch() && !Competition.isFieldControl()) {
+    Controller.rumble(rumbleShort);
+  }
+
+  Controller.Screen.clearLine(3);
+  Controller.Screen.print("Auton Time: ");
+  Controller.Screen.print(autonTimer.time(sec));
+  Controller.Screen.print(" sec");
+}

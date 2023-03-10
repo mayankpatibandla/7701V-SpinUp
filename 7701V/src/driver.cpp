@@ -1,5 +1,6 @@
 #include "driver.h"
 #include "auton-manager.h"
+#include "control.h"
 
 double curveJoystick(double input, const double t) {
   input /= 100;
@@ -11,7 +12,6 @@ bool indexerReady = true;
 
 void driverInit() {
   Controller.ButtonX.pressed([]() { flyMtrs.toggleState(); });
-  Controller.ButtonB.pressed([]() { intakeMtrs.toggleState(); });
   Controller.ButtonY.pressed([]() { angler.toggle(); });
 
   Controller.ButtonA.pressed([]() { Indexer.startAutofiring(); });
@@ -22,6 +22,7 @@ void driver() {
   if (Competition.isCompetitionSwitch() || Competition.isFieldControl()) {
     flyMtrs.setState(true);
     angler.set(false);
+    matchLoadEnabled = false;
   }
 
   while (true) {
@@ -45,14 +46,19 @@ void driver() {
     }
 
     // Indexer toggle
-    if (Controller.ButtonUp.pressing() && indexerReady && !Controller.ButtonLeft.pressing() &&
-        !Controller.ButtonR1.pressing() && !Controller.ButtonR2.pressing() && !Controller.ButtonRight.pressing()) {
+    if (Controller.ButtonDown.pressing() && indexerReady &&
+        !Controller.ButtonLeft.pressing() && !Controller.ButtonR1.pressing() &&
+        !Controller.ButtonR2.pressing() && !Controller.ButtonRight.pressing() &&
+        !Controller.ButtonUp.pressing()) {
       Indexer.toggle();
       indexerReady = false;
     }
-    if(!Controller.ButtonUp.pressing()){
+    if (!Controller.ButtonDown.pressing()) {
       indexerReady = true;
     }
+
+    // Match loads
+    matchLoadEnabled = Controller.ButtonB.pressing();
 
     // Intake
     if (Controller.ButtonL1.pressing()) {

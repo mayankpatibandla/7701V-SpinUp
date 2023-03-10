@@ -1,4 +1,6 @@
 #pragma once
+#include "alarm.h"
+#include "auton-manager.h"
 #include "odom.h"
 #include "robot-config.h"
 
@@ -8,6 +10,10 @@ extern void updateScreen();
 extern void drawField();
 
 extern void printOdom();
+
+extern void printOptical();
+
+extern void printDistance();
 
 extern Pose worldToScreen(Pose pose, Pose offset);
 extern void drawRobot(Pose offset);

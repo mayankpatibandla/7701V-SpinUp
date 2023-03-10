@@ -4,6 +4,7 @@
 #include "gui.h"
 
 int main() {
+  devicesListInit();
   devicesInit();
   autonInit();
   driverInit();
