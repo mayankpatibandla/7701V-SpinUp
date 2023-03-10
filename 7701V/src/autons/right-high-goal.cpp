@@ -21,13 +21,12 @@ void autons::rightHighGoal() {
   this_thread::sleep_for(1000);
   Indexer.shootDisc();
   this_thread::sleep_for(250);
-  angler.set(false);
 
   // intake discs
   // 2.67, 2.46, -2.28
   intakeMtrs.spin(fwd, 12, volt);
-  flyMtrs.spin(fwd, 0.82 * 12, volt);
-  turnToAngle(2.9, 250, 1750);
+  flyMtrs.spin(fwd, 0.865 * 12, volt);
+  turnToAngle(2.85, 250, 1750);
   // driveRelative(80, 400, 2500, {0.0005, 0.000001, 0.000025});
   driveMtrs.spin(fwd, 6, volt);
   this_thread::sleep_for(2150);
@@ -44,4 +43,5 @@ void autons::rightHighGoal() {
   this_thread::sleep_for(1000);
   Indexer.shootDisc();
   this_thread::sleep_for(1000); 
+  angler.set(false);
 }
