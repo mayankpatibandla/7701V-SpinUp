@@ -1,6 +1,6 @@
 #include "alarm.h"
 
-void error(vex::device *Device) {
+void error(alarmDevice *Device) {
   std::ostringstream strstream;
   strstream.clear();
 
@@ -38,7 +38,7 @@ void error(vex::device *Device) {
 void checkDevices() {
   for (auto &i : devicesList) {
     if (!i.device->installed()) {
-      error(i.device);
+      error(&i);
     }
   }
 }
