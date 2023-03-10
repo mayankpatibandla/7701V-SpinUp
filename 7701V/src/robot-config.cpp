@@ -59,6 +59,8 @@ togglepneumatics angler(Brain.ThreeWirePort.D);
 std::vector<alarmDevice> devicesList;
 
 void devicesListInit() {
+  devicesList.reserve(21);
+
   devicesList.push_back({&lbDriveMtr, "Left Bottom Drive", "Motor"});
   devicesList.push_back({&lmDriveMtr, "Left Middle Drive", "Motor"});
   devicesList.push_back({&ltDriveMtr, "Left Top Drive", "Motor"});
