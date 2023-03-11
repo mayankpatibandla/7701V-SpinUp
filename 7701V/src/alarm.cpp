@@ -10,22 +10,22 @@ void error(alarmDevice *Device) {
   Brain.Screen.clearScreen();
 
   Brain.Screen.setFont(mono60);
-  Brain.Screen.printAt(0, 60, "DEVICE NOT FOUND");
+  Brain.Screen.printAt(0, 40, "DEVICE NOT FOUND");
 
-  Brain.Screen.setFont(mono20);
+  Brain.Screen.setFont(mono40);
 
   strstream << "Port: " << Device->device->index() + 1;
-  Brain.Screen.printAt(0, 90, strstream.str().c_str());
+  Brain.Screen.printAt(0, 110, strstream.str().c_str());
   strstream.str("");
   strstream.clear();
 
   strstream << "Type: " << Device->type;
-  Brain.Screen.printAt(0, 120, strstream.str().c_str());
+  Brain.Screen.printAt(0, 155, strstream.str().c_str());
   strstream.str("");
   strstream.clear();
 
   strstream << "Name: " << Device->name;
-  Brain.Screen.printAt(0, 150, strstream.str().c_str());
+  Brain.Screen.printAt(0, 200, strstream.str().c_str());
   strstream.str("");
   strstream.clear();
 
