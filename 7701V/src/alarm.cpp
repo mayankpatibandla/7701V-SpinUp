@@ -14,7 +14,7 @@ void error(alarmDevice *Device) {
 
   Brain.Screen.setFont(mono20);
 
-  strstream << "Port: " << Device->device->index();
+  strstream << "Port: " << Device->device->index() + 1;
   Brain.Screen.printAt(0, 90, strstream.str().c_str());
   strstream.str("");
   strstream.clear();
