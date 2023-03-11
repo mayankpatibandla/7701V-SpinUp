@@ -1,5 +1,7 @@
 #include "alarm.h"
 
+bool dismissed = false;
+
 void error(alarmDevice *Device) {
   std::ostringstream strstream;
   strstream.clear();
@@ -31,10 +33,10 @@ void error(alarmDevice *Device) {
 
   Brain.Screen.render();
 
-  while (true) {
+  while (!Device->device->installed() && !dismissed) {
     Controller.rumble(rumbleLong);
 
-    // break loop on any input
+    // return on any input
     if (Controller.ButtonA.pressing() || Controller.ButtonB.pressing() ||
         Controller.ButtonX.pressing() || Controller.ButtonY.pressing() ||
         Controller.ButtonUp.pressing() || Controller.ButtonDown.pressing() ||
@@ -46,6 +48,7 @@ void error(alarmDevice *Device) {
         Controller.Axis4.position() > 50 || Controller.Axis1.position() < -50 ||
         Controller.Axis2.position() < -50 || Controller.Axis1.position() > 50 ||
         Controller.Axis2.position() > 50 || Brain.Screen.pressing()) {
+      dismissed = true;
       break;
     } else {
       this_thread::sleep_for(100);
@@ -54,10 +57,17 @@ void error(alarmDevice *Device) {
 }
 
 void checkDevices() {
+  bool noErrors = true;
+
   for (auto &i : devicesList) {
     if (!i.device->installed()) {
       error(&i);
+      noErrors = false;
     }
+  }
+
+  if (noErrors) {
+    dismissed = false;
   }
 }
 
