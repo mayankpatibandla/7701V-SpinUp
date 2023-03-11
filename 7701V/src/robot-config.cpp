@@ -56,30 +56,32 @@ togglepneumatics rightExpansion(Brain.ThreeWirePort.A);
 
 togglepneumatics angler(Brain.ThreeWirePort.D);
 
-std::vector<vex::device*> devicesList;
+std::vector<alarmDevice> devicesList;
 
-void devicesListInit(){
-  devicesList.push_back(&lbDriveMtr);
-  devicesList.push_back(&lmDriveMtr);
-  devicesList.push_back(&ltDriveMtr);
+void devicesListInit() {
+  devicesList.reserve(21);
 
-  devicesList.push_back(&rbDriveMtr);
-  devicesList.push_back(&rmDriveMtr);
-  devicesList.push_back(&rtDriveMtr);
+  devicesList.push_back({&lbDriveMtr, "Left Bottom Drive", "Motor"});
+  devicesList.push_back({&lmDriveMtr, "Left Middle Drive", "Motor"});
+  devicesList.push_back({&ltDriveMtr, "Left Top Drive", "Motor"});
 
-  devicesList.push_back(&flyMtr);
+  devicesList.push_back({&rbDriveMtr, "Right Bottom Drive", "Motor"});
+  devicesList.push_back({&rmDriveMtr, "Right Middle Drive", "Motor"});
+  devicesList.push_back({&rtDriveMtr, "Right Top Drive", "Motor"});
 
-  devicesList.push_back(&intakeMtr);
+  devicesList.push_back({&flyMtr, "Flywheel", "Motor"});
 
-  devicesList.push_back(&lRot);
-  devicesList.push_back(&rRot);
-  devicesList.push_back(&sRot);
+  devicesList.push_back({&intakeMtr, "Intake", "Motor"});
 
-  devicesList.push_back(&Inertial);
+  devicesList.push_back({&lRot, "Left Tracking Wheel", "Rotation"});
+  devicesList.push_back({&rRot, "Right Tracking Wheel", "Rotation"});
+  devicesList.push_back({&sRot, "Back Tracking Wheel", "Rotation"});
 
-  devicesList.push_back(&rollerOptical);
+  devicesList.push_back({&Inertial, "Inertial", "Inertial"});
 
-  devicesList.push_back(&storageDistance);
+  devicesList.push_back({&rollerOptical, "Roller Color", "Optical"});
+
+  devicesList.push_back({&storageDistance, "Disc Storage", "Distance"});
 }
 
 void devicesInit() {
