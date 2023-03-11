@@ -36,18 +36,14 @@ void error(alarmDevice *Device) {
   while (!Device->device->installed() && !dismissed) {
     Controller.rumble(rumbleLong);
 
-    // return on any input
+    // break on any button press
     if (Controller.ButtonA.pressing() || Controller.ButtonB.pressing() ||
         Controller.ButtonX.pressing() || Controller.ButtonY.pressing() ||
         Controller.ButtonUp.pressing() || Controller.ButtonDown.pressing() ||
         Controller.ButtonLeft.pressing() || Controller.ButtonRight.pressing() ||
         Controller.ButtonL1.pressing() || Controller.ButtonL2.pressing() ||
         Controller.ButtonR1.pressing() || Controller.ButtonR2.pressing() ||
-        Controller.Axis3.position() < -50 ||
-        Controller.Axis4.position() < -50 || Controller.Axis3.position() > 50 ||
-        Controller.Axis4.position() > 50 || Controller.Axis1.position() < -50 ||
-        Controller.Axis2.position() < -50 || Controller.Axis1.position() > 50 ||
-        Controller.Axis2.position() > 50 || Brain.Screen.pressing()) {
+        Brain.Screen.pressing()) {
       dismissed = true;
       break;
     } else {
