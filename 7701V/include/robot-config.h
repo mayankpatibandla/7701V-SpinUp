@@ -24,6 +24,7 @@ extern motor_group rightDriveMtrs;
 extern motor_group driveMtrs;
 
 extern const double flywheelCoeffs[];
+extern const double flywheelMatchLoadCoeff;
 extern togglemotor flyMtr;
 extern togglemotor_group flyMtrs;
 
@@ -53,7 +54,12 @@ extern togglepneumatics rightExpansion;
 
 extern togglepneumatics angler;
 
-extern std::vector<vex::device*> devicesList;
+typedef struct {
+  vex::device *device;
+  std::string name, type;
+} alarmDevice;
+
+extern std::vector<alarmDevice> devicesList;
 extern void devicesListInit();
 
 extern void devicesInit();
