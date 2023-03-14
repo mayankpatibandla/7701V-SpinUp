@@ -51,7 +51,8 @@ void driver() {
     if (Controller.ButtonDown.pressing() && indexerReady &&
         !Controller.ButtonLeft.pressing() && !Controller.ButtonR1.pressing() &&
         !Controller.ButtonR2.pressing() && !Controller.ButtonRight.pressing() &&
-        !Controller.ButtonUp.pressing() && !Controller.ButtonL1.pressing() && !Controller.ButtonL2.pressing()) {
+        !Controller.ButtonUp.pressing() && !Controller.ButtonL1.pressing() &&
+        !Controller.ButtonL2.pressing()) {
       Indexer.toggle();
       indexerReady = false;
     }
