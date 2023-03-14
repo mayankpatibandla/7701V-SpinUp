@@ -51,7 +51,7 @@ void driver() {
     if (Controller.ButtonDown.pressing() && indexerReady &&
         !Controller.ButtonLeft.pressing() && !Controller.ButtonR1.pressing() &&
         !Controller.ButtonR2.pressing() && !Controller.ButtonRight.pressing() &&
-        !Controller.ButtonUp.pressing()) {
+        !Controller.ButtonUp.pressing() && !Controller.ButtonL1.pressing() && !Controller.ButtonL2.pressing()) {
       Indexer.toggle();
       indexerReady = false;
     }
@@ -90,15 +90,15 @@ void driver() {
     }
 
     // Expansion
-    if (Controller.ButtonUp.pressing() && Controller.ButtonLeft.pressing() &&
+    if (Controller.ButtonL1.pressing() && Controller.ButtonL2.pressing() &&
         Controller.ButtonR1.pressing() && Controller.ButtonR2.pressing()) {
       if (expansionReady) {
         expansionReady = false;
         expand();
         flyMtrs.setState(false);
       }
-    } else if (!Controller.ButtonUp.pressing() &&
-               !Controller.ButtonLeft.pressing() &&
+    } else if (!Controller.ButtonL1.pressing() &&
+               !Controller.ButtonL2.pressing() &&
                !Controller.ButtonR1.pressing() &&
                !Controller.ButtonR2.pressing()) {
       expansionReady = true;
