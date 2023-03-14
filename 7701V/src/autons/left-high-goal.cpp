@@ -6,7 +6,7 @@ void autons::leftHighGoal() {
   angler.set(true);
 
   driveMtrs.spinFor(fwd, 100, msec, 50, velocityUnits::pct);
-  spinRoller(-1, rollerColor, 165);
+  spinRoller(-1, rollerColor, 200);
 
   turnToAngle(0.35, 100, 700, 0.5);
 
