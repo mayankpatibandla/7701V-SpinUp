@@ -8,7 +8,11 @@ void matchLoad() {
       if (storageDistMin < storageDistance.objectDistance(mm) &&
           storageDistance.objectDistance(mm) < storageDistMax) {
         this_thread::sleep_for(matchLoadStartDelay);
-        Indexer.shootDisc();
+        waitUntil(std::abs(flyMtrs.velocity(pct) / 100) > flywheelMinCoeff ||
+                  !matchLoadEnabled);
+        if (matchLoadEnabled) {
+          Indexer.shootDisc();
+        }
         this_thread::sleep_for(matchLoadEndDelay);
       }
     }
