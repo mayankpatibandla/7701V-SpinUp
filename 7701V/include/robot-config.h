@@ -24,7 +24,7 @@ extern motor_group rightDriveMtrs;
 extern motor_group driveMtrs;
 
 extern const double flywheelCoeffs[];
-extern const double flywheelMatchLoadCoeff;
+extern const double flywheelMatchLoadCoeff, flywheelMinCoeff;
 extern togglemotor flyMtr;
 extern togglemotor_group flyMtrs;
 
