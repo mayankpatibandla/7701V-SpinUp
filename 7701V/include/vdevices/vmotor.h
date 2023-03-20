@@ -24,4 +24,4 @@ public:
   using vex::motor_group::stop;
   using vex::motor_group::velocity;
 };
-} // namespace vmotor
+} // namespace vdevices
