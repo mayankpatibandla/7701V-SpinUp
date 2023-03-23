@@ -106,7 +106,7 @@ void turnToAngle(double theta, int minTime, int maxTime, double maxVelocity,
     prevError = error;
 
     // output powers
-    pow = error * pid.kP + integral * pid.kI + derivative + pid.kD;
+    pow = error * pid.kP + integral * pid.kI + derivative * pid.kD;
     pow = clamp(pow, -maxVelocity, maxVelocity);
 
     leftDriveMtrs.spin(fwd, -pow * 12, volt);
