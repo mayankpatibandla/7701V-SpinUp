@@ -15,8 +15,10 @@ void autonInit() {
     Brain.Screen.setFont(mono60);
     Brain.Screen.printAt(0, 60, "No SD Card!");
     Brain.Screen.setFont(mono20);
-    while (!Brain.SDcard.isInserted())
+    
+    while (!Brain.SDcard.isInserted()) {
       Controller.rumble("-.");
+    }
   }
 
   std::ifstream ifs;
