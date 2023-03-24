@@ -9,15 +9,20 @@ void autons::skills() {
 
   // match loads 1
   matchLoadEnabled = true;
-  this_thread::sleep_for(12500);
+  this_thread::sleep_for(3000);
 
   // roller 1
-  turnToAngle(-0.775, 100, 1500, 0.5, {0.8, 0, 0.1});
+  turnToAngle(-0.585, 100, 1500, 0.5, {0.8, 0, 0.1});
+  intakeMtrs.stop();
   matchLoadEnabled = false;
   flyMtrs.spin(fwd, 12, volt);
-  driveRelative(60, 200, 3500, 0.4);
-  driveRelative(-14, 50, 800, 0.65);
-  turnToAngle(0.1, 75, 600, 0.4, {0.9, 0, 0.0075});
+  driveRelative(45, 200, 3500, 0.6);
+  driveRelative(-6, 100, 800, 0.4);
+  intakeMtrs.spin(fwd, 12, volt);
+  this_thread::sleep_for(500);
+  driveRelative(45, 100, 10000, 0.3);
+  driveRelative(-20, 50, 800, 0.65);
+  turnToAngle(0.05, 75, 600, 0.4, {0.9, 0, 0.0075});
   driveMtrs.spin(fwd, 0.45 * 12, volt);
   this_thread::sleep_for(800);
   driveMtrs.stop();
@@ -32,7 +37,7 @@ void autons::skills() {
   // roller 2
   intakeMtrs.spin(fwd, 12, volt);
   driveRelative(-16.25, 200, 1500, 0.5);
-  turnToAngle(1.35, 75, 1500, 0.65, {0.9, 0, 0.0075});
+  turnToAngle(1.05, 75, 1500, 0.65, {0.9, 0, 0.0075});
   driveMtrs.spin(fwd, 0.45 * 12, volt);
   this_thread::sleep_for(800);
   driveMtrs.stop();
@@ -49,8 +54,8 @@ void autons::skills() {
   intakeMtrs.spin(fwd, 12, volt);
   driveRelative(-7.5, 100, 1000);
   angler.set(false);
-  turnToAngle(-0.225, 100, 2500, 0.4, {0.5, 0, 0.005});
-  driveRelative(-63.75, 100, 3000, 1, {0.001, 0.000001, 0.000075});
+  turnToAngle(-0.1, 100, 2500, 0.4, {0.5, 0, 0.005});
+  driveRelative(-63.75, 100, 3000, 0.6, {0.001, 0.000001, 0.000075});
   turnToAngle(0.25, 0, 1000, 0.5, {0.85, 0, 0.01});
   for (int i = 0; i < 3; i++) {
     if (!(storageDistMin < storageDistance.objectDistance(mm) &&
