@@ -24,7 +24,7 @@ motor_group driveMtrs(lbDriveMtr, lmDriveMtr, ltDriveMtr, rbDriveMtr,
                       rmDriveMtr, rtDriveMtr);
 
 const double flywheelCoeffs[] = {1, 0.7, 0.79};
-const double flywheelMatchLoadCoeff = 0.72, flywheelMinCoeff = 0.45;
+const double flywheelMatchLoadCoeff = 0.71, flywheelMinCoeff = 0.45;
 togglemotor flyMtr(PORT1, gearSetting::ratio6_1, true);
 togglemotor_group flyMtrs(flyMtr);
 
@@ -44,7 +44,7 @@ int redMin = 340, redMax = 20;
 int blueMin = 225, blueMax = 265;
 optical rollerOptical(PORT3, false);
 
-int matchLoadStartDelay = 500, matchLoadEndDelay = 500;
+int matchLoadStartDelay = 400, matchLoadEndDelay = 350;
 int storageDistMin = 3, storageDistMax = 175;
 distance storageDistance(PORT4);
 
