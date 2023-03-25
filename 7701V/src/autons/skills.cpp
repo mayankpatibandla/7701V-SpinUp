@@ -15,7 +15,7 @@ void autons::skills() {
   turnToAngle(-0.66, 100, 1500, 0.5, {0.8, 0, 0.1});
   intakeMtrs.stop();
   matchLoadEnabled = false;
-  flyMtrs.spin(fwd, 12, volt);
+  flyMtrs.spin(fwd, 10, volt);
   driveRelative(45, 200, 3500, 0.6);
   driveRelative(-6, 100, 800, 0.4);
   intakeMtrs.spin(fwd, 12, volt);
@@ -54,7 +54,7 @@ void autons::skills() {
   driveMtrs.stop();
 
   // shoot discs
-  flyMtrs.spin(fwd, 0.65 * 12, volt);
+  flyMtrs.spin(fwd, 0.6 * 12, volt);
   turnToAngle(-0.7, 100, 1500, 0.65, {0.9, 0, 0.0075});
   driveRelative(50, 100, 2500, 0.6);
   turnToAngle(-1.58, 100, 1500, 0.65, {0.9, 0, 0.0075});
