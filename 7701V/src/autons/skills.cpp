@@ -9,7 +9,7 @@ void autons::skills() {
 
   // match loads 1
   matchLoadEnabled = true;
-  this_thread::sleep_for(3000);
+  this_thread::sleep_for(25000);
 
   // roller 1
   turnToAngle(-0.66, 100, 1500, 0.5, {0.8, 0, 0.1});
@@ -52,11 +52,11 @@ void autons::skills() {
   this_thread::sleep_for(150);
   spinRoller(-1, rollerColor, 3, 2500);
   driveMtrs.stop();
-
+/*
   // shoot discs
   flyMtrs.spin(fwd, 0.65 * 12, volt);
   turnToAngle(-0.7, 100, 1500, 0.65, {0.9, 0, 0.0075});
-  driveRelative(55, 100, 2500, 0.6);
+  driveRelative(50, 100, 2500, 0.6);
   turnToAngle(-1.58, 100, 1500, 0.65, {0.9, 0, 0.0075});
   driveRelative(50, 100, 2000, 0.5);
   turnToAngle(-1.57, 100, 1500, 0.65, {0.9, 0, 0.0075});
@@ -104,10 +104,10 @@ void autons::skills() {
   this_thread::sleep_for(150);
   spinRoller(-1, rollerColor, 3, 2500);
   driveMtrs.stop();
-
+*/
   // endgame
   driveRelative(-12, 100, 1000);
-  turnToAngle(-2.4, 100, 1500, 0.5);
+  turnToAngle(0.86, 100, 1500, 0.5, {0.9, 0, 0.0075});
   if (Competition.isCompetitionSwitch() || Competition.isFieldControl()) {
     expand();
   }
