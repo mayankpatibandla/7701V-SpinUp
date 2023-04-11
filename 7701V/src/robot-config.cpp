@@ -46,7 +46,7 @@ optical rollerOptical(PORT3, false);
 
 int matchLoadStartDelay = 400, matchLoadEndDelay = 350;
 int storageDistMin = 3, storageDistMax = 175;
-distance storageDistance(PORT4);
+distance storageDistance(PORT5);
 
 const uint32_t shotCooldown = 125;
 const uint32_t autofireCooldown = 200;
