@@ -5,16 +5,19 @@ void printOptical() {
   strstream.clear();
 
   Brain.Screen.setFillColor(transparent);
-  Brain.Screen.setPenColor(rollerOptical.color());
-
-  Brain.Screen.printAt(240, 120, "Optical Hue: %8f", rollerOptical.hue());
+  Brain.Screen.setPenColor(leftRollerOptical.color());
+  // TODO: use both optical sensors
+  Brain.Screen.printAt(240, 120, "Optical Hue: %8f", leftRollerOptical.hue());
   strstream << "Optical Color: "
-            << (blueMax > rollerOptical.hue() && rollerOptical.hue() > blueMin
+            << (blueMax > leftRollerOptical.hue() &&
+                        leftRollerOptical.hue() > blueMin
                     ? "BLUE"
-                    : redMax > rollerOptical.hue() || rollerOptical.hue() > redMin
+                    : redMax > leftRollerOptical.hue() ||
+                              leftRollerOptical.hue() > redMin
                           ? "RED"
-                          : rollerOptical.color() == transparent ? "TRANSPARENT"
-                                                                 : "OTHER");
+                          : leftRollerOptical.color() == transparent
+                                ? "TRANSPARENT"
+                                : "OTHER");
   Brain.Screen.printAt(240, 140, strstream.str().c_str());
   strstream.str("");
   strstream.clear();

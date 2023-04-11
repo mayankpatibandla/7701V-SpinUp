@@ -42,7 +42,8 @@ inertial Inertial(PORT14, turnType::right);
 
 int redMin = 340, redMax = 20;
 int blueMin = 225, blueMax = 265;
-optical rollerOptical(PORT3, false);
+optical leftRollerOptical(PORT3, false);
+optical rightRollerOptical(PORT4, false);
 
 int matchLoadStartDelay = 400, matchLoadEndDelay = 350;
 int storageDistMin = 3, storageDistMax = 175;
@@ -80,7 +81,8 @@ void devicesListInit() {
 
   devicesList.push_back({&Inertial, "Inertial", "Inertial"});
 
-  devicesList.push_back({&rollerOptical, "Roller Color", "Optical"});
+  devicesList.push_back({&leftRollerOptical, "Left Roller Color", "Optical"});
+  devicesList.push_back({&rightRollerOptical, "Right Roller Color", "Optical"});
 
   devicesList.push_back({&storageDistance, "Disc Storage", "Distance"});
 }
@@ -113,8 +115,11 @@ void devicesInit() {
   rRot.resetPosition();
   sRot.resetPosition();
 
-  rollerOptical.setLight(ledState::on);
-  rollerOptical.setLightPower(100, pct);
+  leftRollerOptical.setLight(ledState::on);
+  leftRollerOptical.setLightPower(100, pct);
+
+  rightRollerOptical.setLight(ledState::on);
+  rightRollerOptical.setLightPower(100, pct);
 
   waitUntil(!Inertial.isCalibrating());
 

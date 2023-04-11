@@ -39,7 +39,8 @@ extern inertial Inertial;
 
 extern int redMin, redMax;
 extern int blueMin, blueMax;
-extern optical rollerOptical;
+extern optical leftRollerOptical;
+extern optical rightRollerOptical;
 
 extern int matchLoadStartDelay, matchLoadEndDelay;
 extern int storageDistMin, storageDistMax;
