@@ -51,12 +51,14 @@ distance storageDistance(PORT5);
 
 const uint32_t shotCooldown = 125;
 const uint32_t autofireCooldown = 200;
-indexer Indexer(Brain.ThreeWirePort.B, shotCooldown, autofireCooldown);
+indexer Indexer(Brain.ThreeWirePort.A, shotCooldown, autofireCooldown);
 
-togglepneumatics leftExpansion(Brain.ThreeWirePort.C);
-togglepneumatics rightExpansion(Brain.ThreeWirePort.A);
+togglepneumatics angler(Brain.ThreeWirePort.B);
 
-togglepneumatics angler(Brain.ThreeWirePort.D);
+togglepneumatics topLeftExpansion(Brain.ThreeWirePort.C);
+togglepneumatics topRightExpansion(Brain.ThreeWirePort.D);
+togglepneumatics bottomLeftExpansion(Brain.ThreeWirePort.E);
+togglepneumatics bottomRightExpansion(Brain.ThreeWirePort.F);
 
 std::vector<alarmDevice> devicesList;
 

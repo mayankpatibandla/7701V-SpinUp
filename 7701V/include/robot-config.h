@@ -50,10 +50,12 @@ extern const uint32_t shotCooldown;
 extern const uint32_t autofireCooldown;
 extern indexer Indexer;
 
-extern togglepneumatics leftExpansion;
-extern togglepneumatics rightExpansion;
-
 extern togglepneumatics angler;
+
+extern togglepneumatics topLeftExpansion;
+extern togglepneumatics topRightExpansion;
+extern togglepneumatics bottomLeftExpansion;
+extern togglepneumatics bottomRightExpansion;
 
 typedef struct {
   vex::device *device;
