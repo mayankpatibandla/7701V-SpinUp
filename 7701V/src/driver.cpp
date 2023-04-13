@@ -64,10 +64,10 @@ void driver() {
     matchLoadEnabled = Controller.ButtonB.pressing();
 
     // Intake
-    if (Controller.ButtonL1.pressing()) {
+    if (Controller.ButtonL1.pressing() && !Controller.ButtonL2.pressing()) {
       intakeMtrs.spin(fwd, -12, volt);
       intakeMtrs.setState(false);
-    } else if (Controller.ButtonL2.pressing()) {
+    } else if (Controller.ButtonL2.pressing() && !Controller.ButtonL1.pressing()) {
       intakeMtrs.spin(fwd, 12, volt);
       intakeMtrs.setState(false);
     } else if (intakeMtrs.getState()) {
