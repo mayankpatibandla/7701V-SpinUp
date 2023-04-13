@@ -26,7 +26,7 @@ void expand() {
   topLeftExpansion.toggle();
   topRightExpansion.toggle();
   bottomLeftExpansion.toggle();
-  this_thread::sleep_for(100);
+  this_thread::sleep_for(bottomExpansionDelay);
   bottomRightExpansion.toggle();
 }
 
