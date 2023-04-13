@@ -114,6 +114,7 @@ void driver() {
     if (Controller.ButtonLeft.pressing()) {
       if (Controller.ButtonL1.pressing() && expandRightReady) {
         expandRightReady = false;
+        flyMtrs.setState(false);
         expandRight();
       } else if (!Controller.ButtonL1.pressing()) {
         expandRightReady = true;
@@ -121,6 +122,7 @@ void driver() {
 
       if (Controller.ButtonL2.pressing() && expandLeftReady) {
         expandLeftReady = false;
+        flyMtrs.setState(false);
         expandLeft();
       } else if (!Controller.ButtonL2.pressing()) {
         expandLeftReady = true;
@@ -128,6 +130,7 @@ void driver() {
 
       if (Controller.ButtonR1.pressing() && expandTopReady) {
         expandTopReady = false;
+        flyMtrs.setState(false);
         expandTop();
       } else if (!Controller.ButtonR1.pressing()) {
         expandTopReady = true;
@@ -135,6 +138,7 @@ void driver() {
 
       if (Controller.ButtonR2.pressing() && expandBottomReady) {
         expandBottomReady = false;
+        flyMtrs.setState(false);
         expandBottom();
       } else if (!Controller.ButtonR2.pressing()) {
         expandBottomReady = true;
