@@ -7,7 +7,12 @@ double curveJoystick(double input, const double t) {
   return input * std::exp(t * (std::abs(input) - 1));
 }
 
-bool expansionReady = true;
+bool expandAllReady = true;
+bool expandBottomReady = true;
+bool expandTopReady = true;
+bool expandLeftReady = true;
+bool expandRightReady = true;
+
 bool indexerReady = true;
 
 void driverInit() {
@@ -67,7 +72,8 @@ void driver() {
     if (Controller.ButtonL1.pressing() && !Controller.ButtonL2.pressing()) {
       intakeMtrs.spin(fwd, -12, volt);
       intakeMtrs.setState(false);
-    } else if (Controller.ButtonL2.pressing() && !Controller.ButtonL1.pressing()) {
+    } else if (Controller.ButtonL2.pressing() &&
+               !Controller.ButtonL1.pressing()) {
       intakeMtrs.spin(fwd, 12, volt);
       intakeMtrs.setState(false);
     } else if (intakeMtrs.getState()) {
@@ -92,17 +98,47 @@ void driver() {
 
     // Expansion
     if (Controller.ButtonL1.pressing() && Controller.ButtonL2.pressing() &&
-        Controller.ButtonR1.pressing() && Controller.ButtonR2.pressing()) {
-      if (expansionReady) {
-        expansionReady = false;
+        Controller.ButtonR1.pressing() && Controller.ButtonR2.pressing() &&
+        !Controller.ButtonLeft.pressing()) {
+      if (expandAllReady) {
+        expandAllReady = false;
         flyMtrs.setState(false);
-        expand();
+        expandAll();
       }
     } else if (!Controller.ButtonL1.pressing() &&
                !Controller.ButtonL2.pressing() &&
                !Controller.ButtonR1.pressing() &&
                !Controller.ButtonR2.pressing()) {
-      expansionReady = true;
+      expandAllReady = true;
+    }
+    if (Controller.ButtonLeft.pressing()) {
+      if (Controller.ButtonL1.pressing() && expandRightReady) {
+        expandRightReady = false;
+        expandRight();
+      } else if (!Controller.ButtonL1.pressing()) {
+        expandRightReady = true;
+      }
+
+      if (Controller.ButtonL2.pressing() && expandLeftReady) {
+        expandLeftReady = false;
+        expandLeft();
+      } else if (!Controller.ButtonL2.pressing()) {
+        expandLeftReady = true;
+      }
+
+      if (Controller.ButtonR1.pressing() && expandTopReady) {
+        expandTopReady = false;
+        expandTop();
+      } else if (!Controller.ButtonR1.pressing()) {
+        expandTopReady = true;
+      }
+
+      if (Controller.ButtonR2.pressing() && expandBottomReady) {
+        expandBottomReady = false;
+        expandBottom();
+      } else if (!Controller.ButtonR2.pressing()) {
+        expandBottomReady = true;
+      }
     }
 
     this_thread::sleep_for(1);

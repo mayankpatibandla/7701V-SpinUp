@@ -22,13 +22,24 @@ void matchLoad() {
 
 vex::thread matchLoadThread(matchLoad);
 
-void expand() {
+void expandAll() {
   topLeftExpansion.toggle();
   topRightExpansion.toggle();
   bottomLeftExpansion.toggle();
   this_thread::sleep_for(bottomExpansionDelay);
   bottomRightExpansion.toggle();
 }
+void expandBottom() {
+  bottomLeftExpansion.toggle();
+  this_thread::sleep_for(bottomExpansionDelay);
+  bottomRightExpansion.toggle();
+}
+void expandTop() {
+  topLeftExpansion.toggle();
+  topRightExpansion.toggle();
+}
+void expandLeft() { bottomLeftExpansion.toggle(); }
+void expandRight() { bottomRightExpansion.toggle(); }
 
 void spinRoller(double velocity, color col, int minTime, int maxTime) {
   timer rollerTimer;

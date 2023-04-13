@@ -109,7 +109,7 @@ void autons::skills() {
   driveRelative(-12, 100, 1000);
   turnToAngle(-2.4, 100, 1500, 0.5);
   if (Competition.isCompetitionSwitch() || Competition.isFieldControl()) {
-    expand();
+    expandAll();
   }
   driveRelative(12, 100, 1000, 0.5);
 }

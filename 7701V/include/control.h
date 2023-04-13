@@ -21,7 +21,11 @@ template <typename T> T clamp(const T &n, const T &lower, const T &upper) {
 
 extern bool matchLoadEnabled;
 
-extern void expand();
+extern void expandAll();
+extern void expandBottom();
+extern void expandTop();
+extern void expandLeft();
+extern void expandRight();
 
 extern void spinRoller(double velocity = -1, color col = rollerColor,
                        int minTime = 0, int maxTime = 0);
