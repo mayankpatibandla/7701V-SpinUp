@@ -95,8 +95,8 @@ void driver() {
         Controller.ButtonR1.pressing() && Controller.ButtonR2.pressing()) {
       if (expansionReady) {
         expansionReady = false;
-        expand();
         flyMtrs.setState(false);
+        expand();
       }
     } else if (!Controller.ButtonL1.pressing() &&
                !Controller.ButtonL2.pressing() &&
