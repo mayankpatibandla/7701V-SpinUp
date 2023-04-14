@@ -17,12 +17,12 @@ void printOptical() {
   strstream << "L Col: "
             << (blueMax > leftRollerOptical.hue() &&
                         leftRollerOptical.hue() > blueMin
-                    ? "BLUE"
+                    ? "Blue"
                     : redMax > leftRollerOptical.hue() ||
                               leftRollerOptical.hue() > redMin
-                          ? "RED"
-                          : leftRollerOptical.color() == transparent ? "TRAN"
-                                                                     : "OTHR");
+                          ? "Red"
+                          : leftRollerOptical.color() == transparent ? "Tran"
+                                                                     : "Othr");
   Brain.Screen.printAt(240, 160, strstream.str().c_str());
   strstream.str("");
   strstream.clear();
@@ -31,23 +31,29 @@ void printOptical() {
   strstream << "R Col: "
             << (blueMax > rightRollerOptical.hue() &&
                         rightRollerOptical.hue() > blueMin
-                    ? "BLUE"
+                    ? "Blue"
                     : redMax > rightRollerOptical.hue() ||
                               rightRollerOptical.hue() > redMin
-                          ? "RED"
-                          : rightRollerOptical.color() == transparent
-                                ? "TRAN"
-                                : "OTHR");
+                          ? "Red"
+                          : rightRollerOptical.color() == transparent ? "Tran"
+                                                                      : "Othr");
   Brain.Screen.printAt(360, 160, strstream.str().c_str());
+  strstream.str("");
+  strstream.clear();
+
+  Brain.Screen.setPenColor(white);
+  strstream << "L Obj: " << (leftRollerOptical.isNearObject() ? "Yes" : "No")
+            << "R Obj: " << (rightRollerOptical.isNearObject() ? "Yes" : "No");
+  Brain.Screen.printAt(240, 180, strstream.str().c_str());
   strstream.str("");
   strstream.clear();
 
   Brain.Screen.setPenColor(
       rollerColor == red ? red : rollerColor == blue ? blue : white);
   strstream << "Target Color: "
-            << (rollerColor == red ? "RED"
-                                   : rollerColor == blue ? "BLUE" : "OTHER");
-  Brain.Screen.printAt(240, 180, strstream.str().c_str());
+            << (rollerColor == red ? "Red"
+                                   : rollerColor == blue ? "Blue" : "Other");
+  Brain.Screen.printAt(240, 200, strstream.str().c_str());
   strstream.str("");
   strstream.clear();
 }
