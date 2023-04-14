@@ -53,10 +53,10 @@ extern indexer Indexer;
 extern togglepneumatics angler;
 
 extern const uint32_t bottomExpansionDelay;
-extern togglepneumatics topLeftExpansion;
 extern togglepneumatics topRightExpansion;
-extern togglepneumatics bottomLeftExpansion;
+extern togglepneumatics topLeftExpansion;
 extern togglepneumatics bottomRightExpansion;
+extern togglepneumatics bottomLeftExpansion;
 
 typedef struct {
   vex::device *device;

@@ -56,10 +56,10 @@ indexer Indexer(Brain.ThreeWirePort.A, shotCooldown, autofireCooldown);
 togglepneumatics angler(Brain.ThreeWirePort.B);
 
 const uint32_t bottomExpansionDelay = 100;
-togglepneumatics topLeftExpansion(Brain.ThreeWirePort.C);
-togglepneumatics topRightExpansion(Brain.ThreeWirePort.D);
-togglepneumatics bottomLeftExpansion(Brain.ThreeWirePort.E);
-togglepneumatics bottomRightExpansion(Brain.ThreeWirePort.F);
+togglepneumatics topRightExpansion(Brain.ThreeWirePort.C);
+togglepneumatics topLeftExpansion(Brain.ThreeWirePort.D);
+togglepneumatics bottomRightExpansion(Brain.ThreeWirePort.E);
+togglepneumatics bottomLeftExpansion(Brain.ThreeWirePort.F);
 
 std::vector<alarmDevice> devicesList;
 
