@@ -29,7 +29,7 @@ void autons::rightHighGoal() {
   turnToAngle(2.65, 250, 1750, 0.5, {0.8, 0, 0.1});
   // driveRelative(80, 400, 2500, {0.0005, 0.000001, 0.000025});
   driveMtrs.spin(fwd, 6, volt);
-  this_thread::sleep_for(1700);//2150
+  this_thread::sleep_for(1700); // 2150
   driveMtrs.stop();
 
   // shoot discs
