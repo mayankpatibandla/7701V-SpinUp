@@ -40,13 +40,13 @@ rotation sRot(PORT17, false);
 
 inertial Inertial(PORT14, turnType::right);
 
-int redMin = 340, redMax = 20;
-int blueMin = 200, blueMax = 270;
+double redMin = 340, redMax = 20;
+double blueMin = 200, blueMax = 270;
 optical leftRollerOptical(PORT3, false);
 optical rightRollerOptical(PORT4, false);
 
 int matchLoadStartDelay = 400, matchLoadEndDelay = 350;
-int storageDistMin = 3, storageDistMax = 100;
+double storageDistMin = 3, storageDistMax = 100;
 distance storageDistance(PORT5);
 
 const uint32_t shotCooldown = 125;
