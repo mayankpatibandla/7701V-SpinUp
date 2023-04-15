@@ -6,14 +6,16 @@ void printOptical() {
 
   Brain.Screen.setFillColor(transparent);
 
-  Brain.Screen.setPenColor(leftRollerOptical.hue());
-  Brain.Screen.printAt(240, 120, "L Hue: %3f", leftRollerOptical.hue());
-  Brain.Screen.printAt(240, 140, "L Bri: %3f", leftRollerOptical.brightness());
-  Brain.Screen.setPenColor(rightRollerOptical.hue());
-  Brain.Screen.printAt(350, 120, "R Hue: %3f", rightRollerOptical.hue());
-  Brain.Screen.printAt(350, 140, "R Bri: %3f", rightRollerOptical.brightness());
+  Brain.Screen.setPenColor(leftRollerOptical.color());
+  Brain.Screen.printAt(240, 120, "L Hue: %03.0f", leftRollerOptical.hue());
+  Brain.Screen.printAt(240, 140, "L Bri: %03.1f",
+                       leftRollerOptical.brightness());
+  Brain.Screen.setPenColor(rightRollerOptical.color());
+  Brain.Screen.printAt(370, 120, "R Hue: %03.0f", rightRollerOptical.hue());
+  Brain.Screen.printAt(370, 140, "R Bri: %03.1f",
+                       rightRollerOptical.brightness());
 
-  Brain.Screen.setPenColor(leftRollerOptical.hue());
+  Brain.Screen.setPenColor(leftRollerOptical.color());
   strstream << "L Col: "
             << (blueMax > leftRollerOptical.hue() &&
                         leftRollerOptical.hue() > blueMin
@@ -27,7 +29,7 @@ void printOptical() {
   strstream.str("");
   strstream.clear();
 
-  Brain.Screen.setPenColor(rightRollerOptical.hue());
+  Brain.Screen.setPenColor(rightRollerOptical.color());
   strstream << "R Col: "
             << (blueMax > rightRollerOptical.hue() &&
                         rightRollerOptical.hue() > blueMin
@@ -37,14 +39,18 @@ void printOptical() {
                           ? "Red"
                           : rightRollerOptical.color() == transparent ? "Tran"
                                                                       : "Othr");
-  Brain.Screen.printAt(360, 160, strstream.str().c_str());
+  Brain.Screen.printAt(370, 160, strstream.str().c_str());
   strstream.str("");
   strstream.clear();
 
   Brain.Screen.setPenColor(white);
-  strstream << "L Obj: " << (leftRollerOptical.isNearObject() ? "Yes" : "No")
-            << "R Obj: " << (rightRollerOptical.isNearObject() ? "Yes" : "No");
+  strstream << "L Obj: " << (leftRollerOptical.isNearObject() ? "Yes" : "No");
   Brain.Screen.printAt(240, 180, strstream.str().c_str());
+  strstream.str("");
+  strstream.clear();
+  strstream << "R Obj: " << (rightRollerOptical.isNearObject() ? "Yes" : "No");
+  Brain.Screen.printAt(370, 180, strstream.str().c_str());
+
   strstream.str("");
   strstream.clear();
 
