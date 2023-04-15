@@ -2,7 +2,7 @@
 #include "control.h"
 
 void autons::leftHighGoal() {
-  flyMtrs.spin(fwd, .85 * 12, volt);
+  flyMtrs.spin(fwd, 0.915 * 12, volt);
   angler.set(true);
 
   driveMtrs.spinFor(fwd, 100, msec, 50, velocityUnits::pct);
@@ -13,7 +13,8 @@ void autons::leftHighGoal() {
   this_thread::sleep_for(3500);
 
   Indexer.shootDisc();
-  this_thread::sleep_for(1500);
+  flyMtrs.spin(fwd, 0.925 * 12, volt);
+  this_thread::sleep_for(2500);
   Indexer.shootDisc();
 
   this_thread::sleep_for(500);
