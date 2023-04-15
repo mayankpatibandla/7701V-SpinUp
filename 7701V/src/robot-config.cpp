@@ -40,22 +40,26 @@ rotation sRot(PORT17, false);
 
 inertial Inertial(PORT14, turnType::right);
 
-int redMin = 340, redMax = 20;
-int blueMin = 225, blueMax = 265;
-optical rollerOptical(PORT3, false);
+double redMin = 340, redMax = 20;
+double blueMin = 200, blueMax = 270;
+optical leftRollerOptical(PORT3, false);
+optical rightRollerOptical(PORT4, false);
 
 int matchLoadStartDelay = 400, matchLoadEndDelay = 350;
-int storageDistMin = 3, storageDistMax = 175;
-distance storageDistance(PORT4);
+double storageDistMin = 3, storageDistMax = 100;
+distance storageDistance(PORT5);
 
 const uint32_t shotCooldown = 125;
 const uint32_t autofireCooldown = 200;
-indexer Indexer(Brain.ThreeWirePort.B, shotCooldown, autofireCooldown);
+indexer Indexer(Brain.ThreeWirePort.A, shotCooldown, autofireCooldown);
 
-togglepneumatics leftExpansion(Brain.ThreeWirePort.C);
-togglepneumatics rightExpansion(Brain.ThreeWirePort.A);
+togglepneumatics angler(Brain.ThreeWirePort.B);
 
-togglepneumatics angler(Brain.ThreeWirePort.D);
+const uint32_t bottomExpansionDelay = 100;
+togglepneumatics topRightExpansion(Brain.ThreeWirePort.C);
+togglepneumatics topLeftExpansion(Brain.ThreeWirePort.D);
+togglepneumatics bottomRightExpansion(Brain.ThreeWirePort.E);
+togglepneumatics bottomLeftExpansion(Brain.ThreeWirePort.F);
 
 std::vector<alarmDevice> devicesList;
 
@@ -80,7 +84,8 @@ void devicesListInit() {
 
   devicesList.push_back({&Inertial, "Inertial", "Inertial"});
 
-  devicesList.push_back({&rollerOptical, "Roller Color", "Optical"});
+  devicesList.push_back({&leftRollerOptical, "Left Roller Color", "Optical"});
+  devicesList.push_back({&rightRollerOptical, "Right Roller Color", "Optical"});
 
   devicesList.push_back({&storageDistance, "Disc Storage", "Distance"});
 }
@@ -113,8 +118,11 @@ void devicesInit() {
   rRot.resetPosition();
   sRot.resetPosition();
 
-  rollerOptical.setLight(ledState::on);
-  rollerOptical.setLightPower(100, pct);
+  leftRollerOptical.setLight(ledState::on);
+  leftRollerOptical.setLightPower(100, pct);
+
+  rightRollerOptical.setLight(ledState::on);
+  rightRollerOptical.setLightPower(100, pct);
 
   waitUntil(!Inertial.isCalibrating());
 

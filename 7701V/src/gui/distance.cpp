@@ -10,5 +10,5 @@ void printDistance() {
   } else {
     Brain.Screen.setPenColor(white);
   }
-  Brain.Screen.printAt(240, 190, "Distance: %3f mm", dist);
+  Brain.Screen.printAt(240, 230, "Distance: %3f mm", dist);
 }

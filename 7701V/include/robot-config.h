@@ -37,22 +37,26 @@ extern rotation sRot;
 
 extern inertial Inertial;
 
-extern int redMin, redMax;
-extern int blueMin, blueMax;
-extern optical rollerOptical;
+extern double redMin, redMax;
+extern double blueMin, blueMax;
+extern optical leftRollerOptical;
+extern optical rightRollerOptical;
 
 extern int matchLoadStartDelay, matchLoadEndDelay;
-extern int storageDistMin, storageDistMax;
+extern double storageDistMin, storageDistMax;
 extern distance storageDistance;
 
 extern const uint32_t shotCooldown;
 extern const uint32_t autofireCooldown;
 extern indexer Indexer;
 
-extern togglepneumatics leftExpansion;
-extern togglepneumatics rightExpansion;
-
 extern togglepneumatics angler;
+
+extern const uint32_t bottomExpansionDelay;
+extern togglepneumatics topRightExpansion;
+extern togglepneumatics topLeftExpansion;
+extern togglepneumatics bottomRightExpansion;
+extern togglepneumatics bottomLeftExpansion;
 
 typedef struct {
   vex::device *device;

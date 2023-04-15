@@ -22,10 +22,24 @@ void matchLoad() {
 
 vex::thread matchLoadThread(matchLoad);
 
-void expand() {
-  leftExpansion.toggle();
-  rightExpansion.toggle();
+void expandAll() {
+  topLeftExpansion.toggle();
+  topRightExpansion.toggle();
+  bottomLeftExpansion.toggle();
+  this_thread::sleep_for(bottomExpansionDelay);
+  bottomRightExpansion.toggle();
 }
+void expandBottom() {
+  bottomLeftExpansion.toggle();
+  this_thread::sleep_for(bottomExpansionDelay);
+  bottomRightExpansion.toggle();
+}
+void expandTop() {
+  topLeftExpansion.toggle();
+  topRightExpansion.toggle();
+}
+void expandLeft() { bottomLeftExpansion.toggle(); }
+void expandRight() { bottomRightExpansion.toggle(); }
 
 void spinRoller(double velocity, color col, int minTime, int maxTime) {
   timer rollerTimer;
@@ -37,18 +51,31 @@ void spinRoller(double velocity, color col, int minTime, int maxTime) {
 
   waitUntil(rollerTimer.time(msec) > minTime || minTime == 0);
   while (true) {
-    int hue = rollerOptical.hue();
+    double leftHue = leftRollerOptical.hue();
+    double rightHue = rightRollerOptical.hue();
 
     if (rollerTimer.time(msec) > maxTime && maxTime != 0) {
       break;
     }
 
-    if (col == red && (redMax > hue || hue > redMin)) {
-      break;
+    if (leftRollerOptical.isNearObject()) {
+      if (col == red && (redMax > leftHue || leftHue > redMin)) {
+        break;
+      }
+
+      if (col == blue && blueMax > leftHue && leftHue > blueMin) {
+        break;
+      }
     }
 
-    if (col == blue && blueMax > hue && hue > blueMin) {
-      break;
+    if (rightRollerOptical.isNearObject()) {
+      if (col == red && (redMax > rightHue || rightHue > redMin)) {
+        break;
+      }
+
+      if (col == blue && blueMax > rightHue && rightHue > blueMin) {
+        break;
+      }
     }
 
     this_thread::sleep_for(1);
