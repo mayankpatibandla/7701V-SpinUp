@@ -46,7 +46,7 @@ optical leftRollerOptical(PORT3, false);
 optical rightRollerOptical(PORT4, false);
 
 int matchLoadStartDelay = 400, matchLoadEndDelay = 350;
-int storageDistMin = 3, storageDistMax = 175;
+int storageDistMin = 3, storageDistMax = 100;
 distance storageDistance(PORT5);
 
 const uint32_t shotCooldown = 125;
