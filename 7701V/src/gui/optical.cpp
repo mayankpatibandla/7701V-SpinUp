@@ -6,16 +6,21 @@ void printOptical() {
 
   Brain.Screen.setFillColor(transparent);
 
-  Brain.Screen.setPenColor(leftRollerOptical.color());
+  color leftCol;
+  leftCol = leftCol.hsv(leftRollerOptical.hue(), 1, 1);
+  color rightCol;
+  rightCol = rightCol.hsv(rightRollerOptical.hue(), 1, 1);
+
+  Brain.Screen.setPenColor(leftCol);
   Brain.Screen.printAt(240, 120, "L Hue: %03.0f", leftRollerOptical.hue());
   Brain.Screen.printAt(240, 140, "L Bri: %03.1f",
                        leftRollerOptical.brightness());
-  Brain.Screen.setPenColor(rightRollerOptical.color());
+  Brain.Screen.setPenColor(rightCol);
   Brain.Screen.printAt(370, 120, "R Hue: %03.0f", rightRollerOptical.hue());
   Brain.Screen.printAt(370, 140, "R Bri: %03.1f",
                        rightRollerOptical.brightness());
 
-  Brain.Screen.setPenColor(leftRollerOptical.color());
+  Brain.Screen.setPenColor(leftCol);
   strstream << "L Col: "
             << (blueMax > leftRollerOptical.hue() &&
                         leftRollerOptical.hue() > blueMin
@@ -29,7 +34,7 @@ void printOptical() {
   strstream.str("");
   strstream.clear();
 
-  Brain.Screen.setPenColor(rightRollerOptical.color());
+  Brain.Screen.setPenColor(rightCol);
   strstream << "R Col: "
             << (blueMax > rightRollerOptical.hue() &&
                         rightRollerOptical.hue() > blueMin
