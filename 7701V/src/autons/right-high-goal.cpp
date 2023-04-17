@@ -2,7 +2,7 @@
 #include "control.h"
 
 void autons::rightHighGoal() {
-  flyMtrs.spin(fwd, 0.915 * 12, volt);
+  flyMtrs.spin(fwd, 0.91 * 12, volt);
   angler.set(true);
 
   // roller
@@ -15,7 +15,7 @@ void autons::rightHighGoal() {
   driveRelative(-2.4166, 0, 1000);
 
   // shoot preloads
-  turnToAngle(-1.65, 200, 700);
+  turnToAngle(-1.62, 200, 700);
   this_thread::sleep_for(250);
   Indexer.shootDisc();
   this_thread::sleep_for(1600);
@@ -33,7 +33,7 @@ void autons::rightHighGoal() {
   driveMtrs.stop();
 
   // shoot discs
-  turnToAngle(-1.93, 300, 1500, 0.75, {0.6, 0, 0.0075}); //-2.325
+  turnToAngle(-1.9, 300, 1500, 0.75, {0.6, 0, 0.0075}); //-2.325
   this_thread::sleep_for(500);
   // 111.25, 34 + 13/16
   // turnToAngle(M_PI + std::atan2((54+13/16) - pt::y(), 111.25 - pt::x()), 300,
