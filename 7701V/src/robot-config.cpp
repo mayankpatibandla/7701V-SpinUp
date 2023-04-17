@@ -55,7 +55,6 @@ indexer Indexer(Brain.ThreeWirePort.A, shotCooldown, autofireCooldown);
 
 togglepneumatics angler(Brain.ThreeWirePort.B);
 
-const uint32_t bottomExpansionDelay = 100;
 togglepneumatics topRightExpansion(Brain.ThreeWirePort.C);
 togglepneumatics topLeftExpansion(Brain.ThreeWirePort.D);
 togglepneumatics bottomRightExpansion(Brain.ThreeWirePort.E);

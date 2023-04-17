@@ -26,12 +26,10 @@ void expandAll() {
   topLeftExpansion.toggle();
   topRightExpansion.toggle();
   bottomLeftExpansion.toggle();
-  this_thread::sleep_for(bottomExpansionDelay);
   bottomRightExpansion.toggle();
 }
 void expandBottom() {
   bottomLeftExpansion.toggle();
-  this_thread::sleep_for(bottomExpansionDelay);
   bottomRightExpansion.toggle();
 }
 void expandTop() {

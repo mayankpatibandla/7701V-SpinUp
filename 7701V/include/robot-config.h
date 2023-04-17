@@ -52,7 +52,6 @@ extern indexer Indexer;
 
 extern togglepneumatics angler;
 
-extern const uint32_t bottomExpansionDelay;
 extern togglepneumatics topRightExpansion;
 extern togglepneumatics topLeftExpansion;
 extern togglepneumatics bottomRightExpansion;
