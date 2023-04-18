@@ -12,6 +12,7 @@ int main() {
   odomInit();
   debugInit();
   guiInit();
+  sylib::initialize();
 
   sylib::Addrled testLights(22, 7, 64);
   testLights.gradient(0x00FF00, 0x0000FF);
