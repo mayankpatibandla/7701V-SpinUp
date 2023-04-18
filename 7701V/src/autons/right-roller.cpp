@@ -1,5 +1,5 @@
-#include "auton-manager.hpp"
-#include "control.hpp"
+#include "config/auton-manager.hpp"
+#include "control/control.hpp"
 
 void autons::rightRoller() {
   driveRelative(23, 300, 1700);

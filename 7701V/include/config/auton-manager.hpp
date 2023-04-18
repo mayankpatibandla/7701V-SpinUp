@@ -1,6 +1,6 @@
 #pragma once
-#include "robot-config.hpp"
-#include "vex.hpp"
+#include "config/robot-config.hpp"
+#include "vex/vex.hpp"
 
 // autons
 namespace autons {

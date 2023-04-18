@@ -1,5 +1,5 @@
-#include "auton-manager.hpp"
-#include "control.hpp"
+#include "config/auton-manager.hpp"
+#include "control/control.hpp"
 
 void autons::leftRoller() {
   driveMtrs.spinFor(fwd, 100, msec, 50, velocityUnits::pct);

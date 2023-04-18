@@ -1,4 +1,4 @@
-#include "odom.hpp"
+#include "odom/odom.hpp"
 
 vex::thread positiontracking_thread;
 

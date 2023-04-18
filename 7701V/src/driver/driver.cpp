@@ -1,6 +1,6 @@
-#include "driver.hpp"
-#include "auton-manager.hpp"
-#include "control.hpp"
+#include "driver/driver.hpp"
+#include "config/auton-manager.hpp"
+#include "control/control.hpp"
 
 double curveJoystick(double input, const double t) {
   input /= 100;

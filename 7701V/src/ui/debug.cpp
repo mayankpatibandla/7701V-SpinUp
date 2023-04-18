@@ -1,6 +1,6 @@
-#include "debug.hpp"
-#include "control.hpp"
-#include "driver.hpp"
+#include "ui/debug.hpp"
+#include "control/control.hpp"
+#include "driver/driver.hpp"
 
 void debugFlywheel() {
   std::ostringstream strstream;

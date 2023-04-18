@@ -39,7 +39,7 @@
 #include "pros_includes.h"
 #endif
 #elif defined(SYLIB_ENV_VEXCODE)
-#include "vex.hpp"
+#include "vex/vex.hpp"
 #endif
 
 extern "C" {

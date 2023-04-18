@@ -1,5 +1,5 @@
 #pragma once
-#include "vex.hpp"
+#include "vex/vex.hpp"
 
 namespace vdevices {
 class togglemotor : public vex::motor {
