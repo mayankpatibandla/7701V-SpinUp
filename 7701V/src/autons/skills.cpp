@@ -1,5 +1,5 @@
-#include "auton-manager.h"
-#include "control.h"
+#include "auton-manager.hpp"
+#include "control.hpp"
 
 void autons::skills() {
   flyMtrs.spin(fwd, flywheelMatchLoadCoeff * 12, volt);

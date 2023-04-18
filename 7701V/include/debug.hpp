@@ -1,5 +1,5 @@
 #pragma once
-#include "vex.h"
+#include "vex.hpp"
 
 extern void debugFlywheel();
 extern void debugDrive(const double leftVel, const double rightVel);

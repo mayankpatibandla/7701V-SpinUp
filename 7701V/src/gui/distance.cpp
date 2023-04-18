@@ -1,4 +1,4 @@
-#include "gui.h"
+#include "gui.hpp"
 
 void printDistance() {
   double dist = storageDistance.objectDistance(mm);

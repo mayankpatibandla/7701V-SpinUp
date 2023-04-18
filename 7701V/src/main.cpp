@@ -1,7 +1,7 @@
-#include "auton-manager.h"
-#include "debug.h"
-#include "driver.h"
-#include "gui.h"
+#include "auton-manager.hpp"
+#include "debug.hpp"
+#include "driver.hpp"
+#include "gui.hpp"
 #include "sylib/sylib.hpp"
 
 int main() {

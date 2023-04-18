@@ -1,6 +1,6 @@
-#include "driver.h"
-#include "auton-manager.h"
-#include "control.h"
+#include "driver.hpp"
+#include "auton-manager.hpp"
+#include "control.hpp"
 
 double curveJoystick(double input, const double t) {
   input /= 100;
@@ -37,13 +37,11 @@ void driver() {
     }
 
     // Flywheel
-    double flywheelSpeed = Controller.ButtonR1.pressing()
-                               ? flywheelCoeffs[0]
-                               : Controller.ButtonR2.pressing()
-                                     ? flywheelCoeffs[1]
-                                     : Controller.ButtonB.pressing()
-                                           ? flywheelMatchLoadCoeff
-                                           : flywheelCoeffs[2];
+    double flywheelSpeed = Controller.ButtonR1.pressing()   ? flywheelCoeffs[0]
+                           : Controller.ButtonR2.pressing() ? flywheelCoeffs[1]
+                           : Controller.ButtonB.pressing()
+                               ? flywheelMatchLoadCoeff
+                               : flywheelCoeffs[2];
 
     if (Controller.ButtonLeft.pressing() && Controller.ButtonDown.pressing()) {
       flyMtrs.spin(fwd, flywheelSpeed * -12, volt);
