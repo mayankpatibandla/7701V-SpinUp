@@ -111,7 +111,6 @@ void devicesInit() {
   intakeMtr.setMaxTorque(100, pct);
 
   allMtrs.resetPosition();
-  allMtrs.resetRotation();
 
   lRot.resetPosition();
   rRot.resetPosition();
