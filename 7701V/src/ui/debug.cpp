@@ -1,6 +1,6 @@
-#include "debug.h"
-#include "control.h"
-#include "driver.h"
+#include "ui/debug.hpp"
+#include "control/control.hpp"
+#include "driver/driver.hpp"
 
 void debugFlywheel() {
   std::ostringstream strstream;
@@ -64,9 +64,9 @@ void debugOptical() {
   // TODO: use both optical sensors
   Brain.Screen.printAt(240, 120, "Optical Hue: %8f", leftRollerOptical.hue());
   strstream << "Optical Color: "
-            << (leftRollerOptical.color() == blue
-                    ? "BLUE"
-                    : leftRollerOptical.color() == red ? "RED" : "OTHER");
+            << (leftRollerOptical.color() == blue  ? "BLUE"
+                : leftRollerOptical.color() == red ? "RED"
+                                                   : "OTHER");
   Brain.Screen.printAt(240, 140, strstream.str().c_str());
   strstream.str("");
   strstream.clear();

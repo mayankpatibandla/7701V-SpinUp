@@ -1,4 +1,4 @@
-#include "odom.h"
+#include "odom/odom.hpp"
 
 namespace positiontracking {
 bool usingInertial = true;

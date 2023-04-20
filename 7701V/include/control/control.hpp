@@ -1,8 +1,8 @@
 #pragma once
-#include "auton-manager.h"
-#include "odom.h"
-#include "robot-config.h"
-#include "vex.h"
+#include "config/auton-manager.hpp"
+#include "odom/odom.hpp"
+#include "config/robot-config.hpp"
+#include "vex/vex.hpp"
 
 struct PID {
   double kP, kI, kD, maxError, dT;

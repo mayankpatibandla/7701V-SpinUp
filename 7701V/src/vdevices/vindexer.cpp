@@ -1,4 +1,4 @@
-#include "vdevices/vindexer.h"
+#include "vdevices/vindexer.hpp"
 
 vdevices::indexer::indexer(triport::port &port, uint32_t shotCooldown,
                            uint32_t autofireCooldown)
@@ -17,7 +17,8 @@ void vdevices::indexer::autofire(void *arg) {
     if (instance->getAutofiring()) {
       instance->shootDisc();
     }
-    this_thread::sleep_for(instance->getAutofiring() ? instance->getAutofireCooldown() : 0);
+    this_thread::sleep_for(
+        instance->getAutofiring() ? instance->getAutofireCooldown() : 0);
   }
 }
 

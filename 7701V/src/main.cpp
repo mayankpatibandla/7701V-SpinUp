@@ -1,8 +1,8 @@
-#include "auton-manager.h"
-#include "debug.h"
-#include "driver.h"
-#include "gui.h"
-#include "sylib/sylib.hpp"
+#include "config/auton-manager.hpp"
+#include "driver/driver.hpp"
+#include "ui/debug.hpp"
+#include "ui/gui.hpp"
+
 
 int main() {
   devicesListInit();

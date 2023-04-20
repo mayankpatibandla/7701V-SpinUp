@@ -1,4 +1,4 @@
-#include "vdevices/vpneumatics.h"
+#include "vdevices/vpneumatics.hpp"
 
 vdevices::togglepneumatics::togglepneumatics(triport::port &port)
     : vex::pneumatics(port){};

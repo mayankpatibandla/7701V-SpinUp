@@ -1,4 +1,4 @@
-#include "robot-config.h"
+#include "config/robot-config.hpp"
 
 brain Brain;
 
