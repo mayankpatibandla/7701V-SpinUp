@@ -2,9 +2,10 @@
 #include "driver/driver.hpp"
 #include "ui/debug.hpp"
 #include "ui/gui.hpp"
-
+#include "ui/lights.hpp"
 
 int main() {
+  sylib::initialize();
   devicesListInit();
   devicesInit();
   autonInit();
@@ -12,11 +13,7 @@ int main() {
   odomInit();
   debugInit();
   guiInit();
-  sylib::initialize();
-
-  sylib::Addrled testLights(22, 7, 64);
-  testLights.gradient(0x00FF00, 0x0000FF);
-  testLights.cycle(*testLights, 5);
+  lightsInit();
 
   Competition.drivercontrol(driver);
   Competition.autonomous(auton);
