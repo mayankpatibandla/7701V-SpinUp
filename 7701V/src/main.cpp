@@ -6,14 +6,14 @@
 
 int main() {
   sylib::initialize();
+  autonInit();
+  lightsInit();
   devicesListInit();
   devicesInit();
-  autonInit();
-  driverInit();
   odomInit();
   debugInit();
   guiInit();
-  lightsInit();
+  driverInit();
 
   Competition.drivercontrol(driver);
   Competition.autonomous(auton);
