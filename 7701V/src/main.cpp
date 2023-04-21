@@ -1,8 +1,6 @@
 #include "config/auton-manager.hpp"
 #include "driver/driver.hpp"
-#include "ui/debug.hpp"
-#include "ui/gui.hpp"
-#include "ui/lights.hpp"
+#include "ui/ui.hpp"
 
 int main() {
   sylib::initialize();
