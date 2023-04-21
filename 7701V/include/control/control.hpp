@@ -1,7 +1,7 @@
 #pragma once
 #include "config/auton-manager.hpp"
-#include "odom/odom.hpp"
 #include "config/robot-config.hpp"
+#include "odom/odom.hpp"
 #include "vex/vex.hpp"
 
 struct PID {

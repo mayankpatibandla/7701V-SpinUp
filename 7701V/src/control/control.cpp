@@ -114,7 +114,7 @@ void turnToAngle(double theta, int minTime, int maxTime, double maxVelocity,
     if (absError < M_PI) {
       error = absError;
     } else {
-      error = absError - M_TWOPI;
+      error = absError - 2 * M_PI;
     }
 
     // add error to integral
@@ -149,7 +149,7 @@ void driveRelative(double distance, int minTime, int maxTime,
   driveTimer.reset();
 
   distance =
-      (distance / (M_TWOPI * pt::WHEEL_RADIUS)) * 360 + lRot.position(deg);
+      (distance / (2 * M_PI * pt::WHEEL_RADIUS)) * 360 + lRot.position(deg);
 
   double pow = 1 / 0.;
 

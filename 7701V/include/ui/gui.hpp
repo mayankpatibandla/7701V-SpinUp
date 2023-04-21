@@ -1,8 +1,8 @@
 #pragma once
-#include "ui/alarm.hpp"
 #include "config/auton-manager.hpp"
-#include "odom/odom.hpp"
 #include "config/robot-config.hpp"
+#include "odom/odom.hpp"
+#include "ui/alarm.hpp"
 
 extern void guiInit();
 extern void updateScreen();

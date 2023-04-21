@@ -6,7 +6,7 @@ bool usingInertial = true;
 // radius of tracking wheel (inches)
 const double WHEEL_RADIUS = 1.4; // 2.75 in
 // circumference of tracking wheel (inches)
-const double WHEEL_CIRCUMFERENCE = M_TWOPI * WHEEL_RADIUS;
+const double WHEEL_CIRCUMFERENCE = 2 * M_PI * WHEEL_RADIUS;
 
 // left-right distance between left and right tracking wheels and tracking
 // center (inches)
