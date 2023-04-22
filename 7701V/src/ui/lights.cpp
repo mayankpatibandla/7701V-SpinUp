@@ -2,23 +2,22 @@
 
 vex::thread lightsThread;
 
-void lightsInit() { lightsThread = vex::thread(lights); }
+void lightsInit() { lightsThread = vex::thread(lightsCore); }
 
-void lights() {
-  sylib::Addrled frontLights(22, 8, 64);
+void lightsCore() {
+  lights frontLights(22, 8, 64);
   frontLights.clear();
 
-  uint32_t allianceColor = selectedAuton.allianceColor == RED    ? 0xFF0000
+  frontLights.setBaseColor(selectedAuton.allianceColor == RED    ? 0xFF0000
                            : selectedAuton.allianceColor == BLUE ? 0x0000FF
-                                                                 : 0x00FF00;
+                                                                 : 0x00FF00);
 
-  for (int i = 0; i < 64; i++) {
-    frontLights.set_pixel(allianceColor, i);
-    this_thread::sleep_for(2000 / 64);
-  }
+  frontLights.loadingBar(frontLights.getBaseColor(), 2000.0);
+  this_thread::sleep_for(10000);
 
   while (true) {
-    frontLights.pulse(0xFFFFFF, 2, 10);
+    frontLights.pulse(0xFFFFFF, 2, 15);
+    this_thread::sleep_for(2500);
     this_thread::sleep_for(2500);
   }
 }

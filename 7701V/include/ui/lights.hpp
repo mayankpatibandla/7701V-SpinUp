@@ -4,4 +4,4 @@
 
 extern vex::thread lightsThread;
 extern void lightsInit();
-extern void lights();
+extern void lightsCore();
