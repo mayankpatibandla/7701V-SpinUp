@@ -1,4 +1,4 @@
 #include "config/auton-manager.hpp"
 #include "control/control.hpp"
 
-void autons::test() { spinRoller(-1, rollerColor, 165); }
+void autons::test() { turnToAngle(M_PI, 0, 0, 1, {10, 0, 0}); }
