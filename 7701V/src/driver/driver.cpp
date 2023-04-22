@@ -12,6 +12,8 @@ bool expandTopReady = true;
 bool expandBottomLeftReady = true;
 bool expandBottomRightReady = true;
 
+bool expansionActivated = false;
+
 bool indexerReady = true;
 
 void driverInit() {
@@ -103,6 +105,7 @@ void driver() {
         expandAllReady = false;
         flyMtrs.setState(false);
         expandAll();
+        expansionActivated = true;
       }
     } else if (!Controller.ButtonL1.pressing() &&
                !Controller.ButtonL2.pressing() &&
@@ -115,6 +118,7 @@ void driver() {
         expandBottomRightReady = false;
         flyMtrs.setState(false);
         expandRight();
+        expansionActivated = true;
       } else if (!Controller.ButtonR2.pressing()) {
         expandBottomRightReady = true;
       }
@@ -123,6 +127,7 @@ void driver() {
         expandBottomLeftReady = false;
         flyMtrs.setState(false);
         expandLeft();
+        expansionActivated = true;
       } else if (!Controller.ButtonL2.pressing()) {
         expandBottomLeftReady = true;
       }
@@ -132,6 +137,7 @@ void driver() {
         expandTopReady = false;
         flyMtrs.setState(false);
         expandTop();
+        expansionActivated = true;
       } else if (!Controller.ButtonL1.pressing() &&
                  !Controller.ButtonR1.pressing()) {
         expandTopReady = true;

@@ -1,4 +1,5 @@
 #include "ui/lights.hpp"
+#include "driver/driver.hpp"
 
 vex::thread lightsThread;
 
@@ -81,15 +82,87 @@ void lightsCore() {
   frontLights.loadingBar(frontLights.getBaseColor(), 2000.0);
   waitUntil(!frontLights.loadingBarArgs.isEnabled && !Inertial.isCalibrating());
 
-  // frontLights.set_buffer(rainbow);
+  /**
+   * TODO add responses to indxer
+   */
+
+  // Buttons are temp for field control
+  bool reverse = false;
+  // Pre field control
+  while (!Controller.ButtonRight.pressing()) {
+    frontLights.pulse(0, 6, 13, 0, reverse);
+    reverse = !reverse;
+    waitUntil(!frontLights.isPulsing());
+    this_thread::sleep_for(250);
+  }
+  // Pre auton disabled
+  while (!Controller.ButtonLeft.pressing()) {
+    frontLights.pulse(0xFFFFFF, 6, 13, 0, reverse);
+    reverse = !reverse;
+    waitUntil(!frontLights.isPulsing());
+    this_thread::sleep_for(250);
+  }
+  // Auton
+  while (!Controller.ButtonRight.pressing()) {
+    for (int i = 0; i < frontLights.stripSize() / 2; i++) {
+      frontLights.set_pixel(lights::hsv_to_rgb({leftRollerOptical.hue(), 1, 1}),
+                            i);
+    }
+    for (int i = frontLights.stripSize() / 2; i < frontLights.stripSize();
+         i++) {
+      frontLights.set_pixel(
+          lights::hsv_to_rgb({rightRollerOptical.hue(), 1, 1}), i);
+    }
+  }
+  // Post auton disabled
+  frontLights.set_all(frontLights.getBaseColor());
+  while (!Controller.ButtonLeft.pressing()) {
+    frontLights.pulse(0xFFFFFF, 6, 13, 0, reverse);
+    reverse = !reverse;
+    waitUntil(!frontLights.isPulsing());
+    this_thread::sleep_for(250);
+  }
+  // Driver
+  int driverSection = 0;
+  timer driverTimer;
+  driverTimer.reset();
+  while (!Controller.ButtonRight.pressing()) {
+    // First 45 seconds
+    if (driverSection == 0) {
+      // https://uigradients.com/#KyooPal
+      frontLights.gradient(0xDD3E54, 0x6BE585);
+      frontLights.cycle(*frontLights, 7);
+      driverSection++;
+    }
+    // 1 min to 30 sec
+    else if (driverTimer.time(sec) > 45 && driverSection == 1) {
+      // https://uigradients.com/#SublimeVivid
+      frontLights.gradient(0xFC466B, 0x3F5EFB);
+      frontLights.cycle(*frontLights, 7);
+      driverSection++;
+    }
+    // 30 sec to endgame
+    else if (driverTimer.time(sec) > 75 && driverSection == 2) {
+      // https://uigradients.com/#CrystalClear
+      frontLights.gradient(0x159957, 0x155799);
+      frontLights.cycle(*frontLights, 7);
+      driverSection++;
+    }
+    // Endgame
+    else if (driverTimer.time(sec) > 95 && driverSection == 3) {
+      frontLights.set_all(0);
+      this_thread::sleep_for(100);
+      frontLights.set_all(frontLights.getBaseColor());
+      this_thread::sleep_for(100);
+      if (expansionActivated) {
+        break;
+      }
+    }
+    this_thread::sleep_for(25);
+  }
+  // Endgame
   frontLights.cycle(rainbow, 15);
-
   while (true) {
-    // frontLights.pulse(0xFFFFFF, 8, 10, 0, false);
-    // waitUntil(!frontLights.isPulsing());
-    // this_thread::sleep_for(500);
-    // frontLights.pulse(0xFFFFFF, 8, 10, 63, true);
-
-    this_thread::sleep_for(100000);
+    this_thread::sleep_for(0xFFFFFFFF);
   }
 }
