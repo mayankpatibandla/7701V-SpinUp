@@ -16,6 +16,7 @@ void vdevices::lights::lightsCore(void *arg) {
 
   while (true) {
     instance->loadingBar_i();
+    instance->flash_i();
     this_thread::sleep_for(10);
   }
 }
@@ -45,4 +46,21 @@ void vdevices::lights::loadingBar_i() {
 void vdevices::lights::loadingBar(uint32_t color, double time, int startPos,
                                   int endPos) {
   loadingBarArgs = loadingBarArgs_t(color, time, startPos, endPos, true);
+}
+
+void vdevices::lights::flash_i() {
+  if (flashArgs.isEnabled) {
+    std::vector<uint32_t> original = buffer;
+
+    set_all(flashArgs.color);
+    this_thread::sleep_for(flashArgs.time);
+    set_buffer(original);
+    this_thread::sleep_for(flashArgs.endDelay * flashArgs.time);
+
+    flashArgs.isEnabled = false;
+  }
+}
+
+void vdevices::lights::flash(uint32_t color, double time, bool endDelay) {
+  flashArgs = flashArgs_t(color, time, endDelay, true);
 }

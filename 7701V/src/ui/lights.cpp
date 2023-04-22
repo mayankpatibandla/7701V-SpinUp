@@ -81,11 +81,11 @@ void lightsCore() {
   // Calibrating Inertial
   frontLights.loadingBar(frontLights.getBaseColor(), 2000.0);
   waitUntil(!frontLights.loadingBarArgs.isEnabled && !Inertial.isCalibrating());
-  frontLights.set_all(0xFFFFFF);
-  this_thread::sleep_for(200);
-  frontLights.set_all(frontLights.getBaseColor());
+  frontLights.flash(0xFFFFFF, 250);
+  waitUntil(!frontLights.flashArgs.isEnabled);
 
   // ! Buttons are temp for field control
+  // TODO use Competition to automatically change between states
 
   // Pre field control
   bool reverse = false;
@@ -161,13 +161,14 @@ void lightsCore() {
     }
     // Endgame
     else if (driverTimer.time(sec) > 95 && driverPhase == 3) {
-      frontLights.set_all(0);
-      this_thread::sleep_for(100);
       frontLights.set_all(frontLights.getBaseColor());
-      this_thread::sleep_for(100);
-      if (expansionActivated) {
-        break;
-      }
+      driverPhase++;
+    } else if (driverPhase == 4 && !frontLights.flashArgs.isEnabled) {
+      frontLights.flash(0, 200, true);
+    }
+
+    if (expansionActivated || driverTimer.time(sec) > 105) {
+      break;
     }
 
     if (Indexer.value()) {
@@ -179,6 +180,7 @@ void lightsCore() {
   }
 
   // Endgame
+  this_thread::sleep_for(100);
   frontLights.cycle(rainbow, 32);
   while (true) {
     if (Indexer.value()) {

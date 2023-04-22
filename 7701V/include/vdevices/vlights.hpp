@@ -12,9 +12,9 @@ protected:
   struct loadingBarArgs_t {
     uint32_t color;
     double time;
-    int startPos = 0;
-    int endPos = -1;
-    bool isEnabled = false;
+    int startPos;
+    int endPos;
+    bool isEnabled;
 
     loadingBarArgs_t(uint32_t color = 0, double time = 0, int startPos = 0,
                      int endPos = -1, bool isEnabled = false)
@@ -22,6 +22,18 @@ protected:
           isEnabled(isEnabled) {}
   };
   void loadingBar_i();
+
+  struct flashArgs_t {
+    uint32_t color;
+    double time;
+    bool endDelay;
+    bool isEnabled;
+
+    flashArgs_t(uint32_t color = 0, double time = 0, bool endDelay = false,
+                bool isEnabled = false)
+        : color(color), time(time), endDelay(endDelay), isEnabled(isEnabled) {}
+  };
+  void flash_i();
 
 public:
   lights(
@@ -38,5 +50,8 @@ public:
   loadingBarArgs_t loadingBarArgs;
   void loadingBar(uint32_t color, double time, int startPos = 0,
                   int endPos = -1);
+
+  flashArgs_t flashArgs;
+  void flash(uint32_t color, double time, bool endDelay = false);
 };
 } // namespace vdevices
