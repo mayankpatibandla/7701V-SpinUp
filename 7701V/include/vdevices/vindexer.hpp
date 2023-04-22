@@ -1,5 +1,5 @@
 #pragma once
-#include "vdevices/vpneumatics.h"
+#include "vdevices/vpneumatics.hpp"
 
 namespace vdevices {
 class indexer : public togglepneumatics {

@@ -1,4 +1,4 @@
-#include "alarm.h"
+#include "ui/alarm.hpp"
 
 bool dismissed = false;
 

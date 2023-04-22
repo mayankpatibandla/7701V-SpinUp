@@ -1,4 +1,4 @@
-#include "gui.h"
+#include "ui/gui.hpp"
 
 vex::thread guiThread;
 

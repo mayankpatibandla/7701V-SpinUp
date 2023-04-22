@@ -1,4 +1,4 @@
-#include "gui.h"
+#include "ui/gui.hpp"
 
 void printOdom() {
   Brain.Screen.setPenWidth(2);
@@ -30,9 +30,9 @@ Pose worldToScreen(Pose pose, Pose offset) {
 
   // rotate the pose to account for starting position
   // subtract pi/2 to account for odom x-axis being forward
-  Pose rotPose =
-      rotatePose({pose.x * k + offset.x, pose.y * k + offset.y, offset.theta - M_PI_2},
-                 {120, 120, 0}); // c = field center
+  Pose rotPose = rotatePose(
+      {pose.x * k + offset.x, pose.y * k + offset.y, offset.theta - M_PI_2},
+      {120, 120, 0}); // c = field center
 
   return {rotPose.x, rotPose.y, pose.theta + offset.theta};
 }
