@@ -45,7 +45,10 @@ void vdevices::flywheel::pidCore(void *arg) {
           derivative * instance->pid.kD;
     pow = clamp(pow, -1.0, 1.0);
 
-    instance->spin(fwd, pow * 12, volt);
+    instance->spin(
+        fwd, std::abs(instance->getTargetVelocity()) > 0 ? pow * 12 : 0, volt);
+
+    std::cout << "Pos: " << currentPos << " Pow: " << pow << std::endl;
 
     // sleep for dT
     this_thread::sleep_until(timeStart + instance->pid.dT);

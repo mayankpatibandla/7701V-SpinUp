@@ -14,7 +14,7 @@ public:
 protected:
   PID pid;
 
-  double targetVel;
+  double targetVel = 0.0;
 
   vex::thread pidThread;
   static void pidCore(void *arg);
