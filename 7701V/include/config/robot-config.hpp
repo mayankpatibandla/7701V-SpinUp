@@ -26,6 +26,7 @@ extern motor_group driveMtrs;
 
 extern const double flywheelCoeffs[];
 extern const double flywheelMatchLoadCoeff, flywheelMinCoeff;
+extern flywheel::PID flywheelPID;
 extern togglemotor flyMtr;
 extern flywheel Flywheel;
 

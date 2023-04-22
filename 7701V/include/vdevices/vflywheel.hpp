@@ -3,7 +3,7 @@
 
 namespace vdevices {
 class flywheel : public togglemotor, public vex::motor_group {
-protected:
+public:
   struct PID {
     double kP, kI, kD, maxError, dT;
 
@@ -11,6 +11,7 @@ protected:
         double dT = 15);
   };
 
+protected:
   PID pid;
 
   double targetVel;

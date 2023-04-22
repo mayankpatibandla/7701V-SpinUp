@@ -25,6 +25,7 @@ motor_group driveMtrs(lbDriveMtr, lmDriveMtr, ltDriveMtr, rbDriveMtr,
 
 const double flywheelCoeffs[] = {1, 0.775, 0.7};
 const double flywheelMatchLoadCoeff = 0.66, flywheelMinCoeff = 0.4;
+flywheel::PID flywheelPID = {1, 0, 0, 1};
 togglemotor flyMtr(PORT1, gearSetting::ratio6_1, true);
 flywheel Flywheel(flyMtr);
 
@@ -121,6 +122,10 @@ void devicesInit() {
 
   rightRollerOptical.setLight(ledState::on);
   rightRollerOptical.setLightPower(100, pct);
+
+  Flywheel.setPID(flywheelPID);
+  Flywheel.setTargetVelocity(0);
+  Flywheel.init();
 
   waitUntil(!Inertial.isCalibrating());
 
