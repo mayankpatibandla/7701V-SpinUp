@@ -23,6 +23,10 @@ void vdevices::lights::lightsCore(void *arg) {
 uint32_t vdevices::lights::getBaseColor() { return baseColor; }
 void vdevices::lights::setBaseColor(uint32_t color) { baseColor = color; }
 
+bool vdevices::lights::isPulsing() { return sendingPulse; }
+
+const uint8_t vdevices::lights::stripSize() { return strip_length; }
+
 void vdevices::lights::loadingBar_i() {
   if (loadingBarArgs.isEnabled) {
     if (loadingBarArgs.endPos == -1) {

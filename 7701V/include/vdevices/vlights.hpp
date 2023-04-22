@@ -21,7 +21,6 @@ protected:
         : color(color), time(time), startPos(startPos), endPos(endPos),
           isEnabled(isEnabled) {}
   };
-  loadingBarArgs_t loadingBarArgs;
   void loadingBar_i();
 
 public:
@@ -33,6 +32,10 @@ public:
   uint32_t getBaseColor();
   void setBaseColor(uint32_t color);
 
+  bool isPulsing();
+  const uint8_t stripSize();
+
+  loadingBarArgs_t loadingBarArgs;
   void loadingBar(uint32_t color, double time, int startPos = 0,
                   int endPos = -1);
 };
