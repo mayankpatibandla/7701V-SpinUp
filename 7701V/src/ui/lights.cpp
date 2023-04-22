@@ -81,6 +81,9 @@ void lightsCore() {
   // Calibrating Inertial
   frontLights.loadingBar(frontLights.getBaseColor(), 2000.0);
   waitUntil(!frontLights.loadingBarArgs.isEnabled && !Inertial.isCalibrating());
+  frontLights.set_all(0xFFFFFF);
+  this_thread::sleep_for(200);
+  frontLights.set_all(frontLights.getBaseColor());
 
   // ! Buttons are temp for field control
 
