@@ -134,33 +134,33 @@ void lightsCore() {
   }
 
   // Driver
-  int driverSection = 0;
+  int driverPhase = 0;
   timer driverTimer;
   driverTimer.reset();
   while (!Controller.ButtonRight.pressing()) {
     // First 45 seconds
-    if (driverSection == 0) {
+    if (driverPhase == 0) {
       // https://uigradients.com/#KyooPal
       frontLights.gradient(0xDD3E54, 0x6BE585);
-      frontLights.cycle(*frontLights, 7);
-      driverSection++;
+      frontLights.cycle(*frontLights, 8);
+      driverPhase++;
     }
     // 1 min to 30 sec
-    else if (driverTimer.time(sec) > 45 && driverSection == 1) {
+    else if (driverTimer.time(sec) > 45 && driverPhase == 1) {
       // https://uigradients.com/#SublimeVivid
       frontLights.gradient(0xFC466B, 0x3F5EFB);
-      frontLights.cycle(*frontLights, 7);
-      driverSection++;
+      frontLights.cycle(*frontLights, 16);
+      driverPhase++;
     }
     // 30 sec to endgame
-    else if (driverTimer.time(sec) > 75 && driverSection == 2) {
+    else if (driverTimer.time(sec) > 75 && driverPhase == 2) {
       // https://uigradients.com/#CrystalClear
       frontLights.gradient(0x159957, 0x155799);
-      frontLights.cycle(*frontLights, 7);
-      driverSection++;
+      frontLights.cycle(*frontLights, 32);
+      driverPhase++;
     }
     // Endgame
-    else if (driverTimer.time(sec) > 95 && driverSection == 3) {
+    else if (driverTimer.time(sec) > 95 && driverPhase == 3) {
       frontLights.set_all(0);
       this_thread::sleep_for(100);
       frontLights.set_all(frontLights.getBaseColor());
@@ -179,7 +179,7 @@ void lightsCore() {
   }
 
   // Endgame
-  frontLights.cycle(rainbow, 15);
+  frontLights.cycle(rainbow, 32);
   while (true) {
     if (Indexer.value()) {
       frontLights.pulse(0xFFFF00, 12, 100);
