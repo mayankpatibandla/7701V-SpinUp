@@ -1,6 +1,6 @@
 #pragma once
+#include "vdevices/vflywheel.hpp"
 #include "vdevices/vindexer.hpp"
 #include "vdevices/vlights.hpp"
-#include "vdevices/vmotor.hpp"
 
 using namespace vdevices;

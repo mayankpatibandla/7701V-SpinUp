@@ -23,3 +23,10 @@
   for (int iterator = 0; iterator < iterations; iterator++)
 
 using namespace vex;
+
+template <typename T> T sgn(const T &val) {
+  return (T(0) < val) - (val < T(0));
+}
+template <typename T> T clamp(const T &n, const T &lower, const T &upper) {
+  return std::max(lower, std::min(n, upper));
+}

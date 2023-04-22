@@ -12,13 +12,6 @@ struct PID {
       : kP(kP), kI(kI), kD(kD), maxError(maxError), dT(dT) {}
 };
 
-template <typename T> T sgn(const T &val) {
-  return (T(0) < val) - (val < T(0));
-}
-template <typename T> T clamp(const T &n, const T &lower, const T &upper) {
-  return std::max(lower, std::min(n, upper));
-}
-
 extern bool matchLoadEnabled;
 
 extern void expandAll();

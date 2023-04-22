@@ -2,7 +2,7 @@
 #include "control/control.hpp"
 
 void autons::rightHighGoal() {
-  flyMtrs.spin(fwd, 12, volt);
+  Flywheel.spin(fwd, 12, volt);
   angler.set(true);
 
   // roller

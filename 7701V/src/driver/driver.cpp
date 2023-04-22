@@ -17,7 +17,7 @@ bool expansionActivated = false;
 bool indexerReady = true;
 
 void driverInit() {
-  Controller.ButtonX.pressed([]() { flyMtrs.toggleState(); });
+  Controller.ButtonX.pressed([]() { Flywheel.toggleState(); });
   Controller.ButtonY.pressed([]() { angler.toggle(); });
 
   Controller.ButtonA.pressed([]() { Indexer.startAutofiring(); });
@@ -26,7 +26,7 @@ void driverInit() {
 
 void driver() {
   if (Competition.isCompetitionSwitch() || Competition.isFieldControl()) {
-    flyMtrs.setState(true);
+    Flywheel.setState(true);
     angler.set(false);
     matchLoadEnabled = false;
   }
@@ -46,9 +46,9 @@ void driver() {
                                : flywheelCoeffs[2];
 
     if (Controller.ButtonLeft.pressing() && Controller.ButtonDown.pressing()) {
-      flyMtrs.spin(fwd, flywheelSpeed * -12, volt);
+      Flywheel.spin(fwd, flywheelSpeed * -12, volt);
     } else {
-      flyMtrs.spin(fwd, flyMtrs.getState() * flywheelSpeed * 12, volt);
+      Flywheel.spin(fwd, Flywheel.getState() * flywheelSpeed * 12, volt);
     }
 
     // Indexer toggle
@@ -103,7 +103,7 @@ void driver() {
         !Controller.ButtonLeft.pressing()) {
       if (expandAllReady) {
         expandAllReady = false;
-        flyMtrs.setState(false);
+        Flywheel.setState(false);
         expandAll();
         expansionActivated = true;
       }
@@ -116,7 +116,7 @@ void driver() {
     if (Controller.ButtonLeft.pressing()) {
       if (Controller.ButtonR2.pressing() && expandBottomRightReady) {
         expandBottomRightReady = false;
-        flyMtrs.setState(false);
+        Flywheel.setState(false);
         expandRight();
         expansionActivated = true;
       } else if (!Controller.ButtonR2.pressing()) {
@@ -125,7 +125,7 @@ void driver() {
 
       if (Controller.ButtonL2.pressing() && expandBottomLeftReady) {
         expandBottomLeftReady = false;
-        flyMtrs.setState(false);
+        Flywheel.setState(false);
         expandLeft();
         expansionActivated = true;
       } else if (!Controller.ButtonL2.pressing()) {
@@ -135,7 +135,7 @@ void driver() {
       if (Controller.ButtonL1.pressing() && Controller.ButtonR1.pressing() &&
           expandTopReady) {
         expandTopReady = false;
-        flyMtrs.setState(false);
+        Flywheel.setState(false);
         expandTop();
         expansionActivated = true;
       } else if (!Controller.ButtonL1.pressing() &&
