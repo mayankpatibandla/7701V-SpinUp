@@ -147,8 +147,8 @@ void lightsCore() {
     }
     // 1 min to 30 sec
     else if (driverTimer.time(sec) > 45 && driverPhase == 1) {
-      // https://uigradients.com/#SublimeVivid
-      frontLights.gradient(0xFC466B, 0x3F5EFB);
+      // https://uigradients.com/#Jupiter
+      frontLights.gradient(0xFFD89B, 0x19547B);
       frontLights.cycle(*frontLights, 16);
       driverPhase++;
     }
