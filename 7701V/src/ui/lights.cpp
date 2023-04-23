@@ -85,16 +85,31 @@ void lightsCore() {
   waitUntil(!frontLights.flashArgs.isEnabled);
 
   // Pre field control
-  bool reverse = false;
   while (!Competition.isCompetitionSwitch() && !Competition.isFieldControl()) {
-    frontLights.bounce(0, 250, 6, 13);
-    waitUntil(!frontLights.bounceArgs.isEnabled);
+    if (!frontLights.bounceArgs.isEnabled) {
+      frontLights.bounce(0, 250, 6, 13);
+    }
+
+    if (Indexer.value() && !frontLights.isPulsing()) {
+      frontLights.pulse(0xFFFF00, 12, 100);
+      waitUntil(!Indexer.value() && !frontLights.isPulsing());
+    }
+
+    this_thread::sleep_for(10);
   }
 
   // Pre auton disabled
   while (!Competition.isAutonomous()) {
-    frontLights.bounce(0xFFFFFF, 250, 6, 13);
-    waitUntil(!frontLights.bounceArgs.isEnabled);
+    if (!frontLights.bounceArgs.isEnabled) {
+      frontLights.bounce(0xFFFFFF, 250, 6, 13);
+    }
+
+    if (Indexer.value() && !frontLights.isPulsing()) {
+      frontLights.pulse(0xFFFF00, 12, 100);
+      waitUntil(!Indexer.value() && !frontLights.isPulsing());
+    }
+
+    this_thread::sleep_for(10);
   }
 
   // Auton
@@ -109,7 +124,7 @@ void lightsCore() {
           lights::hsv_to_rgb({rightRollerOptical.hue(), 1, 1}), i);
     }
 
-    if (Indexer.value()) {
+    if (Indexer.value() && !frontLights.isPulsing()) {
       frontLights.pulse(0xFFFF00, 12, 100);
       waitUntil(!Indexer.value() && !frontLights.isPulsing());
     }
@@ -120,8 +135,16 @@ void lightsCore() {
   // Post auton disabled
   frontLights.set_all(frontLights.getBaseColor());
   while (!Competition.isDriverControl()) {
-    frontLights.bounce(0xFFFFFF, 250, 6, 13);
-    waitUntil(!frontLights.bounceArgs.isEnabled);
+    if (!frontLights.bounceArgs.isEnabled) {
+      frontLights.bounce(0xFFFFFF, 250, 6, 13);
+    }
+
+    if (Indexer.value() && !frontLights.isPulsing()) {
+      frontLights.pulse(0xFFFF00, 12, 100);
+      waitUntil(!Indexer.value() && !frontLights.isPulsing());
+    }
+
+    this_thread::sleep_for(10);
   }
 
   // Driver
@@ -162,7 +185,7 @@ void lightsCore() {
       break;
     }
 
-    if (Indexer.value()) {
+    if (Indexer.value() && !frontLights.isPulsing()) {
       frontLights.pulse(0xFFFF00, 12, 100);
       waitUntil(!Indexer.value() && !frontLights.isPulsing());
     }
@@ -174,7 +197,7 @@ void lightsCore() {
   this_thread::sleep_for(100);
   frontLights.cycle(rainbow, 32);
   while (true) {
-    if (Indexer.value()) {
+    if (Indexer.value() && !frontLights.isPulsing()) {
       frontLights.pulse(0xFFFF00, 12, 100);
       waitUntil(!Indexer.value() && !frontLights.isPulsing());
     }
