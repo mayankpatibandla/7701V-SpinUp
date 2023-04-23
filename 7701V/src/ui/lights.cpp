@@ -99,7 +99,7 @@ void lightsCore() {
   }
 
   // Pre auton disabled
-  while (!Competition.isAutonomous()) {
+  while (!Competition.isEnabled()) {
     if (!frontLights.bounceArgs.isEnabled) {
       frontLights.bounce(0xFFFFFF, 250, 6, 13);
     }
@@ -134,7 +134,7 @@ void lightsCore() {
 
   // Post auton disabled
   frontLights.set_all(frontLights.getBaseColor());
-  while (!Competition.isDriverControl()) {
+  while (!Competition.isEnabled()) {
     if (!frontLights.bounceArgs.isEnabled) {
       frontLights.bounce(0xFFFFFF, 250, 6, 13);
     }
