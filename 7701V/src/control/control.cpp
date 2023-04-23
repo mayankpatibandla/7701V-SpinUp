@@ -95,7 +95,7 @@ void turnToAngle(double theta, int minTime, int maxTime, double maxVelocity,
 
   double prevError = error;
 
-  const double errorAcc = 0.01, powAcc = 0.01;
+  const double errorAcc = 0.05, powAcc = 0.01;
 
   while (std::abs(error) > errorAcc || std::abs(pow) > powAcc ||
          (turnTimer.time(msec) < minTime && minTime != 0)) {

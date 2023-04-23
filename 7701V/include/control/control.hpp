@@ -24,7 +24,7 @@ extern void spinRoller(double velocity = -1, color col = rollerColor,
                        int minTime = 0, int maxTime = 0);
 
 extern void turnToAngle(double theta, int minTime = 0, int maxTime = 0,
-                        double maxVelocity = 1, PID pid = {1, 0, 0});
+                        double maxVelocity = 1, PID pid = {0.5, 0, 0});
 extern void driveRelative(double distance, int minTime = 0, int maxTime = 0,
                           double maxVelocity = 1,
                           PID pid = {0.00125, 0.000001, 0.000075});
