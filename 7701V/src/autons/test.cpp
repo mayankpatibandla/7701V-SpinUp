@@ -1,6 +1,11 @@
 #include "control/control.hpp"
 
 void autons::test() {
-  turnToAngle(M_PI, 0, 1000, 1, {0.5, 0, 0});
-  std::cout << "Theta (rad): " << pt::thetaWrapped() << std::endl;
+  PID testPID = {0.001, 0, 0, 6};
+  driveRelative(48, 0, 2000, 1, testPID);
+  this_thread::sleep_for(1000);
+  std::cout << "X (in): " << pt::x() << " Y(in): " << pt::x() << std::endl;
+  driveRelative(-48, 0, 2000, 1, testPID);
+  this_thread::sleep_for(1000);
+  std::cout << "X (in): " << pt::x() << " Y(in): " << pt::x() << std::endl;
 }
