@@ -147,8 +147,8 @@ void lightsCore() {
     }
     // 1 min to 30 sec
     else if (driverTimer.time(sec) > 45 && driverPhase == 1) {
-      // https://uigradients.com/#Jupiter
-      frontLights.gradient(0xFFD89B, 0x19547B);
+      // https://uigradients.com/#KyeMeh
+      frontLights.gradient(0x8360C3, 0x2EBF91);
       frontLights.cycle(*frontLights, 16);
       driverPhase++;
     }
