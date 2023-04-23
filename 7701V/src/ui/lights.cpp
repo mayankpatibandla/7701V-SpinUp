@@ -84,24 +84,21 @@ void lightsCore() {
   frontLights.flash(0xFFFFFF, 250);
   waitUntil(!frontLights.flashArgs.isEnabled);
 
-  // ! Buttons are temp for field control
-  // TODO use Competition to automatically change between states
-
   // Pre field control
   bool reverse = false;
-  while (!Controller.ButtonRight.pressing()) {
+  while (!Competition.isCompetitionSwitch() && !Competition.isFieldControl()) {
     frontLights.bounce(0, 250, 6, 13);
     waitUntil(!frontLights.bounceArgs.isEnabled);
   }
 
   // Pre auton disabled
-  while (!Controller.ButtonLeft.pressing()) {
+  while (!Competition.isAutonomous()) {
     frontLights.bounce(0xFFFFFF, 250, 6, 13);
     waitUntil(!frontLights.bounceArgs.isEnabled);
   }
 
   // Auton
-  while (!Controller.ButtonRight.pressing()) {
+  while (Competition.isEnabled()) {
     for (int i = 0; i < frontLights.stripSize() / 2; i++) {
       frontLights.set_pixel(lights::hsv_to_rgb({leftRollerOptical.hue(), 1, 1}),
                             i);
@@ -122,7 +119,7 @@ void lightsCore() {
 
   // Post auton disabled
   frontLights.set_all(frontLights.getBaseColor());
-  while (!Controller.ButtonLeft.pressing()) {
+  while (!Competition.isDriverControl()) {
     frontLights.bounce(0xFFFFFF, 250, 6, 13);
     waitUntil(!frontLights.bounceArgs.isEnabled);
   }
@@ -131,7 +128,7 @@ void lightsCore() {
   int driverPhase = 0;
   timer driverTimer;
   driverTimer.reset();
-  while (!Controller.ButtonRight.pressing()) {
+  while (Competition.isEnabled()) {
     // First 45 seconds
     if (driverPhase == 0) {
       // https://uigradients.com/#KyooPal
