@@ -1,7 +1,7 @@
 #include "control/control.hpp"
 
 void autons::skills() {
-  Flywheel.spin(fwd, flywheelMatchLoadCoeff * 12, volt);
+  Flywheel.setTargetVelocity(flywheelMatchLoadCoeff);
   intakeMtrs.spin(fwd, 12, volt);
   angler.set(true);
   this_thread::sleep_for(3500);
@@ -14,7 +14,7 @@ void autons::skills() {
   turnToAngle(-0.66, 100, 1500, 0.5, {0.8, 0, 0.1});
   intakeMtrs.stop();
   matchLoadEnabled = false;
-  Flywheel.spin(fwd, 10, volt);
+  Flywheel.setTargetVelocity(0.83);
   driveRelative(45, 200, 3500, 0.6);
   driveRelative(-6, 100, 800, 0.4);
   intakeMtrs.spin(fwd, 12, volt);
@@ -53,7 +53,7 @@ void autons::skills() {
   driveMtrs.stop();
 
   // shoot discs
-  Flywheel.spin(fwd, 0.6 * 12, volt);
+  Flywheel.setTargetVelocity(0.6);
   turnToAngle(-0.7, 100, 1500, 0.65, {0.9, 0, 0.0075});
   driveRelative(50, 100, 2500, 0.6);
   turnToAngle(-1.58, 100, 1500, 0.65, {0.9, 0, 0.0075});

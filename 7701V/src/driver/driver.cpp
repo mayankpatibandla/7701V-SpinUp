@@ -46,10 +46,8 @@ void driver() {
                                : flywheelCoeffs[2];
 
     if (Controller.ButtonLeft.pressing() && Controller.ButtonDown.pressing()) {
-      // Flywheel.spin(fwd, flywheelSpeed * -12, volt);
       Flywheel.setTargetVelocity(-flywheelSpeed);
     } else {
-      // Flywheel.spin(fwd, Flywheel.getState() * flywheelSpeed * 12, volt);
       Flywheel.setTargetVelocity(Flywheel.getState() ? flywheelSpeed : 0.0);
     }
 

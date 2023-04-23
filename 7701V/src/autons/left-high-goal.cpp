@@ -1,7 +1,7 @@
 #include "control/control.hpp"
 
 void autons::leftHighGoal() {
-  Flywheel.spin(fwd, 0.875 * 12, volt);
+  Flywheel.setTargetVelocity(0.875);
   angler.set(true);
 
   driveMtrs.spinFor(fwd, 100, msec, 50, velocityUnits::pct);
