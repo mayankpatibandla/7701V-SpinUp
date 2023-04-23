@@ -1,8 +1,9 @@
 #include "vdevices/vflywheel.hpp"
 
-vdevices::flywheel::PID::PID(double kP, double kI, double kD, double maxError,
-                             double dT)
-    : kP(kP), kI(kI), kD(kD), maxError(maxError), dT(dT) {}
+vdevices::flywheel::PID::PID(double kP, double kI, double kD, double threshold,
+                             double kP2, double maxError, double dT)
+    : kP(kP), kI(kI), kD(kD), threshold(threshold), kP2(kP2),
+      maxError(maxError), dT(dT) {}
 
 void vdevices::flywheel::pidCore(void *arg) {
   if (arg == NULL) {
@@ -43,12 +44,17 @@ void vdevices::flywheel::pidCore(void *arg) {
     // output powers
     pow = error * instance->pid.kP + integral * instance->pid.kI +
           derivative * instance->pid.kD;
-    pow = clamp(pow, -1.0, 1.0);
+    pow = clamp(pow, 0.25, 1.0);
+
+    // threshold to prevent oscillation near target
+    if (std::abs(error) < instance->pid.threshold) {
+      pow = instance->pid.kP2 * instance->getTargetVelocity();
+    }
 
     instance->spin(
         fwd, std::abs(instance->getTargetVelocity()) > 0 ? pow * 12 : 0, volt);
 
-    std::cout << "Pos: " << currentPos << " Pow: " << pow << std::endl;
+    // std::cout << "Pos: " << currentPos << " Pow: " << pow << std::endl;
 
     // sleep for dT
     this_thread::sleep_until(timeStart + instance->pid.dT);

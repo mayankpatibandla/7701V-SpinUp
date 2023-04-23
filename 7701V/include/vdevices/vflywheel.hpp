@@ -5,10 +5,10 @@ namespace vdevices {
 class flywheel : public togglemotor, public vex::motor_group {
 public:
   struct PID {
-    double kP, kI, kD, maxError, dT;
+    double kP, kI, kD, threshold, kP2, maxError, dT;
 
-    PID(double kP = 0, double kI = 0, double kD = 0, double maxError = 0,
-        double dT = 15);
+    PID(double kP = 0, double kI = 0, double kD = 0, double threshold = 0,
+        double kP2 = 0, double maxError = 0, double dT = 15);
   };
 
 protected:

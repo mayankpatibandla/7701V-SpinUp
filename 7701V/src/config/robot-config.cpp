@@ -25,7 +25,7 @@ motor_group driveMtrs(lbDriveMtr, lmDriveMtr, ltDriveMtr, rbDriveMtr,
 
 const double flywheelCoeffs[] = {1, 0.775, 0.7};
 const double flywheelMatchLoadCoeff = 0.66, flywheelMinCoeff = 0.4;
-flywheel::PID flywheelPID = {15, 0.1, 3, 1};
+flywheel::PID flywheelPID = {8, 0.1, 0.5, 0.1, 1.05, 1};
 togglemotor flyMtr(PORT1, gearSetting::ratio6_1, true);
 flywheel Flywheel(flyMtr);
 
