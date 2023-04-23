@@ -35,6 +35,24 @@ protected:
   };
   void flash_i();
 
+  struct bounceArgs_t {
+    uint32_t color;
+    double time;
+    int width;
+    int speed;
+    int start;
+    int end;
+    bool reverse;
+    bool isEnabled;
+
+    bounceArgs_t(uint32_t color = 0, double time = 0, int width = 0,
+                 int speed = 1, int start = 0, int end = -1,
+                 bool reverse = false, bool isEnabled = false)
+        : color(color), time(time), width(width), speed(speed), start(start),
+          end(end), reverse(reverse), isEnabled(isEnabled) {}
+  };
+  void bounce_i();
+
 public:
   lights(
       const std::uint8_t smart_port, const std::uint8_t adi_port,
@@ -53,5 +71,9 @@ public:
 
   flashArgs_t flashArgs;
   void flash(uint32_t color, double time, bool endDelay = false);
+
+  bounceArgs_t bounceArgs;
+  void bounce(uint32_t color, double time, int width, int speed, int start = 0,
+              int end = -1, bool reverse = false);
 };
 } // namespace vdevices

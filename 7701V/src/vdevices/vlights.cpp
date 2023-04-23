@@ -17,6 +17,7 @@ void vdevices::lights::lightsCore(void *arg) {
   while (true) {
     instance->loadingBar_i();
     instance->flash_i();
+    instance->bounce_i();
     this_thread::sleep_for(10);
   }
 }
@@ -63,4 +64,24 @@ void vdevices::lights::flash_i() {
 
 void vdevices::lights::flash(uint32_t color, double time, bool endDelay) {
   flashArgs = flashArgs_t(color, time, endDelay, true);
+}
+
+void vdevices::lights::bounce_i() {
+  if (bounceArgs.isEnabled) {
+    repeat(2) {
+      pulse(bounceArgs.color, bounceArgs.width, bounceArgs.speed,
+            bounceArgs.start, bounceArgs.reverse, bounceArgs.end);
+      bounceArgs.reverse = !bounceArgs.reverse;
+      waitUntil(!isPulsing());
+      this_thread::sleep_for(bounceArgs.time);
+    }
+
+    bounceArgs.isEnabled = false;
+  }
+}
+
+void vdevices::lights::bounce(uint32_t color, double time, int width, int speed,
+                              int start, int end, bool reverse) {
+  bounceArgs =
+      bounceArgs_t(color, time, width, speed, start, end, reverse, true);
 }

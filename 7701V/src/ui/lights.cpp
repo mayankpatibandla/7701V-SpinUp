@@ -90,18 +90,14 @@ void lightsCore() {
   // Pre field control
   bool reverse = false;
   while (!Controller.ButtonRight.pressing()) {
-    frontLights.pulse(0, 6, 13, 0, reverse);
-    reverse = !reverse;
-    waitUntil(!frontLights.isPulsing());
-    this_thread::sleep_for(250);
+    frontLights.bounce(0, 250, 6, 13);
+    waitUntil(!frontLights.bounceArgs.isEnabled);
   }
 
   // Pre auton disabled
   while (!Controller.ButtonLeft.pressing()) {
-    frontLights.pulse(0xFFFFFF, 6, 13, 0, reverse);
-    reverse = !reverse;
-    waitUntil(!frontLights.isPulsing());
-    this_thread::sleep_for(250);
+    frontLights.bounce(0xFFFFFF, 250, 6, 13);
+    waitUntil(!frontLights.bounceArgs.isEnabled);
   }
 
   // Auton
@@ -127,10 +123,8 @@ void lightsCore() {
   // Post auton disabled
   frontLights.set_all(frontLights.getBaseColor());
   while (!Controller.ButtonLeft.pressing()) {
-    frontLights.pulse(0xFFFFFF, 6, 13, 0, reverse);
-    reverse = !reverse;
-    waitUntil(!frontLights.isPulsing());
-    this_thread::sleep_for(250);
+    frontLights.bounce(0xFFFFFF, 250, 6, 13);
+    waitUntil(!frontLights.bounceArgs.isEnabled);
   }
 
   // Driver
