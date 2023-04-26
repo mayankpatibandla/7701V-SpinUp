@@ -12,6 +12,8 @@ struct PID {
       : kP(kP), kI(kI), kD(kD), maxError(maxError), dT(dT) {}
 };
 
+extern bool hasDisc();
+
 extern bool matchLoadEnabled;
 
 extern void expandAll();
