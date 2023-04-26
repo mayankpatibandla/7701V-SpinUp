@@ -26,6 +26,21 @@ void matchLoad() {
 
 vex::thread matchLoadThread(matchLoad);
 
+void shootAll(double targetVelocity, int maxTime, int delay) {
+  timer shootingTimer;
+  shootingTimer.reset();
+
+  while (hasDisc()) {
+    if (maxTime != 0 && shootingTimer.time(msec) > maxTime) {
+      break;
+    }
+
+    Indexer.shootDisc();
+    Flywheel.setTargetVelocity(targetVelocity);
+    this_thread::sleep_for(delay);
+  }
+}
+
 void expandAll() {
   topLeftExpansion.toggle();
   topRightExpansion.toggle();
