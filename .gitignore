@@ -1,5 +1,4 @@
 # VEXcode gitignore
-**/.vscode
 **/bin
 **/build
 **/compile_commands.json
