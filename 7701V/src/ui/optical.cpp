@@ -48,11 +48,12 @@ void printOptical() {
   strstream.str("");
   strstream.clear();
 
-  Brain.Screen.setPenColor(white);
+  Brain.Screen.setPenColor(leftRollerOptical.isNearObject() ? yellow : white);
   strstream << "L Obj: " << (leftRollerOptical.isNearObject() ? "Yes" : "No");
   Brain.Screen.printAt(240, 180, strstream.str().c_str());
   strstream.str("");
   strstream.clear();
+  Brain.Screen.setPenColor(rightRollerOptical.isNearObject() ? yellow : white);
   strstream << "R Obj: " << (rightRollerOptical.isNearObject() ? "Yes" : "No");
   Brain.Screen.printAt(370, 180, strstream.str().c_str());
 

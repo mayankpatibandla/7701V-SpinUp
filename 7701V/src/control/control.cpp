@@ -1,12 +1,16 @@
 #include "control/control.hpp"
 
+bool hasDisc() {
+  return storageDistMin < storageDistance.objectDistance(mm) &&
+         storageDistance.objectDistance(mm) < storageDistMax;
+}
+
 bool matchLoadEnabled = false;
 
 void matchLoad() {
   while (true) {
     if (matchLoadEnabled) {
-      if (storageDistMin < storageDistance.objectDistance(mm) &&
-          storageDistance.objectDistance(mm) < storageDistMax) {
+      if (hasDisc()) {
         this_thread::sleep_for(matchLoadStartDelay);
         waitUntil(std::abs(Flywheel.velocity(pct) / 100) > flywheelMinCoeff ||
                   !matchLoadEnabled);
@@ -16,11 +20,26 @@ void matchLoad() {
         this_thread::sleep_for(matchLoadEndDelay);
       }
     }
-    this_thread::sleep_for(1);
+    this_thread::sleep_for(10);
   }
 }
 
 vex::thread matchLoadThread(matchLoad);
+
+void shootAll(double targetVelocity, int maxTime, int delay) {
+  timer shootingTimer;
+  shootingTimer.reset();
+
+  while (hasDisc()) {
+    if (maxTime != 0 && shootingTimer.time(msec) > maxTime) {
+      break;
+    }
+
+    Indexer.shootDisc();
+    Flywheel.setTargetVelocity(targetVelocity);
+    this_thread::sleep_for(delay);
+  }
+}
 
 void expandAll() {
   topLeftExpansion.toggle();
