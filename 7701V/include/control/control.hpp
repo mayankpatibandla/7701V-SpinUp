@@ -12,7 +12,11 @@ struct PID {
       : kP(kP), kI(kI), kD(kD), maxError(maxError), dT(dT) {}
 };
 
+extern bool hasDisc();
+
 extern bool matchLoadEnabled;
+
+extern void shootAll(double targetVelocity, int maxTime = 0, int delay = 500);
 
 extern void expandAll();
 extern void expandBottom();
